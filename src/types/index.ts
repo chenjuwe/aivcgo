@@ -25,6 +25,7 @@ export interface PrayerRequest {
   specificNeeds?: string;
   length: 'short' | 'medium' | 'long';
   tone: 'formal' | 'casual' | 'traditional';
+  characterId?: string; // 新增角色ID
 }
 
 export interface PrayerTemplate {

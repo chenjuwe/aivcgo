@@ -4,6 +4,7 @@ import { Navigation } from './components/Navigation';
 import { PrayerGenerator } from './components/PrayerGenerator';
 import { PrayerHistory } from './components/PrayerHistory';
 import { CommunityPrayers } from './components/CommunityPrayers';
+import { CharacterGallery } from './components/CharacterGallery';
 import { usePrayerStorage } from './hooks/usePrayerStorage';
 import { useAuth } from './hooks/useAuth';
 import { PrayerCard } from './components/PrayerCard';
@@ -17,6 +18,13 @@ function App() {
     switch (currentView) {
       case 'generator':
         return <PrayerGenerator />;
+      
+      case 'characters':
+        return <CharacterGallery onCharacterSelect={() => {
+          // 切換到生成器頁面並選擇角色
+          setCurrentView('generator');
+          // 這裡可以通過狀態管理來傳遞角色選擇
+        }} />;
       
       case 'history':
         return <PrayerHistory />;

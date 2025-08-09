@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import { Sparkles, Heart, Settings, RefreshCw, Share2, BookOpen, Lightbulb } from 'lucide-react';
 import { PrayerCategory, PrayerRequest } from '../types';
 import { generatePrayer, categoryNames, categoryDescriptions, getDailyVerse } from '../utils/prayerTemplates';
+import { generateCharacterPrayer } from '../utils/characterProfiles';
 import { usePrayerStorage } from '../hooks/usePrayerStorage';
 import { useAuth } from '../hooks/useAuth';
+import { CharacterSelector } from './CharacterSelector';
 import toast from 'react-hot-toast';
 
 export function PrayerGenerator() {
@@ -14,7 +16,8 @@ export function PrayerGenerator() {
     category: user?.preferences?.defaultCategory || 'gratitude',
     length: user?.preferences?.defaultLength || 'medium',
     tone: user?.preferences?.defaultTone || 'formal',
-    specificNeeds: ''
+    specificNeeds: '',
+    characterId: undefined
   });
   
   const [generatedPrayer, setGeneratedPrayer] = useState<string>('');
@@ -38,7 +41,21 @@ export function PrayerGenerator() {
     
     // 模擬生成延遲，增加真實感
     setTimeout(() => {
-      const prayer = generatePrayer(request);
+      let prayer: string;
+      
+      // 如果選擇了角色，使用角色專用的禱告生成
+      if (request.characterId) {
+        const characterPrayer = generateCharacterPrayer(
+          request.characterId,
+          request.category,
+          request.specificNeeds,
+          request.length
+        );
+        prayer = characterPrayer || generatePrayer(request);
+      } else {
+        prayer = generatePrayer(request);
+      }
+      
       setGeneratedPrayer(prayer);
       setIsGenerating(false);
       
@@ -109,10 +126,24 @@ export function PrayerGenerator() {
   };
 
   const handleQuickGenerate = (category: PrayerCategory) => {
-    setRequest(prev => ({ ...prev, category }));
+    const newRequest = { ...request, category };
+    setRequest(newRequest);
     // 自動生成
     setTimeout(() => {
-      const prayer = generatePrayer({ ...request, category });
+      let prayer: string;
+      
+      if (newRequest.characterId) {
+        const characterPrayer = generateCharacterPrayer(
+          newRequest.characterId,
+          category,
+          newRequest.specificNeeds,
+          newRequest.length
+        );
+        prayer = characterPrayer || generatePrayer(newRequest);
+      } else {
+        prayer = generatePrayer(newRequest);
+      }
+      
       setGeneratedPrayer(prayer);
     }, 100);
   };
@@ -167,6 +198,15 @@ export function PrayerGenerator() {
           <Settings className="inline mr-2" />
           詳細設定
         </h2>
+
+        {/* 角色選擇器 */}
+        <CharacterSelector
+          selectedCharacterId={request.characterId}
+          onCharacterSelect={(characterId) => setRequest({...request, characterId})}
+          onRecommendationSelect={(recommendation) => 
+            setRequest({...request, specificNeeds: recommendation})
+          }
+        />
 
         {/* 禱告類型 */}
         <div>
