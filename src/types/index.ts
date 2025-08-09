@@ -72,3 +72,43 @@ export interface CloudSyncStatus {
   pendingDownloads: number;
   syncError: string | null;
 }
+
+export interface CustomCharacter {
+  id: string;
+  name: string;
+  description: string;
+  avatar: string;
+  background: string;
+  personality: string[];
+  age?: number;
+  occupation?: string;
+  location?: string;
+  interests: string[];
+  challenges: string[];
+  preferredCategories: PrayerCategory[];
+  prayerStyle: 'formal' | 'casual' | 'traditional';
+  commonNeeds: string[];
+  customTemplates?: {
+    [key in PrayerCategory]?: {
+      opening: string[];
+      body: string[];
+      closing: string[];
+    };
+  };
+  createdAt: Date;
+  updatedAt: Date;
+  userId?: string;
+  isPublic: boolean;
+}
+
+export interface CharacterTemplate {
+  id: string;
+  name: string;
+  description: string;
+  avatar: string;
+  basePersonality: string[];
+  suggestedOccupations: string[];
+  typicalChallenges: string[];
+  recommendedCategories: PrayerCategory[];
+  defaultStyle: 'formal' | 'casual' | 'traditional';
+}

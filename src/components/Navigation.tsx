@@ -32,6 +32,7 @@ export function Navigation({ currentView, onViewChange }: NavigationProps) {
   const navItems = [
     { id: 'generator', label: '生成禱告', icon: Sparkles },
     { id: 'characters', label: '角色庫', icon: User },
+    { id: 'custom-characters', label: '自訂角色', icon: Users },
     { id: 'history', label: '禱告歷史', icon: Clock },
     { id: 'favorites', label: '我的收藏', icon: Heart },
     { id: 'community', label: '社群禱告', icon: Users },

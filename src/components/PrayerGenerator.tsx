@@ -6,6 +6,7 @@ import { generateCharacterPrayer } from '../utils/characterProfiles';
 import { usePrayerStorage } from '../hooks/usePrayerStorage';
 import { useAuth } from '../hooks/useAuth';
 import { CharacterSelector } from './CharacterSelector';
+import { CharacterCreator } from './CharacterCreator';
 import toast from 'react-hot-toast';
 
 export function PrayerGenerator() {
@@ -23,6 +24,7 @@ export function PrayerGenerator() {
   const [generatedPrayer, setGeneratedPrayer] = useState<string>('');
   const [isGenerating, setIsGenerating] = useState(false);
   const [dailyVerse] = useState(getDailyVerse());
+  const [showCharacterCreator, setShowCharacterCreator] = useState(false);
 
   // 當用戶偏好改變時更新預設值
   useEffect(() => {
@@ -206,6 +208,7 @@ export function PrayerGenerator() {
           onRecommendationSelect={(recommendation) => 
             setRequest({...request, specificNeeds: recommendation})
           }
+          onCreateCharacter={() => setShowCharacterCreator(true)}
         />
 
         {/* 禱告類型 */}
@@ -399,6 +402,12 @@ export function PrayerGenerator() {
           </ul>
         </div>
       )}
+
+      {/* 角色創建器 */}
+      <CharacterCreator
+        isOpen={showCharacterCreator}
+        onClose={() => setShowCharacterCreator(false)}
+      />
     </div>
   );
 }
