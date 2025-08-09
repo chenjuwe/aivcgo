@@ -96,18 +96,7 @@ export function CustomCharacterManager() {
     setEditingCharacter(undefined);
   };
 
-  if (!user) {
-    return (
-      <div className="max-w-6xl mx-auto p-6">
-        <div className="text-center py-16">
-          <Users className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">自訂角色管理</h2>
-          <p className="text-gray-600 mb-6">創建和管理您的專屬禱告角色</p>
-          <p className="text-gray-500">請先登入以使用此功能</p>
-        </div>
-      </div>
-    );
-  }
+  // 移除登入要求，允許所有用戶使用自訂角色功能
 
   const filteredCharacters = getFilteredCharacters();
 
@@ -119,6 +108,13 @@ export function CustomCharacterManager() {
           自訂角色管理
         </h1>
         <p className="text-gray-600">創建和管理您的專屬禱告角色</p>
+        {!user && (
+          <div className="mt-3 p-3 bg-orange-50 border border-orange-200 rounded-lg inline-block">
+            <p className="text-orange-700 text-sm">
+              💡 目前使用本地存儲，登入後可享受雲端同步功能
+            </p>
+          </div>
+        )}
       </div>
 
       {/* 操作工具欄 */}
@@ -197,6 +193,11 @@ export function CustomCharacterManager() {
               <EyeOff className="h-4 w-4 mr-1" />
               私人：{getUserCharacters().filter(c => !c.isPublic).length} 個
             </div>
+            {!user && (
+              <div className="text-orange-600 text-xs">
+                💡 登入後可享受雲端同步功能
+              </div>
+            )}
           </div>
         </div>
       </div>

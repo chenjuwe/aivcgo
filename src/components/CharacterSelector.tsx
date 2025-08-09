@@ -117,14 +117,14 @@ export function CharacterSelector({
               ))}
 
               {/* 自訂角色分隔線 */}
-              {user && customCharacters.length > 0 && (
+              {customCharacters.length > 0 && (
                 <div className="px-3 py-2 bg-gray-100 border-t border-gray-200">
                   <div className="text-xs font-medium text-gray-600">我的自訂角色</div>
                 </div>
               )}
 
               {/* 自訂角色 */}
-              {user && customCharacters.map((character) => (
+              {customCharacters.map((character) => (
                 <button
                   key={character.id}
                   onClick={() => handleCharacterSelect(character)}
@@ -156,7 +156,7 @@ export function CharacterSelector({
               ))}
 
               {/* 創建新角色按鈕 */}
-              {user && onCreateCharacter && (
+              {onCreateCharacter && (
                 <button
                   onClick={() => {
                     onCreateCharacter();
@@ -169,7 +169,10 @@ export function CharacterSelector({
                   </div>
                   <div className="text-left">
                     <div className="font-medium text-purple-600">創建新角色</div>
-                    <div className="text-sm text-purple-500">設計您的專屬禱告角色</div>
+                    <div className="text-sm text-purple-500">
+                      設計您的專屬禱告角色
+                      {!user && <span className="text-orange-500"> (本地存儲)</span>}
+                    </div>
                   </div>
                 </button>
               )}

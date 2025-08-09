@@ -53,7 +53,7 @@ export function useCustomCharacters() {
       id: `custom_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
       createdAt: new Date(),
       updatedAt: new Date(),
-      userId: user?.uid
+      userId: user?.uid || 'anonymous' // 未登入用戶使用 'anonymous'
     };
 
     const updatedCharacters = [...characters, newCharacter];
@@ -92,7 +92,7 @@ export function useCustomCharacters() {
       name: `${originalCharacter.name} (副本)`,
       createdAt: new Date(),
       updatedAt: new Date(),
-      userId: user?.uid
+      userId: user?.uid || 'anonymous'
     };
 
     const updatedCharacters = [...characters, duplicatedCharacter];
@@ -145,7 +145,7 @@ export function useCustomCharacters() {
           id: `custom_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
           createdAt: new Date(),
           updatedAt: new Date(),
-          userId: user?.uid,
+          userId: user?.uid || 'anonymous',
           name: `${importData.name} (匯入)`
         };
 
@@ -160,10 +160,10 @@ export function useCustomCharacters() {
     reader.readAsText(file);
   }, [characters, user?.uid, saveLocalCharacters]);
 
-  // 獲取用戶的角色
+  // 獲取用戶的角色（如果未登入則返回所有本地角色）
   const getUserCharacters = useCallback(() => {
-    if (!user) return characters;
-    return characters.filter(c => c.userId === user.uid);
+    if (!user) return characters; // 未登入時返回所有本地角色
+    return characters.filter(c => c.userId === user.uid || !c.userId); // 登入時返回用戶角色和未標記用戶的角色
   }, [characters, user]);
 
   // 獲取公開角色
