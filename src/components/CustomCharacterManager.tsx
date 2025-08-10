@@ -105,9 +105,9 @@ export function CustomCharacterManager() {
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-gray-800 mb-2">
           <Users className="inline mr-2 text-purple-500" />
-          自訂角色管理
+          自訂人物管理
         </h1>
-        <p className="text-gray-600">創建和管理您的專屬禱告角色</p>
+        <p className="text-gray-600">創建和管理您的專屬虛擬人物</p>
         {!user && (
           <div className="mt-3 p-3 bg-orange-50 border border-orange-200 rounded-lg inline-block">
             <p className="text-orange-700 text-sm">
@@ -214,8 +214,8 @@ export function CustomCharacterManager() {
             <Users className="h-16 w-16 text-gray-400 mx-auto mb-4" />
             {getUserCharacters().length === 0 ? (
               <>
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">還沒有自訂角色</h3>
-                <p className="text-gray-600 mb-6">創建您的第一個專屬禱告角色</p>
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">還沒有自訂人物</h3>
+                <p className="text-gray-600 mb-6">創建您的第一個虛擬人物</p>
                 <button
                   onClick={() => setShowCreator(true)}
                   className="px-6 py-3 bg-purple-500 hover:bg-purple-600 text-white rounded-md transition-colors"
@@ -319,7 +319,7 @@ export function CustomCharacterManager() {
 
                   {/* 偏好禱告類型 */}
                   <div className="mb-4">
-                    <h4 className="text-sm font-medium text-gray-700 mb-2">偏好禱告類型</h4>
+                    <h4 className="text-sm font-medium text-gray-700 mb-2">偏好主題（附加）</h4>
                     <div className="flex flex-wrap gap-2">
                       {character.preferredCategories.map((category) => (
                         <span
@@ -393,7 +393,7 @@ export function CustomCharacterManager() {
                     </div>
                     
                     <div className="flex items-center space-x-2">
-                      <span>禱告風格：
+                      <span>禱告風格（附加）：
                         {character.prayerStyle === 'formal' ? '正式' :
                          character.prayerStyle === 'casual' ? '親切' : '傳統'}
                       </span>

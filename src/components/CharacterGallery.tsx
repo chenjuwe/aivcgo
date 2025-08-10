@@ -26,9 +26,9 @@ export function CharacterGallery({ onCharacterSelect }: CharacterGalleryProps) {
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-gray-800 mb-2">
           <Users className="inline mr-2 text-purple-500" />
-          禱告角色庫
+          虛擬人物庫
         </h1>
-        <p className="text-gray-600">選擇一個角色，體驗個人化的禱告內容</p>
+        <p className="text-gray-600">選擇一個人物，體驗個人化互動</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -90,7 +90,7 @@ export function CharacterGallery({ onCharacterSelect }: CharacterGalleryProps) {
                     className="w-full flex items-center justify-center px-4 py-2 bg-purple-500 hover:bg-purple-600 text-white text-sm font-medium rounded-md transition-colors"
                   >
                     <Sparkles className="h-4 w-4 mr-2" />
-                    使用此角色禱告
+                    選擇此人物
                     <ArrowRight className="h-4 w-4 ml-2" />
                   </button>
                 </div>
@@ -133,7 +133,7 @@ export function CharacterGallery({ onCharacterSelect }: CharacterGalleryProps) {
 
                 {/* 禱告偏好 */}
                 <div className="mb-6">
-                  <h3 className="font-semibold text-gray-800 mb-2">禱告偏好</h3>
+                  <h3 className="font-semibold text-gray-800 mb-2">附加：禱告偏好</h3>
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-gray-600">語調風格：</span>
@@ -160,7 +160,7 @@ export function CharacterGallery({ onCharacterSelect }: CharacterGalleryProps) {
 
                 {/* 常見需求 */}
                 <div className="mb-6">
-                  <h3 className="font-semibold text-gray-800 mb-2">常見禱告需求</h3>
+                  <h3 className="font-semibold text-gray-800 mb-2">附加：常見需求</h3>
                   <div className="space-y-1">
                     {selectedCharacter.commonNeeds.map((need, index) => (
                       <div key={index} className="flex items-center text-sm text-gray-600">
@@ -177,7 +177,7 @@ export function CharacterGallery({ onCharacterSelect }: CharacterGalleryProps) {
                   className="w-full flex items-center justify-center px-6 py-3 bg-gradient-to-r from-purple-500 to-blue-600 hover:from-purple-600 hover:to-blue-700 text-white font-medium rounded-md transition-all duration-300 transform hover:scale-105"
                 >
                   <Sparkles className="h-5 w-5 mr-2" />
-                  開始用{selectedCharacter.name}禱告
+                  選擇{selectedCharacter.name}
                   <ArrowRight className="h-5 w-5 ml-2" />
                 </button>
               </div>
@@ -196,7 +196,7 @@ export function CharacterGallery({ onCharacterSelect }: CharacterGalleryProps) {
 
       {/* 使用提示 */}
       <div className="mt-12 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg p-6 border-l-4 border-purple-500">
-        <h3 className="font-semibold text-purple-800 mb-3">如何使用角色禱告</h3>
+        <h3 className="font-semibold text-purple-800 mb-3">如何使用虛擬人物</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-purple-700">
           <div>
             <h4 className="font-medium mb-2">🎭 角色特色</h4>

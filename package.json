@@ -7,7 +7,11 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "data:help": "node -e \"console.log('see scripts/*.js for CSV->JSON converters')\"",
+    "data:convert": "node scripts/convert_all.js",
+    "data:lint": "node scripts/validate_csv_schema.js",
+    "ci": "npm run data:lint && npm run build"
   },
   "dependencies": {
     "react": "^18.2.0",

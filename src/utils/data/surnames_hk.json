@@ -1,0 +1,52 @@
+[
+  {
+    "surname": "陳",
+    "weight": 9,
+    "region": "HK"
+  },
+  {
+    "surname": "李",
+    "weight": 8.5,
+    "region": "HK"
+  },
+  {
+    "surname": "張",
+    "weight": 7.8,
+    "region": "HK"
+  },
+  {
+    "surname": "黃",
+    "weight": 7.2,
+    "region": "HK"
+  },
+  {
+    "surname": "王",
+    "weight": 6.8,
+    "region": "HK"
+  },
+  {
+    "surname": "劉",
+    "weight": 6.5,
+    "region": "HK"
+  },
+  {
+    "surname": "吳",
+    "weight": 6.2,
+    "region": "HK"
+  },
+  {
+    "surname": "何",
+    "weight": 5.8,
+    "region": "HK"
+  },
+  {
+    "surname": "郭",
+    "weight": 5.5,
+    "region": "HK"
+  },
+  {
+    "surname": "周",
+    "weight": 5.2,
+    "region": "HK"
+  }
+]

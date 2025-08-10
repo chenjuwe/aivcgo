@@ -1,0 +1,212 @@
+[
+  {
+    "char": "偉",
+    "weight": 9,
+    "strokes": 11,
+    "rare": 0,
+    "structure": "亻",
+    "poly": 0,
+    "freqRank": 150,
+    "tags": [
+      "偉大",
+      "雄偉"
+    ],
+    "gender": "male"
+  },
+  {
+    "char": "志",
+    "weight": 8,
+    "strokes": 7,
+    "rare": 0,
+    "structure": "士上心下",
+    "poly": 0,
+    "freqRank": 220,
+    "tags": [
+      "志向",
+      "奮發"
+    ],
+    "gender": "male"
+  },
+  {
+    "char": "翔",
+    "weight": 7,
+    "strokes": 12,
+    "rare": 0,
+    "structure": "羽",
+    "poly": 0,
+    "freqRank": 390,
+    "tags": [
+      "飛翔",
+      "自由"
+    ],
+    "gender": "male"
+  },
+  {
+    "char": "傑",
+    "weight": 8,
+    "strokes": 12,
+    "rare": 0,
+    "structure": "亻",
+    "poly": 0,
+    "freqRank": 180,
+    "tags": [
+      "傑出",
+      "優秀"
+    ],
+    "gender": "male"
+  },
+  {
+    "char": "豪",
+    "weight": 8,
+    "strokes": 14,
+    "rare": 0,
+    "structure": "豕",
+    "poly": 0,
+    "freqRank": 420,
+    "tags": [
+      "豪邁",
+      "豪爽"
+    ],
+    "gender": "male"
+  },
+  {
+    "char": "俊",
+    "weight": 8,
+    "strokes": 9,
+    "rare": 0,
+    "structure": "亻",
+    "poly": 0,
+    "freqRank": 200,
+    "tags": [
+      "俊秀",
+      "英俊"
+    ],
+    "gender": "male"
+  },
+  {
+    "char": "強",
+    "weight": 8,
+    "strokes": 11,
+    "rare": 0,
+    "structure": "弓",
+    "poly": 0,
+    "freqRank": 160,
+    "tags": [
+      "強壯",
+      "堅強"
+    ],
+    "gender": "male"
+  },
+  {
+    "char": "勇",
+    "weight": 8,
+    "strokes": 9,
+    "rare": 0,
+    "structure": "力",
+    "poly": 0,
+    "freqRank": 240,
+    "tags": [
+      "勇敢",
+      "勇氣"
+    ],
+    "gender": "male"
+  },
+  {
+    "char": "建",
+    "weight": 8,
+    "strokes": 8,
+    "rare": 0,
+    "structure": "廴",
+    "poly": 0,
+    "freqRank": 190,
+    "tags": [
+      "建設",
+      "建立"
+    ],
+    "gender": "male"
+  },
+  {
+    "char": "文",
+    "weight": 8,
+    "strokes": 4,
+    "rare": 0,
+    "structure": "文",
+    "poly": 0,
+    "freqRank": 50,
+    "tags": [
+      "文化",
+      "文學"
+    ],
+    "gender": "male"
+  },
+  {
+    "char": "智",
+    "weight": 8,
+    "strokes": 12,
+    "rare": 0,
+    "structure": "日",
+    "poly": 0,
+    "freqRank": 280,
+    "tags": [
+      "智慧",
+      "聰明"
+    ],
+    "gender": "male"
+  },
+  {
+    "char": "博",
+    "weight": 8,
+    "strokes": 12,
+    "rare": 0,
+    "structure": "十",
+    "poly": 0,
+    "freqRank": 350,
+    "tags": [
+      "博學",
+      "廣博"
+    ],
+    "gender": "male"
+  },
+  {
+    "char": "明",
+    "weight": 8,
+    "strokes": 8,
+    "rare": 0,
+    "structure": "日",
+    "poly": 0,
+    "freqRank": 80,
+    "tags": [
+      "明亮",
+      "聰明"
+    ],
+    "gender": "male"
+  },
+  {
+    "char": "德",
+    "weight": 8,
+    "strokes": 15,
+    "rare": 0,
+    "structure": "彳",
+    "poly": 0,
+    "freqRank": 300,
+    "tags": [
+      "品德",
+      "道德"
+    ],
+    "gender": "male"
+  },
+  {
+    "char": "誠",
+    "weight": 8,
+    "strokes": 14,
+    "rare": 0,
+    "structure": "言",
+    "poly": 0,
+    "freqRank": 380,
+    "tags": [
+      "誠實",
+      "真誠"
+    ],
+    "gender": "male"
+  }
+]

@@ -155,9 +155,9 @@ export function PrayerGenerator() {
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold text-gray-800 mb-2">
           <Sparkles className="inline mr-2 text-blue-500" />
-          智能禱告生成器
+          禱告生成（附加功能）
         </h1>
-        <p className="text-gray-600 text-lg">讓我們一起創造個人化的禱告內容</p>
+        <p className="text-gray-600 text-lg">附加功能：為選定人物生成禱告內容</p>
         
         {/* 每日經文 */}
         <div className="mt-6 bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg border-l-4 border-blue-500">

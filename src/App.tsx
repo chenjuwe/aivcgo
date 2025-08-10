@@ -9,14 +9,17 @@ import { CustomCharacterManager } from './components/CustomCharacterManager';
 import { usePrayerStorage } from './hooks/usePrayerStorage';
 import { useAuth } from './hooks/useAuth';
 import { PrayerCard } from './components/PrayerCard';
+import { NameGenerator } from './components/NameGenerator';
 
 function App() {
-  const [currentView, setCurrentView] = useState('generator');
+  const [currentView, setCurrentView] = useState('custom-characters');
   const { user } = useAuth();
   const { getFavoritePrayers, toggleFavorite, deletePrayer, sharePrayer } = usePrayerStorage();
 
   const renderCurrentView = () => {
     switch (currentView) {
+      case 'name-generator':
+        return <NameGenerator />;
       case 'generator':
         return <PrayerGenerator />;
       
@@ -97,21 +100,21 @@ function App() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-              <h3 className="text-lg font-semibold mb-4">關於禱告生成器</h3>
+              <h3 className="text-lg font-semibold mb-4">關於虛擬人物生成器</h3>
               <p className="text-gray-300 text-sm leading-relaxed">
-                智能禱告生成器幫助您創造個人化的禱告內容，
-                支援多種禱告類型和語調，讓您的靈修時光更加豐富。
+                虛擬人物生成器幫助您創建個人化的虛擬人物與設定；
+                禱告生成作為附加功能提供，讓體驗更完整。
               </p>
             </div>
             
             <div>
               <h3 className="text-lg font-semibold mb-4">功能特色</h3>
               <ul className="text-gray-300 text-sm space-y-2">
-                <li>• 智能禱告內容生成</li>
+                <li>• 虛擬人物生成與管理</li>
                 <li>• 雲端同步與備份</li>
                 <li>• 社群分享功能</li>
                 <li>• 個人化設定</li>
-                <li>• 禱告歷史管理</li>
+                <li>• 禱告功能（附加）</li>
               </ul>
             </div>
             
@@ -129,7 +132,7 @@ function App() {
           
           <div className="border-t border-gray-700 mt-8 pt-8 text-center">
             <p className="text-gray-400 text-sm">
-              © 2024 智能禱告生成器. 願神祝福您的每一個禱告時光.
+              © 2024 虛擬人物生成器. 禱告生成功能為附加選項。
             </p>
           </div>
         </div>

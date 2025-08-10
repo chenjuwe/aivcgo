@@ -18,6 +18,7 @@ import {
 } from '../utils/characterTemplates';
 import { useCustomCharacters } from '../hooks/useCustomCharacters';
 import toast from 'react-hot-toast';
+import { useNameWorker } from '@/hooks/useNameWorker';
 
 interface CharacterCreatorProps {
   isOpen: boolean;
@@ -29,6 +30,7 @@ export function CharacterCreator({ isOpen, onClose, editingCharacter }: Characte
   const { createCharacter, updateCharacter } = useCustomCharacters();
   const [currentStep, setCurrentStep] = useState(1);
   const [, setSelectedTemplate] = useState<string>('');
+  const { generate, loading } = useNameWorker();
 
   const [formData, setFormData] = useState<Partial<CustomCharacter>>({
     name: '',
@@ -168,23 +170,133 @@ export function CharacterCreator({ isOpen, onClose, editingCharacter }: Characte
       case 2:
         return (
           <div className="space-y-6">
-            <div className="text-center">
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">基本資訊</h3>
-              <p className="text-gray-600">設定角色的基本資訊</p>
-            </div>
+                          <div className="text-center">
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">基本資訊</h3>
+                <p className="text-gray-600">設定角色的基本資訊</p>
+              </div>
+
+              <details className="bg-purple-50 border border-purple-200 rounded-md p-4 mb-4">
+                <summary className="cursor-pointer text-sm text-purple-700 font-medium">姓名生成設定</summary>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-3 text-sm">
+                  <div>
+                    <label className="block text-gray-700 mb-1">性別偏好</label>
+                    <select
+                      value={(formData as any)._nameGender || 'unisex'}
+                      onChange={(e) => handleInputChange('_nameGender' as any, e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    >
+                      <option value="unisex">中性</option>
+                      <option value="male">男性</option>
+                      <option value="female">女性</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-gray-700 mb-1">允許單字名</label>
+                    <select
+                      value={(formData as any)._nameSingle || 'no'}
+                      onChange={(e) => handleInputChange('_nameSingle' as any, e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    >
+                      <option value="no">否（常見雙字名）</option>
+                      <option value="yes">是</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-gray-700 mb-1">筆畫上限</label>
+                    <input
+                      type="number"
+                      placeholder="如 18"
+                      value={(formData as any)._nameMaxStrokes || ''}
+                      onChange={(e) => handleInputChange('_nameMaxStrokes' as any, e.target.value ? parseInt(e.target.value) : undefined)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-gray-700 mb-1">避冷僻字</label>
+                    <select
+                      value={(formData as any)._nameAvoidRare || 'yes'}
+                      onChange={(e) => handleInputChange('_nameAvoidRare' as any, e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    >
+                      <option value="yes">是</option>
+                      <option value="no">否</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-gray-700 mb-1">主題</label>
+                    <select
+                      value={(formData as any)._nameTheme || ''}
+                      onChange={(e) => handleInputChange('_nameTheme' as any, e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    >
+                      <option value="">無</option>
+                      <option value="nature">自然</option>
+                      <option value="virtue">品德</option>
+                      <option value="bright">光明</option>
+                      <option value="family">家庭</option>
+                      <option value="study">學業</option>
+                      <option value="art">藝術</option>
+                      <option value="peace">平安</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-gray-700 mb-1">Seed（可重現）</label>
+                    <input
+                      type="text"
+                      placeholder="例如 202408"
+                      value={(formData as any)._nameSeed || ''}
+                      onChange={(e) => handleInputChange('_nameSeed' as any, e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    />
+                  </div>
+                </div>
+              </details>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   角色名稱 *
                 </label>
-                <input
-                  type="text"
-                  value={formData.name || ''}
-                  onChange={(e) => handleInputChange('name', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="例如：小王、李老師"
-                />
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={formData.name || ''}
+                    onChange={(e) => handleInputChange('name', e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="例如：陳柏宇、林雅庭"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const genderPref = (formData as any)._nameGender as 'male'|'female'|'unisex' | undefined;
+                      const allowSingle = ((formData as any)._nameSingle || 'no') === 'yes';
+                      const maxStrokes = (formData as any)._nameMaxStrokes as number | undefined;
+                      const avoidRare = ((formData as any)._nameAvoidRare || 'yes') === 'yes';
+                      const seed = (formData as any)._nameSeed as string | number | undefined;
+                      const theme = (formData as any)._nameTheme as any;
+                      generate({ 
+                        gender: genderPref || 'unisex',
+                        allowSingleGiven: allowSingle,
+                        maxStrokePerChar: maxStrokes,
+                        avoidRareChars: avoidRare,
+                        seed,
+                        theme,
+                        candidateCount: 96,
+                      }).then(n => {
+                        handleInputChange('name', n.fullName);
+                        handleInputChange('_nameReasons' as any, n.meta?.reasons?.join('、') || '');
+                      });
+                    }}
+                    className="px-3 py-2 bg-purple-500 hover:bg-purple-600 text-white rounded-md whitespace-nowrap"
+                  >
+                    隨機姓名
+                  </button>
+                </div>
+                {(formData as any)._nameReasons && (
+                  <div className="mt-2 text-xs text-gray-600 bg-gray-50 border border-gray-200 rounded p-2">
+                    生成理由：{(formData as any)._nameReasons}
+                  </div>
+                )}
               </div>
 
               <div>
@@ -380,8 +492,8 @@ export function CharacterCreator({ isOpen, onClose, editingCharacter }: Characte
         return (
           <div className="space-y-6">
             <div className="text-center">
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">禱告偏好</h3>
-              <p className="text-gray-600">設定角色的禱告風格和偏好</p>
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">附加：禱告偏好</h3>
+              <p className="text-gray-600">（選填）設定角色的禱告風格和偏好</p>
             </div>
 
             <div>
@@ -417,7 +529,7 @@ export function CharacterCreator({ isOpen, onClose, editingCharacter }: Characte
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                偏好禱告類型 * (已選擇 {formData.preferredCategories?.length || 0} 個)
+                偏好主題（附加）* (已選擇 {formData.preferredCategories?.length || 0} 個)
               </label>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                 {Object.entries(categoryNames).map(([key, name]) => {
@@ -482,7 +594,7 @@ export function CharacterCreator({ isOpen, onClose, editingCharacter }: Characte
                   className="flex items-center px-3 py-2 text-blue-500 hover:bg-blue-50 rounded-md transition-colors"
                 >
                   <Plus className="h-4 w-4 mr-2" />
-                  新增禱告需求
+                                     新增需求（附加）
                 </button>
               </div>
             </div>
@@ -518,7 +630,7 @@ export function CharacterCreator({ isOpen, onClose, editingCharacter }: Characte
               {editingCharacter ? '編輯角色' : '創建新角色'}
             </h2>
             <p className="text-purple-100 text-sm">
-              {editingCharacter ? '修改角色設定' : '創建您的專屬禱告角色'}
+              {editingCharacter ? '修改角色設定' : '創建您的專屬虛擬人物'}
             </p>
           </div>
           <button

@@ -1,0 +1,131 @@
+[
+  {
+    "char": "柏",
+    "weight": 6,
+    "strokes": 9,
+    "rare": false,
+    "structure": "左右",
+    "polyphonic": false,
+    "freqRank": 500,
+    "tags": [
+      "自然",
+      "木"
+    ]
+  },
+  {
+    "char": "宇",
+    "weight": 6,
+    "strokes": 6,
+    "rare": false,
+    "structure": "宀",
+    "polyphonic": false,
+    "freqRank": 320,
+    "tags": [
+      "宇宙",
+      "寬廣"
+    ]
+  },
+  {
+    "char": "雅",
+    "weight": 8,
+    "strokes": 12,
+    "rare": false,
+    "structure": "上下",
+    "polyphonic": false,
+    "freqRank": 210,
+    "tags": [
+      "典雅",
+      "文雅"
+    ]
+  },
+  {
+    "char": "庭",
+    "weight": 7,
+    "strokes": 10,
+    "rare": false,
+    "structure": "广",
+    "polyphonic": false,
+    "freqRank": 430,
+    "tags": [
+      "家庭",
+      "庭園"
+    ]
+  },
+  {
+    "char": "志",
+    "weight": 8,
+    "strokes": 7,
+    "rare": false,
+    "structure": "士上心下",
+    "polyphonic": false,
+    "freqRank": 220,
+    "tags": [
+      "志向",
+      "奮發"
+    ]
+  },
+  {
+    "char": "偉",
+    "weight": 9,
+    "strokes": 11,
+    "rare": false,
+    "structure": "亻",
+    "polyphonic": false,
+    "freqRank": 150,
+    "tags": [
+      "偉大"
+    ]
+  },
+  {
+    "char": "怡",
+    "weight": 9,
+    "strokes": 9,
+    "rare": false,
+    "structure": "忄",
+    "polyphonic": false,
+    "freqRank": 260,
+    "tags": [
+      "愉悅",
+      "安適"
+    ]
+  },
+  {
+    "char": "晨",
+    "weight": 7,
+    "strokes": 11,
+    "rare": false,
+    "structure": "日",
+    "polyphonic": false,
+    "freqRank": 410,
+    "tags": [
+      "清晨",
+      "新生"
+    ]
+  },
+  {
+    "char": "恩",
+    "weight": 7,
+    "strokes": 10,
+    "rare": false,
+    "structure": "心下",
+    "polyphonic": false,
+    "freqRank": 280,
+    "tags": [
+      "恩典",
+      "感恩"
+    ]
+  },
+  {
+    "char": "翔",
+    "weight": 7,
+    "strokes": 12,
+    "rare": false,
+    "structure": "羽",
+    "polyphonic": false,
+    "freqRank": 390,
+    "tags": [
+      "飛翔",
+      "自由"
+    ]
+  }
+]

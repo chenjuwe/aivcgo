@@ -28,6 +28,9 @@ export default defineConfig({
       },
     },
   },
+  worker: {
+    format: 'es',
+  },
   define: {
     // 定義全域變數
     __APP_VERSION__: JSON.stringify(process.env.npm_package_version),

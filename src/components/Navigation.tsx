@@ -30,12 +30,13 @@ export function Navigation({ currentView, onViewChange }: NavigationProps) {
   const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
 
   const navItems = [
-    { id: 'generator', label: '生成禱告', icon: Sparkles },
-    { id: 'characters', label: '角色庫', icon: User },
-    { id: 'custom-characters', label: '自訂角色', icon: Users },
-    { id: 'history', label: '禱告歷史', icon: Clock },
-    { id: 'favorites', label: '我的收藏', icon: Heart },
-    { id: 'community', label: '社群禱告', icon: Users },
+    { id: 'name-generator', label: '姓名生成', icon: Sparkles },
+    { id: 'custom-characters', label: '人物生成', icon: Users },
+    { id: 'characters', label: '人物庫', icon: User },
+    { id: 'generator', label: '附加：禱告生成', icon: Sparkles },
+    { id: 'history', label: '禱告歷史（附加）', icon: Clock },
+    { id: 'favorites', label: '收藏（附加）', icon: Heart },
+    { id: 'community', label: '社群（附加）', icon: Users },
   ];
 
   const handleAuthClick = (mode: 'login' | 'register') => {
@@ -63,7 +64,7 @@ export function Navigation({ currentView, onViewChange }: NavigationProps) {
             <div className="flex items-center">
               <div className="flex-shrink-0 flex items-center">
                 <Sparkles className="h-8 w-8 text-blue-500 mr-2" />
-                <span className="text-xl font-bold text-gray-800">禱告生成器</span>
+                <span className="text-xl font-bold text-gray-800">虛擬人物生成器</span>
               </div>
             </div>
 

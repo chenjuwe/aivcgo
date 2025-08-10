@@ -52,8 +52,8 @@
 
 1. **克隆專案**
    ```bash
-   git clone https://github.com/your-username/prayer-generator-app.git
-   cd prayer-generator-app
+   git clone https://github.com/your-username/aivcgo.git
+   cd aivcgo
    ```
 
 2. **安裝依賴**
@@ -61,7 +61,29 @@
    npm install
    ```
 
-3. **配置 Firebase**
+3. **轉換資料檔案**
+   
+   執行批次轉換腳本將 CSV 檔案轉換為 JSON：
+   ```bash
+   node scripts/convert_all.js
+   ```
+   
+   或個別轉換：
+   ```bash
+   # 轉換男性用字池
+   node scripts/convert_given_chars_male.js
+   
+   # 轉換女性用字池
+   node scripts/convert_given_chars_female.js
+   
+   # 轉換香港雙字組合
+   node scripts/convert_bigrams_hk.js
+   
+   # 轉換中國大陸雙字組合
+   node scripts/convert_bigrams_cn.js
+   ```
+
+4. **配置 Firebase**
    
    在 `src/services/firebase.ts` 中更新 Firebase 配置：
    ```typescript
@@ -75,14 +97,60 @@
    };
    ```
 
-4. **啟動開發伺服器**
+5. **啟動開發伺服器**
    ```bash
    npm run dev
    ```
 
-5. **開啟瀏覽器**
+6. **開啟瀏覽器**
    
    訪問 `http://localhost:3000`
+
+## 📊 資料檔案說明
+
+### CSV 示範檔案
+
+專案包含多個示範 CSV 檔案，涵蓋不同地區和性別的命名資料：
+
+#### 用字池檔案
+- `given_chars_sample.csv` - 台灣通用用字池
+- `given_chars_male_sample.csv` - 男性專用字池
+- `given_chars_female_sample.csv` - 女性專用字池
+
+#### 雙字組合檔案
+- `bigrams_sample.csv` - 台灣雙字組合
+- `bigrams_hk_sample.csv` - 香港雙字組合
+- `bigrams_cn_sample.csv` - 中國大陸雙字組合
+
+#### 姓氏檔案
+- `surnames_sample.csv` - 台灣姓氏
+- `surnames_hk_sample.csv` - 香港姓氏
+- `surnames_cn_sample.csv` - 中國大陸姓氏
+
+### 資料格式
+
+每個 CSV 檔案都包含相應的欄位：
+
+#### 用字池格式
+```csv
+char,weight,strokes,rare,structure,poly,freqRank,tags,gender
+偉,9,11,0,亻,0,150,偉大|雄偉,male
+雅,8,12,0,上下,0,210,典雅|文雅,female
+```
+
+#### 雙字組合格式
+```csv
+first,second,weight,gender,era,region
+家,豪,9,male,1990s,HK
+雅,婷,10,female,1990s,HK
+```
+
+#### 姓氏格式
+```csv
+surname,weight,region
+陳,9.0,HK
+王,9.5,CN
+```
 
 ## 📦 建置和部署
 
@@ -133,8 +201,28 @@ firebase deploy
 ## 🏗️ 專案結構
 
 ```
-prayer-generator-app/
-├── public/                 # 靜態資源
+aivcgo/
+├── data/                   # 示範 CSV 資料檔案
+│   ├── given_chars_sample.csv          # 台灣用字池示範
+│   ├── given_chars_male_sample.csv     # 男性用字池示範
+│   ├── given_chars_female_sample.csv   # 女性用字池示範
+│   ├── bigrams_sample.csv              # 台灣雙字組合示範
+│   ├── bigrams_hk_sample.csv           # 香港雙字組合示範
+│   ├── bigrams_cn_sample.csv           # 中國大陸雙字組合示範
+│   ├── surnames_sample.csv             # 台灣姓氏示範
+│   ├── surnames_hk_sample.csv          # 香港姓氏示範
+│   └── surnames_cn_sample.csv          # 中國大陸姓氏示範
+├── scripts/                # 資料轉換腳本
+│   ├── convert_given_chars.js          # 轉換用字池
+│   ├── convert_given_chars_male.js     # 轉換男性用字池
+│   ├── convert_given_chars_female.js   # 轉換女性用字池
+│   ├── convert_bigrams.js              # 轉換雙字組合
+│   ├── convert_bigrams_hk.js           # 轉換香港雙字組合
+│   ├── convert_bigrams_cn.js           # 轉換中國大陸雙字組合
+│   ├── convert_surnames.js             # 轉換姓氏
+│   ├── convert_surnames_hk.js          # 轉換香港姓氏
+│   ├── convert_surnames_cn.js          # 轉換中國大陸姓氏
+│   └── convert_all.js                  # 批次轉換腳本
 ├── src/
 │   ├── components/        # React 組件
 │   │   ├── AuthModal.tsx     # 身份驗證模態框
@@ -153,7 +241,8 @@ prayer-generator-app/
 │   │   └── firebase.ts       # Firebase 配置
 │   ├── types/             # TypeScript 類型定義
 │   │   └── index.ts
-│   ├── utils/             # 工具函數
+│   ├── utils/             # 工具函數和資料
+│   │   ├── data/          # JSON 資料檔案
 │   │   └── prayerTemplates.ts # 禱告模板
 │   ├── App.tsx            # 主應用組件
 │   ├── main.tsx           # 應用入口

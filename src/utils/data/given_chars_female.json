@@ -1,0 +1,212 @@
+[
+  {
+    "char": "雅",
+    "weight": 8,
+    "strokes": 12,
+    "rare": 0,
+    "structure": "上下",
+    "poly": 0,
+    "freqRank": 210,
+    "tags": [
+      "典雅",
+      "文雅"
+    ],
+    "gender": "female"
+  },
+  {
+    "char": "怡",
+    "weight": 9,
+    "strokes": 9,
+    "rare": 0,
+    "structure": "忄",
+    "poly": 0,
+    "freqRank": 260,
+    "tags": [
+      "愉悅",
+      "安適"
+    ],
+    "gender": "female"
+  },
+  {
+    "char": "欣",
+    "weight": 8,
+    "strokes": 8,
+    "rare": 0,
+    "structure": "欠",
+    "poly": 0,
+    "freqRank": 290,
+    "tags": [
+      "欣喜",
+      "快樂"
+    ],
+    "gender": "female"
+  },
+  {
+    "char": "婷",
+    "weight": 8,
+    "strokes": 12,
+    "rare": 0,
+    "structure": "女",
+    "poly": 0,
+    "freqRank": 320,
+    "tags": [
+      "婷婷",
+      "優雅"
+    ],
+    "gender": "female"
+  },
+  {
+    "char": "美",
+    "weight": 8,
+    "strokes": 9,
+    "rare": 0,
+    "structure": "羊",
+    "poly": 0,
+    "freqRank": 120,
+    "tags": [
+      "美麗",
+      "美好"
+    ],
+    "gender": "female"
+  },
+  {
+    "char": "麗",
+    "weight": 8,
+    "strokes": 19,
+    "rare": 0,
+    "structure": "鹿",
+    "poly": 0,
+    "freqRank": 340,
+    "tags": [
+      "美麗",
+      "華麗"
+    ],
+    "gender": "female"
+  },
+  {
+    "char": "芳",
+    "weight": 8,
+    "strokes": 7,
+    "rare": 0,
+    "structure": "艹",
+    "poly": 0,
+    "freqRank": 310,
+    "tags": [
+      "芬芳",
+      "芳香"
+    ],
+    "gender": "female"
+  },
+  {
+    "char": "華",
+    "weight": 8,
+    "strokes": 10,
+    "rare": 0,
+    "structure": "艹",
+    "poly": 0,
+    "freqRank": 140,
+    "tags": [
+      "華麗",
+      "華美"
+    ],
+    "gender": "female"
+  },
+  {
+    "char": "慧",
+    "weight": 8,
+    "strokes": 15,
+    "rare": 0,
+    "structure": "心",
+    "poly": 0,
+    "freqRank": 360,
+    "tags": [
+      "智慧",
+      "聰慧"
+    ],
+    "gender": "female"
+  },
+  {
+    "char": "靜",
+    "weight": 8,
+    "strokes": 16,
+    "rare": 0,
+    "structure": "青",
+    "poly": 0,
+    "freqRank": 370,
+    "tags": [
+      "安靜",
+      "寧靜"
+    ],
+    "gender": "female"
+  },
+  {
+    "char": "潔",
+    "weight": 8,
+    "strokes": 15,
+    "rare": 0,
+    "structure": "氵",
+    "poly": 0,
+    "freqRank": 330,
+    "tags": [
+      "潔淨",
+      "純潔"
+    ],
+    "gender": "female"
+  },
+  {
+    "char": "秀",
+    "weight": 8,
+    "strokes": 7,
+    "rare": 0,
+    "structure": "禾",
+    "poly": 0,
+    "freqRank": 250,
+    "tags": [
+      "秀麗",
+      "優秀"
+    ],
+    "gender": "female"
+  },
+  {
+    "char": "玲",
+    "weight": 8,
+    "strokes": 9,
+    "rare": 0,
+    "structure": "王",
+    "poly": 0,
+    "freqRank": 270,
+    "tags": [
+      "玲瓏",
+      "靈巧"
+    ],
+    "gender": "female"
+  },
+  {
+    "char": "瑩",
+    "weight": 8,
+    "strokes": 15,
+    "rare": 0,
+    "structure": "玉",
+    "poly": 0,
+    "freqRank": 400,
+    "tags": [
+      "晶瑩",
+      "明亮"
+    ],
+    "gender": "female"
+  },
+  {
+    "char": "萱",
+    "weight": 8,
+    "strokes": 12,
+    "rare": 0,
+    "structure": "艹",
+    "poly": 0,
+    "freqRank": 450,
+    "tags": [
+      "萱草",
+      "忘憂"
+    ],
+    "gender": "female"
+  }
+]

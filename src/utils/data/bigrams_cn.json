@@ -1,0 +1,122 @@
+[
+  {
+    "first": "建",
+    "second": "國",
+    "weight": 10,
+    "gender": "male",
+    "era": "1980s",
+    "region": "CN"
+  },
+  {
+    "first": "志",
+    "second": "強",
+    "weight": 9,
+    "gender": "male",
+    "era": "1990s",
+    "region": "CN"
+  },
+  {
+    "first": "文",
+    "second": "明",
+    "weight": 8,
+    "gender": "male",
+    "era": "1980s",
+    "region": "CN"
+  },
+  {
+    "first": "德",
+    "second": "華",
+    "weight": 7,
+    "gender": "male",
+    "era": "1990s",
+    "region": "CN"
+  },
+  {
+    "first": "博",
+    "second": "文",
+    "weight": 9,
+    "gender": "male",
+    "era": "2000s",
+    "region": "CN"
+  },
+  {
+    "first": "建",
+    "second": "軍",
+    "weight": 8,
+    "gender": "male",
+    "era": "1980s",
+    "region": "CN"
+  },
+  {
+    "first": "志",
+    "second": "遠",
+    "weight": 7,
+    "gender": "male",
+    "era": "1990s",
+    "region": "CN"
+  },
+  {
+    "first": "文",
+    "second": "斌",
+    "weight": 6,
+    "gender": "male",
+    "era": "1980s",
+    "region": "CN"
+  },
+  {
+    "first": "美",
+    "second": "麗",
+    "weight": 10,
+    "gender": "female",
+    "era": "1980s",
+    "region": "CN"
+  },
+  {
+    "first": "秀",
+    "second": "英",
+    "weight": 9,
+    "gender": "female",
+    "era": "1980s",
+    "region": "CN"
+  },
+  {
+    "first": "華",
+    "second": "芳",
+    "weight": 8,
+    "gender": "female",
+    "era": "1990s",
+    "region": "CN"
+  },
+  {
+    "first": "麗",
+    "second": "華",
+    "weight": 7,
+    "gender": "female",
+    "era": "1990s",
+    "region": "CN"
+  },
+  {
+    "first": "美",
+    "second": "玲",
+    "weight": 8,
+    "gender": "female",
+    "era": "1980s",
+    "region": "CN"
+  },
+  {
+    "first": "秀",
+    "second": "珍",
+    "weight": 7,
+    "gender": "female",
+    "era": "1980s",
+    "region": "CN"
+  },
+  {
+    "first": "華",
+    "second": "美",
+    "weight": 6,
+    "gender": "female",
+    "era": "1990s",
+    "region": "CN"
+  }
+]

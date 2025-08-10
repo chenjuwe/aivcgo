@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
+import { initNameData } from '@/utils/nameDataInit';
+
+initNameData();
 
 // 註冊 Service Worker（如果需要離線功能）
 if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {

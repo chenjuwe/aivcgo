@@ -43,7 +43,7 @@ export function CharacterSelector({
       {/* 角色選擇器 */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          選擇禱告角色 (可選)
+          選擇人物（可選）
         </label>
         
         <div className="relative">
@@ -63,7 +63,7 @@ export function CharacterSelector({
               ) : (
                 <>
                   <User className="h-5 w-5 text-gray-400" />
-                  <span className="text-gray-500">選擇一個角色來獲得個人化禱告</span>
+                  <span className="text-gray-500">選擇一個人物</span>
                 </>
               )}
             </div>
@@ -85,7 +85,7 @@ export function CharacterSelector({
                 <User className="h-5 w-5 text-gray-400" />
                 <div className="text-left">
                   <div className="font-medium text-gray-900">不選擇角色</div>
-                  <div className="text-sm text-gray-500">使用通用禱告模板</div>
+                  <div className="text-sm text-gray-500">使用通用設定</div>
                 </div>
               </button>
 
@@ -206,7 +206,7 @@ export function CharacterSelector({
                 </div>
                 
                 <div>
-                  <h4 className="font-medium text-gray-700 mb-2">禱告風格</h4>
+                  <h4 className="font-medium text-gray-700 mb-2">禱告風格（附加）</h4>
                   <span className="inline-block px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">
                     {selectedCharacter.prayerStyle === 'formal' ? '正式' : 
                      selectedCharacter.prayerStyle === 'casual' ? '親切' : '傳統'}
@@ -223,7 +223,7 @@ export function CharacterSelector({
         <div>
           <h4 className="text-sm font-medium text-gray-700 mb-2 flex items-center">
             <Sparkles className="h-4 w-4 mr-1 text-yellow-500" />
-            {selectedCharacter?.name}的常見禱告需求
+            {selectedCharacter?.name}的常見需求（附加）
           </h4>
           <div className="flex flex-wrap gap-2">
             {recommendations.map((recommendation, index) => (

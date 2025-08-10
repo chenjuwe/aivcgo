@@ -202,3 +202,18 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+/* 統一輸入欄高度（不影響 checkbox/radio/range/textarea） */
+:root {}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+select {
+  height: 2.5rem; /* 40px，同 tailwind h-10 */
+  line-height: 2.5rem;
+}
+
+/* 讓行高不影響文字輸入垂直居中 */
+input,
+select {
+  box-sizing: border-box;
+}

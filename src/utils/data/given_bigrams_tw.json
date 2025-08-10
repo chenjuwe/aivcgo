@@ -1,0 +1,58 @@
+[
+  {
+    "first": "柏",
+    "second": "宇",
+    "weight": 10,
+    "gender": "unisex",
+    "era": "2000s",
+    "region": "TW"
+  },
+  {
+    "first": "雅",
+    "second": "庭",
+    "weight": 10,
+    "gender": "female",
+    "era": "1990s",
+    "region": "TW"
+  },
+  {
+    "first": "家",
+    "second": "偉",
+    "weight": 9,
+    "gender": "male",
+    "era": "1980s",
+    "region": "TW"
+  },
+  {
+    "first": "宇",
+    "second": "翔",
+    "weight": 8,
+    "gender": "male",
+    "era": "2000s",
+    "region": "TW"
+  },
+  {
+    "first": "怡",
+    "second": "欣",
+    "weight": 9,
+    "gender": "female",
+    "era": "1990s",
+    "region": "TW"
+  },
+  {
+    "first": "晨",
+    "second": "語",
+    "weight": 7,
+    "gender": "unisex",
+    "era": "2010s",
+    "region": "TW"
+  },
+  {
+    "first": "安",
+    "second": "涵",
+    "weight": 7,
+    "gender": "unisex",
+    "era": "2010s",
+    "region": "TW"
+  }
+]
