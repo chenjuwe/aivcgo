@@ -4,6 +4,7 @@ import {
   EnhancedCustomCharacter
 } from '../types';
 import bundle from './data/character_profile_bundle_v2.6.16f2.json';
+import { getJobRequirement } from './factors/jobPersonality';
 
 // 預設生成因子（作為外部 JSON 轉換失敗或缺欄位時的後備）
 const DEFAULT_GENERATION_FACTORS: CharacterGenerationFactors = {
@@ -443,6 +444,12 @@ export function generateCharacterProfile(request: CharacterGenerationRequest): E
     energyPattern,
     availability: ['週一至週五', '週末']
   };
+  
+  // 合併職業-人格匹配需求（若可解析）
+  const jobReq = getJobRequirement(role);
+  if (jobReq) {
+    (detailedProfile as any).jobRequirement = jobReq;
+  }
   
   return {
     id: `char_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
