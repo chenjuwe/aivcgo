@@ -217,3 +217,25 @@ input,
 select {
   box-sizing: border-box;
 }
+
+/* 2K/4K: auto-fit to avoid overly tall columns while keeping md behavior on smaller screens */
+@media (min-width: 1920px) {
+  .md\:grid-cols-3,
+  .md\:grid-cols-4,
+  .md\:grid-cols-5,
+  .md\:grid-cols-6 {
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  }
+  /* tighten gaps */
+  .gap-4 { gap: 0.625rem; }
+}
+@media (min-width: 2560px) {
+  .md\:grid-cols-3,
+  .md\:grid-cols-4,
+  .md\:grid-cols-5,
+  .md\:grid-cols-6 {
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  }
+  /* keep compact spacing on 4K */
+  .gap-4 { gap: 0.625rem; }
+}

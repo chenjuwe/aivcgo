@@ -791,8 +791,4111 @@ export function CharacterCreator({ isOpen, onClose, editingCharacter }: Characte
                   </div>
                 </div>
                 
-                <div>
-                  <label className="block text-sm font-semibold text-blue-800 mb-2">工作</label>
+                {/* 家庭關係 */}
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-semibold text-blue-800 mb-2">家庭關係</label>
+                  <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                    {/* 配偶資訊（詳細） */}
+                    <div className="md:col-span-6 grid grid-cols-1 md:grid-cols-6 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-blue-700 mb-2">配偶姓名</label>
+                        <input
+                          type="text"
+                          placeholder="輸入姓名"
+                          value={generationRequest.familyRelations?.spouseDetails?.name || ''}
+                          onChange={(e) => setGenerationRequest(prev => ({
+                            ...prev,
+                            familyRelations: { ...(prev.familyRelations||{}), spouseDetails: { ...(prev.familyRelations?.spouseDetails||{}), name: e.target.value || undefined } }
+                          }))}
+                          className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-blue-700 mb-2">年齡</label>
+                        <select
+                          value={generationRequest.familyRelations?.spouseDetails?.age?.toString() || ''}
+                          onChange={(e) => setGenerationRequest(prev => ({
+                            ...prev,
+                            familyRelations: { ...(prev.familyRelations||{}), spouseDetails: { ...(prev.familyRelations?.spouseDetails||{}), age: e.target.value ? parseInt(e.target.value) : undefined } }
+                          }))}
+                          className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                        >
+                          <option value="">未指定</option>
+                          {Array.from({length: 63}, (_,i)=>i+18).map(a => <option key={a} value={a}>{a}</option>)}
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-blue-700 mb-2">職業背景</label>
+                        <select
+                          value={generationRequest.familyRelations?.spouseDetails?.occupationBackground || ''}
+                          onChange={(e) => setGenerationRequest(prev => ({
+                            ...prev,
+                            familyRelations: { ...(prev.familyRelations||{}), spouseDetails: { ...(prev.familyRelations?.spouseDetails||{}), occupationBackground: (e.target.value || undefined) as any } }
+                          }))}
+                          className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                        >
+                          <option value="">未指定</option>
+                          {GENERATION_FACTORS.occupationEconomy.industries.flatMap(i=>i.roles).slice(0,80).map(r => <option key={r} value={r}>{r}</option>)}
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-blue-700 mb-2">信仰狀況</label>
+                        <select
+                          value={generationRequest.familyRelations?.spouseDetails?.faithStatus || ''}
+                          onChange={(e) => setGenerationRequest(prev => ({
+                            ...prev,
+                            familyRelations: { ...(prev.familyRelations||{}), spouseDetails: { ...(prev.familyRelations?.spouseDetails||{}), faithStatus: (e.target.value || undefined) as any } }
+                          }))}
+                          className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                        >
+                          <option value="">未指定</option>
+                          {['無','慕道友','初信者','穩定信徒','成熟信徒'].map(o => <option key={o} value={o}>{o}</option>)}
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-blue-700 mb-2">教育程度</label>
+                        <select
+                          value={generationRequest.familyRelations?.spouseDetails?.educationLevel || ''}
+                          onChange={(e) => setGenerationRequest(prev => ({
+                            ...prev,
+                            familyRelations: { ...(prev.familyRelations||{}), spouseDetails: { ...(prev.familyRelations?.spouseDetails||{}), educationLevel: (e.target.value || undefined) as any } }
+                          }))}
+                          className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                        >
+                          <option value="">未指定</option>
+                          {GENERATION_FACTORS.demographics.education.map(ed => <option key={ed} value={ed}>{ed}</option>)}
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-blue-700 mb-2">家庭背景</label>
+                        <select
+                          value={generationRequest.familyRelations?.spouseDetails?.familyBackground || ''}
+                          onChange={(e) => setGenerationRequest(prev => ({
+                            ...prev,
+                            familyRelations: { ...(prev.familyRelations||{}), spouseDetails: { ...(prev.familyRelations?.spouseDetails||{}), familyBackground: (e.target.value || undefined) as any } }
+                          }))}
+                          className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                        >
+                          <option value="">未指定</option>
+                          {['基督徒家庭','傳統家庭','單親家庭','其他'].map(o => <option key={o} value={o}>{o}</option>)}
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-blue-700 mb-2">性格特質</label>
+                        <select
+                          value={generationRequest.familyRelations?.spouseDetails?.personalityTrait || ''}
+                          onChange={(e) => setGenerationRequest(prev => ({
+                            ...prev,
+                            familyRelations: { ...(prev.familyRelations||{}), spouseDetails: { ...(prev.familyRelations?.spouseDetails||{}), personalityTrait: (e.target.value || undefined) as any } }
+                          }))}
+                          className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                        >
+                          <option value="">未指定</option>
+                          {GENERATION_FACTORS.personality.patterns.map(p => <option key={p} value={p}>{p}</option>)}
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-blue-700 mb-2">興趣愛好</label>
+                        <select
+                          value={generationRequest.familyRelations?.spouseDetails?.interests || ''}
+                          onChange={(e) => setGenerationRequest(prev => ({
+                            ...prev,
+                            familyRelations: { ...(prev.familyRelations||{}), spouseDetails: { ...(prev.familyRelations?.spouseDetails||{}), interests: (e.target.value || undefined) as any } }
+                          }))}
+                          className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                        >
+                          <option value="">未指定</option>
+                          {GENERATION_FACTORS.lifestyleInterests.hobbies.map(h => <option key={h} value={h}>{h}</option>)}
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-blue-700 mb-2">健康狀況</label>
+                        <select
+                          value={generationRequest.familyRelations?.spouseDetails?.healthStatus || ''}
+                          onChange={(e) => setGenerationRequest(prev => ({
+                            ...prev,
+                            familyRelations: { ...(prev.familyRelations||{}), spouseDetails: { ...(prev.familyRelations?.spouseDetails||{}), healthStatus: (e.target.value || undefined) as any } }
+                          }))}
+                          className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                        >
+                          <option value="">未指定</option>
+                          {['健康','過敏','慢性疲勞','睡眠障礙','一般小病','其他'].map(o => <option key={o} value={o}>{o}</option>)}
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-blue-700 mb-2">經濟狀況</label>
+                        <select
+                          value={generationRequest.familyRelations?.spouseDetails?.economicStatus || ''}
+                          onChange={(e) => setGenerationRequest(prev => ({
+                            ...prev,
+                            familyRelations: { ...(prev.familyRelations||{}), spouseDetails: { ...(prev.familyRelations?.spouseDetails||{}), economicStatus: (e.target.value || undefined) as any } }
+                          }))}
+                          className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                        >
+                          <option value="">未指定</option>
+                          {['寬裕','穩定','壓力中','困難'].map(o => <option key={o} value={o}>{o}</option>)}
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-blue-700 mb-2">社交圈</label>
+                        <select
+                          value={generationRequest.familyRelations?.spouseDetails?.socialCircle || ''}
+                          onChange={(e) => setGenerationRequest(prev => ({
+                            ...prev,
+                            familyRelations: { ...(prev.familyRelations||{}), spouseDetails: { ...(prev.familyRelations?.spouseDetails||{}), socialCircle: (e.target.value || undefined) as any } }
+                          }))}
+                          className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                        >
+                          <option value="">未指定</option>
+                          {['家庭為主','教會為主','職場為主','廣泛社交','低社交'].map(o => <option key={o} value={o}>{o}</option>)}
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-blue-700 mb-2">價值觀念</label>
+                        <select
+                          value={generationRequest.familyRelations?.spouseDetails?.values || ''}
+                          onChange={(e) => setGenerationRequest(prev => ({
+                            ...prev,
+                            familyRelations: { ...(prev.familyRelations||{}), spouseDetails: { ...(prev.familyRelations?.spouseDetails||{}), values: (e.target.value || undefined) as any } }
+                          }))}
+                          className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                        >
+                          <option value="">未指定</option>
+                          {['家庭至上','事業為重','信仰優先','自由獨立','社會關懷'].map(o => <option key={o} value={o}>{o}</option>)}
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-blue-700 mb-2">人生成就/目標</label>
+                        <select
+                          value={generationRequest.familyRelations?.spouseDetails?.lifeGoals || ''}
+                          onChange={(e) => setGenerationRequest(prev => ({
+                            ...prev,
+                            familyRelations: { ...(prev.familyRelations||{}), spouseDetails: { ...(prev.familyRelations?.spouseDetails||{}), lifeGoals: (e.target.value || undefined) as any } }
+                          }))}
+                          className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                        >
+                          <option value="">未指定</option>
+                          {['事業成功','家庭幸福','財務自由','社會貢獻','自我實現'].map(o => <option key={o} value={o}>{o}</option>)}
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-blue-700 mb-2">相處模式</label>
+                        <select
+                          value={generationRequest.familyRelations?.spouseDetails?.relationshipMode || ''}
+                          onChange={(e) => setGenerationRequest(prev => ({
+                            ...prev,
+                            familyRelations: { ...(prev.familyRelations||{}), spouseDetails: { ...(prev.familyRelations?.spouseDetails||{}), relationshipMode: (e.target.value || undefined) as any } }
+                          }))}
+                          className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                        >
+                          <option value="">未指定</option>
+                          {['黏膩依賴','獨立自主','相互補型','平等合作'].map(o => <option key={o} value={o}>{o}</option>)}
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-blue-700 mb-2">溝通方式</label>
+                        <select
+                          value={generationRequest.familyRelations?.spouseDetails?.communicationStyle || ''}
+                          onChange={(e) => setGenerationRequest(prev => ({
+                            ...prev,
+                            familyRelations: { ...(prev.familyRelations||{}), spouseDetails: { ...(prev.familyRelations?.spouseDetails||{}), communicationStyle: (e.target.value || undefined) as any } }
+                          }))}
+                          className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                        >
+                          <option value="">未指定</option>
+                          {['直接坦率','婉轉含蓄','理性討論','情緒表達'].map(o => <option key={o} value={o}>{o}</option>)}
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-blue-700 mb-2">衝突處理</label>
+                        <select
+                          value={generationRequest.familyRelations?.spouseDetails?.conflictResolution || ''}
+                          onChange={(e) => setGenerationRequest(prev => ({
+                            ...prev,
+                            familyRelations: { ...(prev.familyRelations||{}), spouseDetails: { ...(prev.familyRelations?.spouseDetails||{}), conflictResolution: (e.target.value || undefined) as any } }
+                          }))}
+                          className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                        >
+                          <option value="">未指定</option>
+                          {['直接溝通','冷戰處理','妥協讓步','尋求仲裁'].map(o => <option key={o} value={o}>{o}</option>)}
+                        </select>
+                      </div>
+                    </div>
+
+                    {/* 婚姻狀態 */}
+                    <div>
+                      <label className="block text-sm font-medium text-blue-700 mb-2">婚姻狀態</label>
+                      <select
+                        value={generationRequest.familyRelations?.marriageStage || ''}
+                        onChange={(e) => setGenerationRequest(prev => ({
+                          ...prev,
+                          familyRelations: { ...(prev.familyRelations||{}), marriageStage: (e.target.value || undefined) as any }
+                        }))}
+                        className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                      >
+                        <option value="">未指定</option>
+                        {['新婚蜜月期','穩定婚姻期','婚姻困難期','分居冷靜期','感情修復期','婚姻倦怠期','重燃愛火期','和諧相處期','互相扶持期','黃昏戀情','第二春','老夫老妻','金婚銀婚','鑽石婚','白金婚'].map(o => (
+                          <option key={o} value={o}>{o}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* 相識方式 */}
+                    <div>
+                      <label className="block text-sm font-medium text-blue-700 mb-2">相識方式</label>
+                      <select
+                        value={generationRequest.familyRelations?.meetingMethod || ''}
+                        onChange={(e) => setGenerationRequest(prev => ({
+                          ...prev,
+                          familyRelations: { ...(prev.familyRelations||{}), meetingMethod: (e.target.value || undefined) as any }
+                        }))}
+                        className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                      >
+                        <option value="">未指定</option>
+                        {['教會認識','朋友介紹','職場戀情','網路交友','相親安排','同學同窗','鄰居鄰里','旅行邂逅','興趣社團','志工活動','運動健身','咖啡廳偶遇','圖書館相遇','醫院相識','意外相撞'].map(o => (
+                          <option key={o} value={o}>{o}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* 子女數量 */}
+                    <div>
+                      <label className="block text-sm font-medium text-blue-700 mb-2">子女數量</label>
+                      <select
+                        value={generationRequest.familyRelations?.childrenCount || ''}
+                        onChange={(e) => setGenerationRequest(prev => ({
+                          ...prev,
+                          familyRelations: { ...(prev.familyRelations||{}), childrenCount: (e.target.value || undefined) as any }
+                        }))}
+                        className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                      >
+                        <option value="">未指定</option>
+                        {['不生族','0','1','2','3','4','5','6','7'].map(o => (
+                          <option key={o} value={o}>{o}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* 年齡分布（多選） */}
+                    <div>
+                      <label className="block text-sm font-medium text-blue-700 mb-2">年齡分布</label>
+                      <div className="flex flex-wrap gap-2">
+                        {['嬰幼兒','學齡前','小學','中學','成年'].map(it => {
+                          const selected = (generationRequest.familyRelations?.childrenAgeDistribution || []).includes(it as any);
+                          return (
+                            <button key={it} type="button" onClick={() => setGenerationRequest(prev => {
+                              const cur = new Set(prev.familyRelations?.childrenAgeDistribution || []);
+                              selected ? cur.delete(it as any) : cur.add(it as any);
+                              return { ...prev, familyRelations: { ...(prev.familyRelations||{}), childrenAgeDistribution: Array.from(cur) as any } };
+                            })} className={`px-2 py-1 text-xs rounded border ${selected ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-blue-700 border-blue-300'}`}>
+                              {it}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* 教養風格 */}
+                    <div>
+                      <label className="block text-sm font-medium text-blue-700 mb-2">教養風格</label>
+                      <select
+                        value={generationRequest.familyRelations?.parentingStyle || ''}
+                        onChange={(e) => setGenerationRequest(prev => ({
+                          ...prev,
+                          familyRelations: { ...(prev.familyRelations||{}), parentingStyle: (e.target.value || undefined) as any }
+                        }))}
+                        className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                      >
+                        <option value="">未指定</option>
+                        {['民主型','權威型','放任型','溺愛型'].map(o => (
+                          <option key={o} value={o}>{o}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* 父母狀況 */}
+                    <div>
+                      <label className="block text-sm font-medium text-blue-700 mb-2">父母狀況</label>
+                      <select
+                        value={generationRequest.familyRelations?.parentsStatus || ''}
+                        onChange={(e) => setGenerationRequest(prev => ({
+                          ...prev,
+                          familyRelations: { ...(prev.familyRelations||{}), parentsStatus: (e.target.value || undefined) as any }
+                        }))}
+                        className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                      >
+                        <option value="">未指定</option>
+                        {['健在','過世','離婚','分居'].map(o => (
+                          <option key={o} value={o}>{o}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* 家庭背景 */}
+                    <div>
+                      <label className="block text-sm font-medium text-blue-700 mb-2">家庭背景</label>
+                      <select
+                        value={generationRequest.familyRelations?.familyBackground || ''}
+                        onChange={(e) => setGenerationRequest(prev => ({
+                          ...prev,
+                          familyRelations: { ...(prev.familyRelations||{}), familyBackground: (e.target.value || undefined) as any }
+                        }))}
+                        className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                      >
+                        <option value="">未指定</option>
+                        {['基督徒家庭','傳統家庭','單親家庭'].map(o => (
+                          <option key={o} value={o}>{o}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* 兄弟姊妹：排行/親密度 */}
+                    <div>
+                      <label className="block text-sm font-medium text-blue-700 mb-2">兄弟姊妹（排行/親密度）</label>
+                      <div className="grid grid-cols-2 gap-2">
+                        <input
+                          type="text"
+                          placeholder="排行（例：老大/第二）"
+                          value={generationRequest.familyRelations?.siblingsRank || ''}
+                          onChange={(e) => setGenerationRequest(prev => ({
+                            ...prev,
+                            familyRelations: { ...(prev.familyRelations||{}), siblingsRank: e.target.value || undefined }
+                          }))}
+                          className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                        />
+                        <input
+                          type="text"
+                          placeholder="關係親密度（例：很親/普通/疏遠）"
+                          value={generationRequest.familyRelations?.siblingsCloseness || ''}
+                          onChange={(e) => setGenerationRequest(prev => ({
+                            ...prev,
+                            familyRelations: { ...(prev.familyRelations||{}), siblingsCloseness: e.target.value || undefined }
+                          }))}
+                          className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* 生理特徵與外貌 */}
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-semibold text-blue-800 mb-2">生理特徵與外貌</label>
+                  <div className="space-y-4">
+                    {/* 體型特徵 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">體型特徵</div>
+                      <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        {/* 身高體重 */}
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">身高體重</label>
+                          <select
+                            value={(generationRequest.physicalAppearance?.heightWeight || [])[0] || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              physicalAppearance: { ...(prev.physicalAppearance||{}), heightWeight: e.target.value ? [e.target.value] : [] }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['嬌小玲瓏','標準勻稱','高挑修長','豐滿圓潤','纖細瘦弱','壯碩健壯','中等身材','袖珍可愛','高大威猛','微胖可愛','骨感清瘦','結實精壯'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        {/* 體型分類 */}
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">體型分類</label>
+                          <select
+                            value={(generationRequest.physicalAppearance?.bodyType || [])[0] || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              physicalAppearance: { ...(prev.physicalAppearance||{}), bodyType: e.target.value ? [e.target.value] : [] }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['瘦弱型','標準型','肌肉型','豐腴型','運動型','苗條型','健美型','圓潤型','精實型','柔軟型','緊實型','勻稱型'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        {/* 身體比例 */}
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">身體比例</label>
+                          <select
+                            value={(generationRequest.physicalAppearance?.bodyProportion || [])[0] || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              physicalAppearance: { ...(prev.physicalAppearance||{}), bodyProportion: e.target.value ? [e.target.value] : [] }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['長腿型','短腿型','寬肩型','窄肩型','腰細型','臀豐型','胸豐型','手長型','脖長型','頭小型','五官精緻','體態優雅'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 外貌特色 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">外貌特色</div>
+                      <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        {/* 髮型髮色 */}
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">髮型髮色</label>
+                          <select
+                            value={(generationRequest.physicalAppearance?.hairStyleColor || [])[0] || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              physicalAppearance: { ...(prev.physicalAppearance||{}), hairStyleColor: e.target.value ? [e.target.value] : [] }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['烏黑亮麗','栗色溫暖','染髮時尚','自然捲髮','柔順直髮','俏麗短髮','飄逸長髮','波浪捲髮','蓬鬆捲髮','銀白髮色','挑染髮色','漸層髮色','厚重瀏海','空氣瀏海','側分髮型'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        {/* 眼睛特徵 */}
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">眼睛特徵</label>
+                          <select
+                            value={(generationRequest.physicalAppearance?.eyeFeatures || [])[0] || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              physicalAppearance: { ...(prev.physicalAppearance||{}), eyeFeatures: e.target.value ? [e.target.value] : [] }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['大眼有神','小眼精緻','單眼皮清秀','雙眼皮深邃','丹鳳眼魅惑','杏眼溫柔','桃花眼迷人','眼神銳利','眼神溫和','深邃眼眸','明亮眼神','憂鬱眼神','瞇瞇眼可愛','眼角上揚','長睫毛'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        {/* 膚色膚質 */}
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">膚色膚質</label>
+                          <select
+                            value={(generationRequest.physicalAppearance?.skinTexture || [])[0] || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              physicalAppearance: { ...(prev.physicalAppearance||{}), skinTexture: e.target.value ? [e.target.value] : [] }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['雪白無瑕','健康小麥色','古銅膚色','粉嫩膚質','光滑細膩','敏感紅潤','乾燥粗糙','油光滿面','混合膚質','暗沉蠟黃','紅潤光澤','蒼白無血色','曬傷膚色','嬰兒般肌膚','成熟膚質'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        {/* 特殊標記 */}
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">特殊標記</label>
+                          <select
+                            value={(generationRequest.physicalAppearance?.specialMarks || [])[0] || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              physicalAppearance: { ...(prev.physicalAppearance||{}), specialMarks: e.target.value ? [e.target.value] : [] }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['可愛胎記','歲月疤痕','藝術刺青','性感痣點','迷人酒窩','深深梨渦','眉間痣','唇下痣','頸部胎記','手臂疤痕','背部刺青','耳洞穿孔','鼻環裝飾','特殊胎記','戰傷疤痕'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 穿衣風格 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">穿衣風格</div>
+                      <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        {/* 服裝類型 */}
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">服裝類型</label>
+                          <select
+                            value={(generationRequest.physicalAppearance?.clothingType || [])[0] || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              physicalAppearance: { ...(prev.physicalAppearance||{}), clothingType: e.target.value ? [e.target.value] : [] }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['正式商務裝','休閒舒適風','潮流時尚款','保守傳統式','學院風格','街頭嘻哈','田園清新','復古懷舊','極簡主義','浪漫甜美','朋克搖滾','嬉皮風格','民族風情','工業風格','未來科技風'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        {/* 風格偏好 */}
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">風格偏好</label>
+                          <select
+                            value={(generationRequest.physicalAppearance?.stylePreference || [])[0] || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              physicalAppearance: { ...(prev.physicalAppearance||{}), stylePreference: e.target.value ? [e.target.value] : [] }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['藝術創意型','運動休閒風','文青書卷氣','華麗優雅風','個性叛逆風','知性優雅','可愛甜美','成熟穩重','前衛先鋒','古典韻味','異國情調','簡約現代','奢華貴氣','自然率性','潮流先鋒'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        {/* 配件習慣 */}
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">配件習慣</label>
+                          <select
+                            value={(generationRequest.physicalAppearance?.accessoriesHabits || [])[0] || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              physicalAppearance: { ...(prev.physicalAppearance||{}), accessoriesHabits: e.target.value ? [e.target.value] : [] }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['手錶收藏','珠寶首飾','時尚眼鏡','帽子控','圍巾愛好','包包控','鞋子迷','髮飾控','太陽眼鏡','領帶領結','胸針別針','手環腳鍊','戒指控','耳環穿搭','配飾達人'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 身體習慣 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">身體習慣</div>
+                      <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        {/* 慣用特徵 */}
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">慣用特徵</label>
+                          <select
+                            value={(generationRequest.physicalAppearance?.handedness || [])[0] || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              physicalAppearance: { ...(prev.physicalAppearance||{}), handedness: e.target.value ? [e.target.value] : [] }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['左撇子靈活','右撇子標準','雙手並用','左腦右手','右腦左手','混合慣用','使用輔助','適應性強','天生左利','後天改變','靈活切換','單手偏好'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        {/* 姿態特色 */}
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">姿態特色</label>
+                          <select
+                            value={(generationRequest.physicalAppearance?.posture || [])[0] || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              physicalAppearance: { ...(prev.physicalAppearance||{}), posture: e.target.value ? [e.target.value] : [] }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['走路快速','走路優雅','駝背習慣','挺胸抬頭','步態輕盈','大步流星','小步謹慎','搖擺走路','軍人姿態','模特步伐','拖沓步伐','彈跳步伐','沉穩踏實','輕浮浮躁','威嚴氣勢'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        {/* 手勢習慣 */}
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">手勢習慣</label>
+                          <select
+                            value={(generationRequest.physicalAppearance?.gestures || [])[0] || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              physicalAppearance: { ...(prev.physicalAppearance||{}), gestures: e.target.value ? [e.target.value] : [] }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['說話比手勢','思考摸下巴','緊張咬指甲','習慣性轉筆','摸頭髮','搓手掌','敲桌面','摸鼻子','撫摸下唇','雙手交握','手指敲擊','摸耳朵','撫胸口','手放口袋','摸眼鏡'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* 情感與愛情觀 */}
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-semibold text-blue-800 mb-2">情感與愛情觀</label>
+                  <div className="space-y-4">
+                    {/* 生活方式與興趣（新增區塊會插在情感與愛情觀之後，這裡僅為定位標記） */}
+                    {/* 戀愛模式 */}
+                    <div>
+                                             <div className="text-sm font-medium text-blue-700 mb-2">戀愛模式</div>
+                       <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        {/* 愛情類型 */}
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">愛情類型</label>
+                          <select
+                            value={generationRequest.loveAndRomance?.loveType || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              loveAndRomance: { ...(prev.loveAndRomance||{}), loveType: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['慢熱升溫型','一見鍾情型','理性分析型','感性衝動型','友情轉愛情','日久生情型','激情燃燒型','細水長流型','靈魂伴侶型','肉體吸引型','精神戀愛型','依賴共生型','獨立平等型','師生型','異地戀型'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        {/* 戀愛風格 */}
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">戀愛風格</label>
+                          <select
+                            value={generationRequest.loveAndRomance?.loveStyle || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              loveAndRomance: { ...(prev.loveAndRomance||{}), loveStyle: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['浪漫主義者','現實主義者','佔有慾強型','給予自由型','黏膩型戀人','獨立型戀人','控制型戀人','放任型戀人','傳統保守型','開放前衛型','完美主義型','隨遇而安型','競爭型戀人','合作型戀人','治癒型戀人'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        {/* 表達方式 */}
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">表達方式</label>
+                          <select
+                            value={generationRequest.loveAndRomance?.expression || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              loveAndRomance: { ...(prev.loveAndRomance||{}), expression: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['直接坦白表達','含蓄暗示情意','行動證明愛意','語言甜蜜表達','書信文字傳情','禮物表達心意','時間陪伴表達','身體接觸表達','眼神傳遞愛意','默默守護表達','創意浪漫表達','實際行動表達','情歌表達','詩詞表達','科技表達'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 感情經歷 */}
+                    <div>
+                                             <div className="text-sm font-medium text-blue-700 mb-2">感情經歷</div>
+                       <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        {/* 戀愛經驗 */}
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">戀愛經驗</label>
+                          <select
+                            value={generationRequest.loveAndRomance?.experience || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              loveAndRomance: { ...(prev.loveAndRomance||{}), experience: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['初戀青澀情結','豐富戀愛經驗','感情完全空白','嚴重創傷經歷','暗戀無數次','網戀經驗','異國戀經驗','辦公室戀情','學生時代戀愛','成年後初戀','閃婚經驗','長跑多年','同性戀經驗','雙性戀經驗','複雜三角戀'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        {/* 分手原因 */}
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">分手原因</label>
+                          <select
+                            value={generationRequest.loveAndRomance?.breakupReason || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              loveAndRomance: { ...(prev.loveAndRomance||{}), breakupReason: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['價值觀差異','遠距離問題','家庭反對','性格不合','第三者介入','經濟壓力','工作忙碌','溝通不良','信任破裂','個人成長','興趣不同','生活習慣','宗教信仰','未來規劃','性格成熟度'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        {/* 情傷復原 */}
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">情傷復原</label>
+                          <select
+                            value={generationRequest.loveAndRomance?.healingStyle || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              loveAndRomance: { ...(prev.loveAndRomance||{}), healingStyle: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['快速復原型','需要時間型','容易受傷型','理性面對型','沉浸痛苦型','報復心理型','逃避現實型','重新開始型','永不忘記型','成長轉化型','麻痺自己型','尋求治療型','朋友支持型','工作轉移型','時間治癒型'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 擇偶條件 */}
+                    <div>
+                                             <div className="text-sm font-medium text-blue-700 mb-2">擇偶條件</div>
+                       <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        {/* 外在條件 */}
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">外在條件</label>
+                          <select
+                            value={generationRequest.loveAndRomance?.externalCriteria || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              loveAndRomance: { ...(prev.loveAndRomance||{}), externalCriteria: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['外貌協會重視','身高要求嚴格','年齡偏好明確','經濟考量實際','體重要求','身材比例','穿著品味','社會地位','家庭背景','教育程度','職業聲望','收入水準','房車條件','外語能力','才藝技能'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        {/* 內在要求 */}
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">內在要求</label>
+                          <select
+                            value={generationRequest.loveAndRomance?.innerCriteria || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              loveAndRomance: { ...(prev.loveAndRomance||{}), innerCriteria: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['性格相容度','價值觀一致','信仰共同點','智慧水準','幽默感','責任感','上進心','孝順程度','情商高低','溝通能力','包容度','穩定性','可靠度','誠實度','溫柔體貼'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        {/* 特殊偏好 */}
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">特殊偏好</label>
+                          <select
+                            value={generationRequest.loveAndRomance?.specialPreference || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              loveAndRomance: { ...(prev.loveAndRomance||{}), specialPreference: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['同齡交往','姐弟戀情','師生戀慕','異國戀情','職場戀愛','青梅竹馬','網友見面','相親介紹','朋友介紹','偶遇邂逅','重逢舊愛','一夜情轉戀','鄰居戀情','旅行邂逅','運動夥伴'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 關係維持 */}
+                    <div>
+                                             <div className="text-sm font-medium text-blue-700 mb-2">關係維持</div>
+                       <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        {/* 相處模式 */}
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">相處模式</label>
+                          <select
+                            value={generationRequest.loveAndRomance?.relationshipMode || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              loveAndRomance: { ...(prev.loveAndRomance||{}), relationshipMode: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['黏膩依賴型','獨立自主型','相互補型','良性競爭型','平等合作型','主導控制型','被動配合型','朋友戀人型','激情浪漫型','平淡溫馨型','衝突不斷型','和諧穩定型','刺激冒險型','安全舒適型','成長促進型'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        {/* 衝突處理 */}
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">衝突處理</label>
+                          <select
+                            value={generationRequest.loveAndRomance?.conflictStyle || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              loveAndRomance: { ...(prev.loveAndRomance||{}), conflictStyle: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['直接溝通型','冷戰處理型','尋求仲裁型','逃避問題型','情緒爆發型','理性討論型','妥協讓步型','堅持己見型','尋求共識型','暫時分離型','第三方調解型','寫信溝通型','時間淡化型','道歉和解型','分手威脅型'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        {/* 未來規劃 */}
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">未來規劃</label>
+                          <select
+                            value={generationRequest.loveAndRomance?.futurePlan || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              loveAndRomance: { ...(prev.loveAndRomance||{}), futurePlan: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['婚姻導向型','享受過程型','恐婚傾向型','開放關係型','試婚同居型','遠距維持型','事業優先型','家庭第一型','子女計畫型','環遊世界型','創業合夥型','學習成長型','退休規劃型','財務規劃型','健康養生型'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 生活方式與興趣 */}
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-semibold text-blue-800 mb-2">生活方式與興趣</label>
+                  <div className="space-y-4">
+                    {/* 日常生活習慣 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">日常生活習慣</div>
+                      <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">作息習慣</label>
+                          <select
+                            value={generationRequest.lifestyleAndInterests?.dailyRhythm || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifestyleAndInterests: { ...(prev.lifestyleAndInterests||{}), dailyRhythm: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['早上6點起床','晚上11點睡覺','午休習慣','夜貓子作息','規律三餐'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">飲食習慣</label>
+                          <select
+                            value={generationRequest.lifestyleAndInterests?.eatingHabit || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifestyleAndInterests: { ...(prev.lifestyleAndInterests||{}), eatingHabit: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['素食主義','地中海飲食','低碳飲食','間歇性斷食','愛吃甜食','有機食品'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">運動習慣</label>
+                          <select
+                            value={generationRequest.lifestyleAndInterests?.exerciseHabit || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifestyleAndInterests: { ...(prev.lifestyleAndInterests||{}), exerciseHabit: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['每日散步','跑步健身','游泳運動','瑜伽練習','重量訓練','不愛運動'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">居住環境</label>
+                          <select
+                            value={generationRequest.lifestyleAndInterests?.livingEnvironment || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifestyleAndInterests: { ...(prev.lifestyleAndInterests||{}), livingEnvironment: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['市中心公寓','郊區透天','租屋族','與家人同住','獨居生活','極簡風格'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 興趣愛好與技能 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">興趣愛好與技能</div>
+                      <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">藝術類</label>
+                          <select
+                            value={generationRequest.lifestyleAndInterests?.artInterest || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifestyleAndInterests: { ...(prev.lifestyleAndInterests||{}), artInterest: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['古典音樂','流行音樂','繪畫藝術','攝影技術','書法','手工藝','數位藝術'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">運動類</label>
+                          <select
+                            value={generationRequest.lifestyleAndInterests?.sportsInterest || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifestyleAndInterests: { ...(prev.lifestyleAndInterests||{}), sportsInterest: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['游泳','慢跑','登山健行','球類運動','瑜伽','騎腳踏車','跳舞','武術'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">學習類</label>
+                          <select
+                            value={generationRequest.lifestyleAndInterests?.learningInterest || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifestyleAndInterests: { ...(prev.lifestyleAndInterests||{}), learningInterest: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['程式設計','數據分析','語言學習','投資理財','心理學','歷史研究'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">社交類</label>
+                          <select
+                            value={generationRequest.lifestyleAndInterests?.socialInterest || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifestyleAndInterests: { ...(prev.lifestyleAndInterests||{}), socialInterest: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['聚餐','旅遊','志工服務','社團活動','讀書會','才藝班'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 語言能力 */}
+                    <div>
+                                             <div className="text-sm font-medium text-blue-700 mb-2">語言能力</div>
+                       <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">本土語言</label>
+                          <select
+                            value={generationRequest.lifestyleAndInterests?.nativeLanguage || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifestyleAndInterests: { ...(prev.lifestyleAndInterests||{}), nativeLanguage: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['中文母語','台語流利','客家話母語','原住民語學習中'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">外語能力</label>
+                          <select
+                            value={generationRequest.lifestyleAndInterests?.foreignLanguage || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifestyleAndInterests: { ...(prev.lifestyleAndInterests||{}), foreignLanguage: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['英文流利','日文中級','韓文初級','多語言天才','商業英文優秀'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">溝通特色</label>
+                          <select
+                            value={generationRequest.lifestyleAndInterests?.communicationFeature || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifestyleAndInterests: { ...(prev.lifestyleAndInterests||{}), communicationFeature: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['國際溝通無障礙','專業英文優秀','本土語言熟練'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 數位科技使用 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">數位科技使用</div>
+                      <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">科技產品</label>
+                          <select
+                            value={generationRequest.lifestyleAndInterests?.techProducts || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifestyleAndInterests: { ...(prev.lifestyleAndInterests||{}), techProducts: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['智慧型手機重度使用','平板電腦愛好','智慧手錶健康','VR虛擬實境'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">網路行為</label>
+                          <select
+                            value={generationRequest.lifestyleAndInterests?.onlineBehavior || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifestyleAndInterests: { ...(prev.lifestyleAndInterests||{}), onlineBehavior: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['資訊搜尋','社交互動','娛樂消費','學習進修','購物比價','創作分享'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">社群媒體</label>
+                          <select
+                            value={generationRequest.lifestyleAndInterests?.socialMedia || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifestyleAndInterests: { ...(prev.lifestyleAndInterests||{}), socialMedia: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['Facebook重度使用','Instagram愛好者','YouTube訂閱狂','TikTok創作者'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">數位素養</label>
+                          <select
+                            value={generationRequest.lifestyleAndInterests?.digitalLiteracy || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifestyleAndInterests: { ...(prev.lifestyleAndInterests||{}), digitalLiteracy: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['隱私保護','資安意識','假訊息辨識','網路禮儀'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 社會參與 */}
+                    <div>
+                                             <div className="text-sm font-medium text-blue-700 mb-2">社會參與</div>
+                       <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">社區參與</label>
+                          <select
+                            value={generationRequest.lifestyleAndInterests?.communityParticipation || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifestyleAndInterests: { ...(prev.lifestyleAndInterests||{}), communityParticipation: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['社區委員會','鄰里活動','環境清潔','治安巡守','文化活動'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">環保意識</label>
+                          <select
+                            value={generationRequest.lifestyleAndInterests?.environmentalAwareness || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifestyleAndInterests: { ...(prev.lifestyleAndInterests||{}), environmentalAwareness: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['垃圾分類','資源回收','減塑生活','節能省電','綠色交通'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">志工服務</label>
+                          <select
+                            value={generationRequest.lifestyleAndInterests?.volunteerService || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifestyleAndInterests: { ...(prev.lifestyleAndInterests||{}), volunteerService: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['教育支援','長者關懷','兒童照護','寵物救助','災難救助'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 健康狀況 */}
+                    <div>
+                                             <div className="text-sm font-medium text-blue-700 mb-2">健康狀況</div>
+                       <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">一般健康</label>
+                          <select
+                            value={generationRequest.lifestyleAndInterests?.generalHealth || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifestyleAndInterests: { ...(prev.lifestyleAndInterests||{}), generalHealth: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['健康','過敏','慢性疲勞','偏頭痛','睡眠障礙'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">慢性疾病</label>
+                          <select
+                            value={generationRequest.lifestyleAndInterests?.chronicDisease || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifestyleAndInterests: { ...(prev.lifestyleAndInterests||{}), chronicDisease: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['高血壓','糖尿病','心臟病','氣喘','關節炎','甲狀腺異常'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">精神健康</label>
+                          <select
+                            value={generationRequest.lifestyleAndInterests?.mentalHealth || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifestyleAndInterests: { ...(prev.lifestyleAndInterests||{}), mentalHealth: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['憂鬱症','焦慮症','躁鬱症','強迫症','PTSD','ADHD'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">嚴重疾病</label>
+                          <select
+                            value={generationRequest.lifestyleAndInterests?.severeDisease || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifestyleAndInterests: { ...(prev.lifestyleAndInterests||{}), severeDisease: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['癌症康復中','中風後遺症','帕金森氏症','多發性硬化症'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">成癮問題</label>
+                          <select
+                            value={generationRequest.lifestyleAndInterests?.addictionIssue || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifestyleAndInterests: { ...(prev.lifestyleAndInterests||{}), addictionIssue: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['藥物成癮','酒精成癮','菸癮','網路成癮'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">特殊狀況</label>
+                          <select
+                            value={generationRequest.lifestyleAndInterests?.specialCondition || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifestyleAndInterests: { ...(prev.lifestyleAndInterests||{}), specialCondition: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['視力聽力受損','色盲','妥瑞氏症','自閉症類群障礙'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 交通工具 */}
+                    <div>
+                                             <div className="text-sm font-medium text-blue-700 mb-2">交通工具</div>
+                       <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">大眾運輸</label>
+                          <select
+                            value={generationRequest.lifestyleAndInterests?.publicTransport || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifestyleAndInterests: { ...(prev.lifestyleAndInterests||{}), publicTransport: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['捷運','公車','自行車','步行'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">機車類</label>
+                          <select
+                            value={generationRequest.lifestyleAndInterests?.scooterType || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifestyleAndInterests: { ...(prev.lifestyleAndInterests||{}), scooterType: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['Gogoro','光陽GP125'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">汽車類</label>
+                          <select
+                            value={generationRequest.lifestyleAndInterests?.carType || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifestyleAndInterests: { ...(prev.lifestyleAndInterests||{}), carType: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['Toyota Altis','Honda CR-V','Mercedes-Benz','BMW','Porsche','Tesla'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 心理與情感 */}
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-semibold text-blue-800 mb-2">心理與情感</label>
+                  <div className="space-y-4">
+                    {/* 情緒狀態 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">情緒狀態</div>
+                      <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">正面情緒</label>
+                          <select
+                            value={generationRequest.psychologyAndEmotion?.positiveEmotion || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              psychologyAndEmotion: { ...(prev.psychologyAndEmotion||{}), positiveEmotion: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['樂觀開朗','穩定平和','熱情洋溢','充滿希望','積極正向','溫和親切','活潑開朗','沉著冷靜','溫暖體貼','自信從容','幽默風趣','純真善良','堅韌不拔','富有同情心','充滿活力'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">負面情緒</label>
+                          <select
+                            value={generationRequest.psychologyAndEmotion?.negativeEmotion || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              psychologyAndEmotion: { ...(prev.psychologyAndEmotion||{}), negativeEmotion: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['容易焦慮','情緒起伏大','憂鬱傾向','容易沮喪','多愁善感','急躁易怒','悲觀消極','情緒化','易受挫折','內心脆弱','情緒壓抑','過度敏感','情緒不穩','容易絕望','心情陰鬱'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">情緒特質</label>
+                          <select
+                            value={generationRequest.psychologyAndEmotion?.emotionTrait || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              psychologyAndEmotion: { ...(prev.psychologyAndEmotion||{}), emotionTrait: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['敏感細膩','冷靜理性','內心堅強','情緒穩定','內向安靜','外向健談','情感豐富','理智務實','感性浪漫','情緒複雜','直覺敏銳','邏輯清晰','富有想像力','現實主義','理想主義'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 情緒管理方式 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">情緒管理方式</div>
+                      <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">身心調節</label>
+                          <select
+                            value={generationRequest.psychologyAndEmotion?.regulationBodyMind || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              psychologyAndEmotion: { ...(prev.psychologyAndEmotion||{}), regulationBodyMind: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['深呼吸冥想','運動發洩','音樂療癒','獨處思考','專業諮商'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">社交支持</label>
+                          <select
+                            value={generationRequest.psychologyAndEmotion?.socialSupport || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              psychologyAndEmotion: { ...(prev.psychologyAndEmotion||{}), socialSupport: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['找朋友聊天','宗教信仰','家人支持'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">創意表達</label>
+                          <select
+                            value={generationRequest.psychologyAndEmotion?.creativeExpression || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              psychologyAndEmotion: { ...(prev.psychologyAndEmotion||{}), creativeExpression: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['寫日記抒發','藝術創作','料理烹飪','園藝活動'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">轉移注意</label>
+                          <select
+                            value={generationRequest.psychologyAndEmotion?.attentionShift || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              psychologyAndEmotion: { ...(prev.psychologyAndEmotion||{}), attentionShift: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['閱讀','購物療法','旅行放鬆','寵物陪伴'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 壓力反應 */}
+                    <div>
+                                             <div className="text-sm font-medium text-blue-700 mb-2">壓力反應</div>
+                       <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">生理反應</label>
+                          <select
+                            value={generationRequest.psychologyAndEmotion?.stressPhysiological || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              psychologyAndEmotion: { ...(prev.psychologyAndEmotion||{}), stressPhysiological: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['失眠多夢','食慾不振','暴飲暴食','頭痛頭暈','肌肉緊張'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">心理反應</label>
+                          <select
+                            value={generationRequest.psychologyAndEmotion?.stressPsychological || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              psychologyAndEmotion: { ...(prev.psychologyAndEmotion||{}), stressPsychological: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['容易發怒','注意力不集中','記憶力下降','情緒低落','焦慮不安'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">行為反應</label>
+                          <select
+                            value={generationRequest.psychologyAndEmotion?.stressBehavioral || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              psychologyAndEmotion: { ...(prev.psychologyAndEmotion||{}), stressBehavioral: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['社交退縮','過度工作','拖延逃避','強迫行為'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 自信程度 */}
+                    <div>
+                                             <div className="text-sm font-medium text-blue-700 mb-2">自信程度</div>
+                       <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">高自信</label>
+                          <select
+                            value={generationRequest.psychologyAndEmotion?.selfConfidenceHigh || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              psychologyAndEmotion: { ...(prev.psychologyAndEmotion||{}), selfConfidenceHigh: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['非常自信','過度自信','盲目自信','表面自信','領袖氣質','自信滿滿','氣場強大','天生自信','魅力自信','霸氣自信'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">中等自信</label>
+                          <select
+                            value={generationRequest.psychologyAndEmotion?.selfConfidenceMedium || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              psychologyAndEmotion: { ...(prev.psychologyAndEmotion||{}), selfConfidenceMedium: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['適度自信','情境性自信','謙虛自信','理性自信','平衡自信','穩定自信','內斂自信','成熟自信','溫和自信','實事求是'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">低自信</label>
+                          <select
+                            value={generationRequest.psychologyAndEmotion?.selfConfidenceLow || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              psychologyAndEmotion: { ...(prev.psychologyAndEmotion||{}), selfConfidenceLow: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['缺乏自信','自我懷疑','需要鼓勵','容易動搖','自卑敏感','畏畏縮縮','膽小怯懦','依賴他人','害怕表現','逃避挑戰'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 愛的語言 */}
+                    <div>
+                                             <div className="text-sm font-medium text-blue-700 mb-2">愛的語言</div>
+                       <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">肯定言語</label>
+                          <select
+                            value={generationRequest.psychologyAndEmotion?.loveLanguageWords || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              psychologyAndEmotion: { ...(prev.psychologyAndEmotion||{}), loveLanguageWords: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['讚美鼓勵','言語支持','口語表達愛意','正面評價','感謝表達','欣賞認同','言語安慰','口頭承諾','甜言蜜語','激勵話語'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">精心時刻</label>
+                          <select
+                            value={generationRequest.psychologyAndEmotion?.loveLanguageTime || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              psychologyAndEmotion: { ...(prev.psychologyAndEmotion||{}), loveLanguageTime: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['專注陪伴','深度對話','高品質時光','全心投入','共同活動','獨處時光','傾聽理解','心靈交流','共同經歷','陪伴支持'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">接受禮物</label>
+                          <select
+                            value={generationRequest.psychologyAndEmotion?.loveLanguageGifts || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              psychologyAndEmotion: { ...(prev.psychologyAndEmotion||{}), loveLanguageGifts: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['禮物表達','紀念意義','心意體現','驚喜禮物','實用禮品','手作禮物','昂貴禮物','簡單心意','節日禮物','收藏品'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">服務行動</label>
+                          <select
+                            value={generationRequest.psychologyAndEmotion?.loveLanguageService || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              psychologyAndEmotion: { ...(prev.psychologyAndEmotion||{}), loveLanguageService: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['實際幫助','具體行動','主動服務','分擔家務','解決問題','照顧需求','默默付出','實用支援','貼心服務','行動證明'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">身體接觸</label>
+                          <select
+                            value={generationRequest.psychologyAndEmotion?.loveLanguageTouch || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              psychologyAndEmotion: { ...(prev.psychologyAndEmotion||{}), loveLanguageTouch: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['擁抱安慰','牽手表達','親密接觸','溫暖觸碰','肢體語言','撫摸安撫','親吻示愛','身體親近','觸覺表達','物理連結'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 個人特色 */}
+                    <div>
+                                             <div className="text-sm font-medium text-blue-700 mb-2">個人特色</div>
+                       <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">背景故事</label>
+                          <select
+                            value={generationRequest.psychologyAndEmotion?.backgroundStory || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              psychologyAndEmotion: { ...(prev.psychologyAndEmotion||{}), backgroundStory: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['夢想開咖啡廳','學習樂器','搖滾樂迷','環遊世界計畫'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">個人秘密</label>
+                          <select
+                            value={generationRequest.psychologyAndEmotion?.personalSecret || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              psychologyAndEmotion: { ...(prev.psychologyAndEmotion||{}), personalSecret: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['暗戀同事','童年願望','創業失敗經歷','珍貴回憶'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">習慣動作</label>
+                          <select
+                            value={generationRequest.psychologyAndEmotion?.habitualAction || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              psychologyAndEmotion: { ...(prev.psychologyAndEmotion||{}), habitualAction: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['思考時轉筆','緊張咬指甲','說話比手勢','聽音樂打拍子'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">代表物品</label>
+                          <select
+                            value={generationRequest.psychologyAndEmotion?.representativeItem || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              psychologyAndEmotion: { ...(prev.psychologyAndEmotion||{}), representativeItem: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['特別的書','家人項鍊','音樂盒','舊照片','手寫信件'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">特殊經歷</label>
+                          <select
+                            value={generationRequest.psychologyAndEmotion?.specialExperience || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              psychologyAndEmotion: { ...(prev.psychologyAndEmotion||{}), specialExperience: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['國際志工','背包旅行','救災活動','街頭表演','環保抗議'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 人格特質系統 */}
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-semibold text-blue-800 mb-2">人格特質系統</label>
+                  <div className="space-y-4">
+                    {/* 正面特質 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">正面特質</div>
+                      <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">品格特質</label>
+                          <select
+                            value={generationRequest.personalitySystem?.strengthCharacter || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              personalitySystem: { ...(prev.personalitySystem||{}), strengthCharacter: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['誠實','善良','耐心','謙遜','勇敢','有同理心','責任感強'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">社交特質</label>
+                          <select
+                            value={generationRequest.personalitySystem?.strengthSocial || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              personalitySystem: { ...(prev.personalitySystem||{}), strengthSocial: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['友善','幽默','領導力','同理心','溝通能力佳','善於傾聽'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">工作特質</label>
+                          <select
+                            value={generationRequest.personalitySystem?.strengthWork || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              personalitySystem: { ...(prev.personalitySystem||{}), strengthWork: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['勤奮','創新','負責任','團隊合作','學習能力強','解決問題'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">靈性特質</label>
+                          <select
+                            value={generationRequest.personalitySystem?.strengthSpiritual || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              personalitySystem: { ...(prev.personalitySystem||{}), strengthSpiritual: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['信心','盼望','愛心','智慧','樂觀積極','堅持不懈'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 負面特質 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">負面特質</div>
+                      <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">性格缺陷</label>
+                          <select
+                            value={generationRequest.personalitySystem?.weaknessCharacter || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              personalitySystem: { ...(prev.personalitySystem||{}), weaknessCharacter: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['急躁','固執','自私','驕傲','過於完美主義','優柔寡斷'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">情緒問題</label>
+                          <select
+                            value={generationRequest.personalitySystem?.weaknessEmotion || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              personalitySystem: { ...(prev.personalitySystem||{}), weaknessEmotion: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['焦慮','憂鬱','易怒','敏感','容易情緒化','社交恐懼'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">行為問題</label>
+                          <select
+                            value={generationRequest.personalitySystem?.weaknessBehavior || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              personalitySystem: { ...(prev.personalitySystem||{}), weaknessBehavior: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['拖延','完美主義','控制慾','容易分心','工作狂傾向'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">人際問題</label>
+                          <select
+                            value={generationRequest.personalitySystem?.weaknessInterpersonal || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              personalitySystem: { ...(prev.personalitySystem||{}), weaknessInterpersonal: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['內向','不信任','溝通困難','過度依賴他人','缺乏自信'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 人生觀與價值觀 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">人生觀與價值觀</div>
+                      <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">生活觀</label>
+                          <select
+                            value={generationRequest.personalitySystem?.worldviewLife || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              personalitySystem: { ...(prev.personalitySystem||{}), worldviewLife: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['享受當下','未來導向','家庭至上','事業為重','平衡發展'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">金錢觀</label>
+                          <select
+                            value={generationRequest.personalitySystem?.worldviewMoney || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              personalitySystem: { ...(prev.personalitySystem||{}), worldviewMoney: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['節儉儲蓄','理性投資','及時行樂','金錢是工具不是目標'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">工作觀</label>
+                          <select
+                            value={generationRequest.personalitySystem?.worldviewWork || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              personalitySystem: { ...(prev.personalitySystem||{}), worldviewWork: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['實現自我價值','謀生手段','工作生活平衡','服務他人'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">政治觀</label>
+                          <select
+                            value={generationRequest.personalitySystem?.worldviewPolitics || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              personalitySystem: { ...(prev.personalitySystem||{}), worldviewPolitics: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['中立不表態','關心社會議題','支持環保','重視教育改革'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 人生目標與規劃 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">人生目標與規劃</div>
+                      <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">短期目標</label>
+                          <select
+                            value={generationRequest.personalitySystem?.goalsShortTerm || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              personalitySystem: { ...(prev.personalitySystem||{}), goalsShortTerm: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['買房置產','學習新技能','轉換職業','投資理財'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">長期目標</label>
+                          <select
+                            value={generationRequest.personalitySystem?.goalsLongTerm || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              personalitySystem: { ...(prev.personalitySystem||{}), goalsLongTerm: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['事業成功','家庭幸福','財務自由','環遊世界','社會貢獻'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">人生成就</label>
+                          <select
+                            value={generationRequest.personalitySystem?.goalsAchievement || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              personalitySystem: { ...(prev.personalitySystem||{}), goalsAchievement: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['專業證照','馬拉松完賽','學會外語','創業成功','出版作品'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">座右銘</label>
+                          <select
+                            value={generationRequest.personalitySystem?.motto || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              personalitySystem: { ...(prev.personalitySystem||{}), motto: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['活在當下','永不放棄','知足常樂','助人為樂','相信自己'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 深層負面特質 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">深層負面特質（負面人物專用）</div>
+                      <div className="space-y-4">
+                        {/* 深層負面情緒 + 人格陰暗面 */}
+                        <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                          <div>
+                            <label className="block text-xs text-blue-600 mb-1">深層負面情緒</label>
+                            <select
+                              value={generationRequest.personalitySystem?.deepNegativeEmotion || ''}
+                              onChange={(e) => setGenerationRequest(prev => ({
+                                ...prev,
+                                personalitySystem: { ...(prev.personalitySystem||{}), deepNegativeEmotion: (e.target.value || undefined) as any }
+                              }))}
+                              className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                            >
+                              <option value="">未指定</option>
+                              {['長期低落','被遺棄感','對未來恐懼','內心憤怒','深度自卑','嫉妒怨恨','恐懼親密','自我懷疑','絕望缺乏動力','內心空虛'].map(o => <option key={o} value={o}>{o}</option>)}
+                            </select>
+                          </div>
+                          <div>
+                            <label className="block text-xs text-blue-600 mb-1">人格陰暗面</label>
+                            <select
+                              value={generationRequest.personalitySystem?.darkPersonality || ''}
+                              onChange={(e) => setGenerationRequest(prev => ({
+                                ...prev,
+                                personalitySystem: { ...(prev.personalitySystem||{}), darkPersonality: (e.target.value || undefined) as any }
+                              }))}
+                              className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                            >
+                              <option value="">未指定</option>
+                              {['表面和善私下說壞話','操控他人','經常撒謊','對弱者冷漠','自戀受害者心態','報復記仇','缺乏同理心','情緒勒索'].map(o => <option key={o} value={o}>{o}</option>)}
+                            </select>
+                          </div>
+                        </div>
+
+                        {/* 成癮行為、 人際關係問題、 心理創傷影響 */}
+                                                 <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                           <div>
+                             <label className="block text-xs text-blue-600 mb-1">成癮行為</label>
+                            <select
+                              value={generationRequest.personalitySystem?.addictionBehavior || ''}
+                              onChange={(e) => setGenerationRequest(prev => ({
+                                ...prev,
+                                personalitySystem: { ...(prev.personalitySystem||{}), addictionBehavior: (e.target.value || undefined) as any }
+                              }))}
+                              className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                            >
+                              <option value="">未指定</option>
+                              {['網路成癮','社群媒體成癮','遊戲成癮','酒精依賴','藥物依賴','尼古丁依賴','咖啡因依賴','購物成癮','工作成癮','賭博傾向','運動成癮','完美主義成癮'].map(o => <option key={o} value={o}>{o}</option>)}
+                            </select>
+                          </div>
+                          <div>
+                            <label className="block text-xs text-blue-600 mb-1">人際關係問題</label>
+                            <select
+                              value={generationRequest.personalitySystem?.relationshipProblems || ''}
+                              onChange={(e) => setGenerationRequest(prev => ({
+                                ...prev,
+                                personalitySystem: { ...(prev.personalitySystem||{}), relationshipProblems: (e.target.value || undefined) as any }
+                              }))}
+                              className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                            >
+                              <option value="">未指定</option>
+                              {['無法維持長期關係','吸引不適合伴侶','過度依賴/獨立','無法表達情感','與家人衝突','職場關係緊張','缺乏界限'].map(o => <option key={o} value={o}>{o}</option>)}
+                            </select>
+                          </div>
+                          <div>
+                            <label className="block text-xs text-blue-600 mb-1">心理創傷影響</label>
+                            <select
+                              value={generationRequest.personalitySystem?.traumaImpact || ''}
+                              onChange={(e) => setGenerationRequest(prev => ({
+                                ...prev,
+                                personalitySystem: { ...(prev.personalitySystem||{}), traumaImpact: (e.target.value || undefined) as any }
+                              }))}
+                              className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                            >
+                              <option value="">未指定</option>
+                              {['霸凌經歷','父母離婚','被拋棄經歷','家暴陰影','職場霸凌','意外事故','被詐騙經歷','重大疾病','破產經歷'].map(o => <option key={o} value={o}>{o}</option>)}
+                            </select>
+                          </div>
+                        </div>
+
+                        {/* 自毀行為、 社會適應困難、 內在矛盾 */}
+                                                 <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                           <div>
+                             <label className="block text-xs text-blue-600 mb-1">自毀行為</label>
+                            <select
+                              value={generationRequest.personalitySystem?.selfDestructiveBehavior || ''}
+                              onChange={(e) => setGenerationRequest(prev => ({
+                                ...prev,
+                                personalitySystem: { ...(prev.personalitySystem||{}), selfDestructiveBehavior: (e.target.value || undefined) as any }
+                              }))}
+                              className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                            >
+                              <option value="">未指定</option>
+                              {['破壞關係','自我設限','拖延重要事情','選擇有害伴侶','用酒精逃避','拒絕幫助','故意製造衝突','放棄機會'].map(o => <option key={o} value={o}>{o}</option>)}
+                            </select>
+                          </div>
+                          <div>
+                            <label className="block text-xs text-blue-600 mb-1">社會適應困難</label>
+                            <select
+                              value={generationRequest.personalitySystem?.socialAdaptationDifficulty || ''}
+                              onChange={(e) => setGenerationRequest(prev => ({
+                                ...prev,
+                                personalitySystem: { ...(prev.personalitySystem||{}), socialAdaptationDifficulty: (e.target.value || undefined) as any }
+                              }))}
+                              className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                            >
+                              <option value="">未指定</option>
+                              {['無法適應潛規則','對權威反抗','無法團隊合作','社交極度不自在','在群體邊緣化','對變化抗拒'].map(o => <option key={o} value={o}>{o}</option>)}
+                            </select>
+                          </div>
+                          <div>
+                            <label className="block text-xs text-blue-600 mb-1">內在矛盾</label>
+                            <select
+                              value={generationRequest.personalitySystem?.innerConflict || ''}
+                              onChange={(e) => setGenerationRequest(prev => ({
+                                ...prev,
+                                personalitySystem: { ...(prev.personalitySystem||{}), innerConflict: (e.target.value || undefined) as any }
+                              }))}
+                              className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                            >
+                              <option value="">未指定</option>
+                              {['渴望親密卻害怕受傷','想要成功但害怕失敗','想要改變但抗拒行動','需要幫助但拒絕求助'].map(o => <option key={o} value={o}>{o}</option>)}
+                            </select>
+                          </div>
+                        </div>
+
+                        {/* 負面應對機制、 隱藏恐懼、 負面信念系統 */}
+                                                 <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                           <div>
+                             <label className="block text-xs text-blue-600 mb-1">負面應對機制</label>
+                            <select
+                              value={generationRequest.personalitySystem?.negativeCopingMechanism || ''}
+                              onChange={(e) => setGenerationRequest(prev => ({
+                                ...prev,
+                                personalitySystem: { ...(prev.personalitySystem||{}), negativeCopingMechanism: (e.target.value || undefined) as any }
+                              }))}
+                              className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                            >
+                              <option value="">未指定</option>
+                              {['用憤怒掩蓋脆弱','用幽默化解嚴肅','用冷漠保護自己','透過工作逃避','用忙碌掩蓋孤獨','透過討好獲得認同'].map(o => <option key={o} value={o}>{o}</option>)}
+                            </select>
+                          </div>
+                          <div>
+                            <label className="block text-xs text-blue-600 mb-1">隱藏恐懼</label>
+                            <select
+                              value={generationRequest.personalitySystem?.hiddenFear || ''}
+                              onChange={(e) => setGenerationRequest(prev => ({
+                                ...prev,
+                                personalitySystem: { ...(prev.personalitySystem||{}), hiddenFear: (e.target.value || undefined) as any }
+                              }))}
+                              className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                            >
+                              <option value="">未指定</option>
+                              {['害怕被發現真實自己','恐懼死亡無意義','害怕孤獨終老','害怕被拋棄','恐惧親密傷害','害怕愛人離開'].map(o => <option key={o} value={o}>{o}</option>)}
+                            </select>
+                          </div>
+                          <div>
+                            <label className="block text-xs text-blue-600 mb-1">負面信念系統</label>
+                            <select
+                              value={generationRequest.personalitySystem?.negativeBeliefSystem || ''}
+                              onChange={(e) => setGenerationRequest(prev => ({
+                                ...prev,
+                                personalitySystem: { ...(prev.personalitySystem||{}), negativeBeliefSystem: (e.target.value || undefined) as any }
+                              }))}
+                              className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                            >
+                              <option value="">未指定</option>
+                              {['相信世界不公平','認為充滿危險威脅','相信努力沒意義','認為注定失敗','不值得好事物','永遠不夠好','孤獨是宿命'].map(o => <option key={o} value={o}>{o}</option>)}
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 認知與學習風格 */}
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-semibold text-blue-800 mb-2">認知與學習風格</label>
+                  <div className="space-y-4">
+                    {/* 思維模式 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">思維模式</div>
+                                             <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">思考類型</label>
+                          <select
+                            value={generationRequest.cognitiveAndLearning?.thinkingType || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              cognitiveAndLearning: { ...(prev.cognitiveAndLearning||{}), thinkingType: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['邏輯思維','直覺思維','創意思維','批判思維'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">分析方式</label>
+                          <select
+                            value={generationRequest.cognitiveAndLearning?.analysisStyle || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              cognitiveAndLearning: { ...(prev.cognitiveAndLearning||{}), analysisStyle: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['系統性分析','跳躍性思考','細節導向','大局觀'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">問題解決</label>
+                          <select
+                            value={generationRequest.cognitiveAndLearning?.problemSolving || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              cognitiveAndLearning: { ...(prev.cognitiveAndLearning||{}), problemSolving: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['理性分析','經驗依賴','創新嘗試','團隊討論'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 學習風格 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">學習風格</div>
+                                             <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">學習偏好</label>
+                          <select
+                            value={generationRequest.cognitiveAndLearning?.learningPreference || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              cognitiveAndLearning: { ...(prev.cognitiveAndLearning||{}), learningPreference: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['視覺型學習','聽覺型學習','動覺型學習','讀寫型學習'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">學習節奏</label>
+                          <select
+                            value={generationRequest.cognitiveAndLearning?.learningPace || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              cognitiveAndLearning: { ...(prev.cognitiveAndLearning||{}), learningPace: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['快速學習','慢工細活','間歇性學習','持續性學習'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">學習動機</label>
+                          <select
+                            value={generationRequest.cognitiveAndLearning?.learningMotivation || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              cognitiveAndLearning: { ...(prev.cognitiveAndLearning||{}), learningMotivation: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['興趣驅動','目標導向','競爭激勵','自我實現'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 記憶特點 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">記憶特點</div>
+                                             <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">記憶類型</label>
+                          <select
+                            value={generationRequest.cognitiveAndLearning?.memoryType || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              cognitiveAndLearning: { ...(prev.cognitiveAndLearning||{}), memoryType: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['記憶力超強','選擇性記憶','情感記憶深刻','容易健忘'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">記憶方式</label>
+                          <select
+                            value={generationRequest.cognitiveAndLearning?.memoryMethod || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              cognitiveAndLearning: { ...(prev.cognitiveAndLearning||{}), memoryMethod: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['視覺記憶','聽覺記憶','動作記憶','聯想記憶'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">遺忘模式</label>
+                          <select
+                            value={generationRequest.cognitiveAndLearning?.forgettingPattern || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              cognitiveAndLearning: { ...(prev.cognitiveAndLearning||{}), forgettingPattern: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['快速遺忘','長期記憶','創傷記憶','美化記憶'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 決策風格 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">決策風格</div>
+                                             <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">決策速度</label>
+                          <select
+                            value={generationRequest.cognitiveAndLearning?.decisionSpeed || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              cognitiveAndLearning: { ...(prev.cognitiveAndLearning||{}), decisionSpeed: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['衝動決策','謹慎分析','猶豫不決','拖延決策'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">決策依據</label>
+                          <select
+                            value={generationRequest.cognitiveAndLearning?.decisionBasis || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              cognitiveAndLearning: { ...(prev.cognitiveAndLearning||{}), decisionBasis: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['理性分析','直覺感受','他人意見','經驗法則'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">風險態度</label>
+                          <select
+                            value={generationRequest.cognitiveAndLearning?.riskAttitude || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              cognitiveAndLearning: { ...(prev.cognitiveAndLearning||{}), riskAttitude: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['冒險精神','風險規避','計算風險','風險盲目'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 情緒智商與社交能力 */}
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-semibold text-blue-800 mb-2">情緒智商與社交能力</label>
+                  <div className="space-y-4">
+                    {/* 情商表現 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">情商表現</div>
+                      <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">同理能力</label>
+                          <select
+                            value={generationRequest.emotionalSocialSkills?.empathyAbility || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              emotionalSocialSkills: { ...(prev.emotionalSocialSkills||{}), empathyAbility: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['同理心超強','情緒共感','理解困難','冷漠疏離'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">情緒覺察</label>
+                          <select
+                            value={generationRequest.emotionalSocialSkills?.emotionAwareness || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              emotionalSocialSkills: { ...(prev.emotionalSocialSkills||{}), emotionAwareness: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['敏感細膩','情緒遲鈍','自我覺察強','投射他人'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">情緒調節</label>
+                          <select
+                            value={generationRequest.emotionalSocialSkills?.emotionRegulation || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              emotionalSocialSkills: { ...(prev.emotionalSocialSkills||{}), emotionRegulation: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['情緒穩定','情緒起伏','壓抑情緒','情緒爆發'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 社交技巧 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">社交技巧</div>
+                      <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">溝通能力</label>
+                          <select
+                            value={generationRequest.emotionalSocialSkills?.communicationSkill || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              emotionalSocialSkills: { ...(prev.emotionalSocialSkills||{}), communicationSkill: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['幽默風趣','談吐優雅','言語犀利','木訥寡言'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">傾聽技巧</label>
+                          <select
+                            value={generationRequest.emotionalSocialSkills?.listeningSkill || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              emotionalSocialSkills: { ...(prev.emotionalSocialSkills||{}), listeningSkill: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['專注傾聽','選擇性傾聽','急於表達','心不在焉'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">衝突處理</label>
+                          <select
+                            value={generationRequest.emotionalSocialSkills?.conflictHandling || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              emotionalSocialSkills: { ...(prev.emotionalSocialSkills||{}), conflictHandling: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['化解高手','迴避衝突','激化矛盾','理性調解'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 人際邊界 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">人際邊界</div>
+                      <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">界限設定</label>
+                          <select
+                            value={generationRequest.emotionalSocialSkills?.boundarySetting || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              emotionalSocialSkills: { ...(prev.emotionalSocialSkills||{}), boundarySetting: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['清楚界限','模糊邊界','過度保護','容易被利用'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">人際距離</label>
+                          <select
+                            value={generationRequest.emotionalSocialSkills?.interpersonalDistance || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              emotionalSocialSkills: { ...(prev.emotionalSocialSkills||{}), interpersonalDistance: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['親密無間','保持距離','選擇性親近','防禦心強'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">信任建立</label>
+                          <select
+                            value={generationRequest.emotionalSocialSkills?.trustBuilding || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              emotionalSocialSkills: { ...(prev.emotionalSocialSkills||{}), trustBuilding: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['容易信任','謹慎信任','信任困難','盲目信任'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 領導特質 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">領導特質</div>
+                      <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">領導風格</label>
+                          <select
+                            value={generationRequest.emotionalSocialSkills?.leadershipStyle || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              emotionalSocialSkills: { ...(prev.emotionalSocialSkills||{}), leadershipStyle: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['天生領袖','民主領導','威權領導','服務型領導'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">團隊角色</label>
+                          <select
+                            value={generationRequest.emotionalSocialSkills?.teamRole || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              emotionalSocialSkills: { ...(prev.emotionalSocialSkills||{}), teamRole: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['領導者','協調者','執行者','創意發想','跟隨者'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">影響力</label>
+                          <select
+                            value={generationRequest.emotionalSocialSkills?.influenceType || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              emotionalSocialSkills: { ...(prev.emotionalSocialSkills||{}), influenceType: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['魅力影響','專業權威','人際影響','職位權力'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 價值觀與道德觀 */}
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-semibold text-blue-800 mb-2">價值觀與道德觀</label>
+                  <div className="space-y-4">
+                    {/* 道德標準 */}
+                    <div>
+                                             <div className="text-sm font-medium text-blue-700 mb-2">道德標準</div>
+                       <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">道德要求</label>
+                          <select
+                            value={generationRequest.valuesMorality?.moralDemand || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              valuesMorality: { ...(prev.valuesMorality||{}), moralDemand: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['嚴格自律','寬鬆標準','雙重標準','情境道德'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">原則堅持</label>
+                          <select
+                            value={generationRequest.valuesMorality?.principleAdherence || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              valuesMorality: { ...(prev.valuesMorality||{}), principleAdherence: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['原則性強','彈性調整','見風轉舵','無明確原則'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">道德判斷</label>
+                          <select
+                            value={generationRequest.valuesMorality?.moralJudgment || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              valuesMorality: { ...(prev.valuesMorality||{}), moralJudgment: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['黑白分明','灰色地帶','相對主義','絕對主義'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 正義感 */}
+                    <div>
+                                             <div className="text-sm font-medium text-blue-700 mb-2">正義感</div>
+                       <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">正義表現</label>
+                          <select
+                            value={generationRequest.valuesMorality?.justiceExpression || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              valuesMorality: { ...(prev.valuesMorality||{}), justiceExpression: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['強烈正義感','明哲保身','同情弱者','崇拜強者'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">公平觀念</label>
+                          <select
+                            value={generationRequest.valuesMorality?.fairnessView || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              valuesMorality: { ...(prev.valuesMorality||{}), fairnessView: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['絕對公平','程序公正','結果公平','關係公平'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">社會責任</label>
+                          <select
+                            value={generationRequest.valuesMorality?.socialResponsibility || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              valuesMorality: { ...(prev.valuesMorality||{}), socialResponsibility: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['社會參與','個人主義','集體利益','自我保護'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 利他傾向 */}
+                    <div>
+                                             <div className="text-sm font-medium text-blue-700 mb-2">利他傾向</div>
+                       <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">奉獻精神</label>
+                          <select
+                            value={generationRequest.valuesMorality?.dedicationSpirit || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              valuesMorality: { ...(prev.valuesMorality||{}), dedicationSpirit: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['無私奉獻','互惠互利','自我優先','機會主義'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">助人動機</label>
+                          <select
+                            value={generationRequest.valuesMorality?.helpingMotivation || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              valuesMorality: { ...(prev.valuesMorality||{}), helpingMotivation: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['純粹善意','互相幫助','獲得認同','道德義務'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">犧牲意願</label>
+                          <select
+                            value={generationRequest.valuesMorality?.sacrificeWillingness || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              valuesMorality: { ...(prev.valuesMorality||{}), sacrificeWillingness: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['自我犧牲','適度付出','保護自己','利己主義'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 誠信程度 */}
+                    <div>
+                                             <div className="text-sm font-medium text-blue-700 mb-2">誠信程度</div>
+                       <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">誠實度</label>
+                          <select
+                            value={generationRequest.valuesMorality?.honestyLevel || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              valuesMorality: { ...(prev.valuesMorality||{}), honestyLevel: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['絕對誠實','善意謊言','策略隱瞞','習慣撒謊'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">承諾履行</label>
+                          <select
+                            value={generationRequest.valuesMorality?.commitmentFulfillment || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              valuesMorality: { ...(prev.valuesMorality||{}), commitmentFulfillment: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['言出必行','盡力而為','選擇性履行','輕易承諾'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">透明度</label>
+                          <select
+                            value={generationRequest.valuesMorality?.transparencyLevel || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              valuesMorality: { ...(prev.valuesMorality||{}), transparencyLevel: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['開放透明','選擇性公開','保護隱私','神秘主義'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 人生哲學與靈性觀 */}
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-semibold text-blue-800 mb-2">人生哲學與靈性觀</label>
+                  <div className="space-y-4">
+                    {/* 存在意義 */}
+                    <div>
+                                             <div className="text-sm font-medium text-blue-700 mb-2">存在意義</div>
+                       <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">人生目標</label>
+                          <select
+                            value={generationRequest.lifePhilosophyAndSpirituality?.lifeGoal || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifePhilosophyAndSpirituality: { ...(prev.lifePhilosophyAndSpirituality||{}), lifeGoal: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['追求成就','享受過程','服務他人','自我實現'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">生命價值</label>
+                          <select
+                            value={generationRequest.lifePhilosophyAndSpirituality?.lifeValue || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifePhilosophyAndSpirituality: { ...(prev.lifePhilosophyAndSpirituality||{}), lifeValue: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['事業成功','家庭幸福','個人成長','社會貢獻'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">意義來源</label>
+                          <select
+                            value={generationRequest.lifePhilosophyAndSpirituality?.meaningSource || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifePhilosophyAndSpirituality: { ...(prev.lifePhilosophyAndSpirituality||{}), meaningSource: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['宗教信仰','人際關係','個人成就','自然和諧'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 時間觀念 */}
+                    <div>
+                                             <div className="text-sm font-medium text-blue-700 mb-2">時間觀念</div>
+                       <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">時間態度</label>
+                          <select
+                            value={generationRequest.lifePhilosophyAndSpirituality?.timeAttitude || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifePhilosophyAndSpirituality: { ...(prev.lifePhilosophyAndSpirituality||{}), timeAttitude: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['活在當下','未來導向','懷念過去','時間焦慮'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">時間管理</label>
+                          <select
+                            value={generationRequest.lifePhilosophyAndSpirituality?.timeManagement || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifePhilosophyAndSpirituality: { ...(prev.lifePhilosophyAndSpirituality||{}), timeManagement: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['精確計畫','彈性安排','隨性而為','時間混亂'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">節奏偏好</label>
+                          <select
+                            value={generationRequest.lifePhilosophyAndSpirituality?.pacePreference || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifePhilosophyAndSpirituality: { ...(prev.lifePhilosophyAndSpirituality||{}), pacePreference: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['快節奏','慢節奏','張弛有度','節奏不定'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 命運觀 */}
+                    <div>
+                                             <div className="text-sm font-medium text-blue-700 mb-2">命運觀</div>
+                       <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">命運信念</label>
+                          <select
+                            value={generationRequest.lifePhilosophyAndSpirituality?.fateBelief || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifePhilosophyAndSpirituality: { ...(prev.lifePhilosophyAndSpirituality||{}), fateBelief: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['命中注定','人定勝天','隨遇而安','悲觀宿命'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">控制感</label>
+                          <select
+                            value={generationRequest.lifePhilosophyAndSpirituality?.senseOfControl || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifePhilosophyAndSpirituality: { ...(prev.lifePhilosophyAndSpirituality||{}), senseOfControl: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['掌控人生','順其自然','外在歸因','內在歸因'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">變化態度</label>
+                          <select
+                            value={generationRequest.lifePhilosophyAndSpirituality?.changeAttitude || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifePhilosophyAndSpirituality: { ...(prev.lifePhilosophyAndSpirituality||{}), changeAttitude: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['擁抱變化','抗拒改變','適應變化','恐懼變化'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 死亡觀 */}
+                    <div>
+                                             <div className="text-sm font-medium text-blue-700 mb-2">死亡觀</div>
+                       <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">死亡態度</label>
+                          <select
+                            value={generationRequest.lifePhilosophyAndSpirituality?.deathAttitude || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifePhilosophyAndSpirituality: { ...(prev.lifePhilosophyAndSpirituality||{}), deathAttitude: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['恐懼死亡','接受死亡','好奇死後','否認死亡'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">生死觀</label>
+                          <select
+                            value={generationRequest.lifePhilosophyAndSpirituality?.lifeDeathView || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifePhilosophyAndSpirituality: { ...(prev.lifePhilosophyAndSpirituality||{}), lifeDeathView: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['珍惜生命','及時行樂','死後世界','輪迴轉世'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">遺產觀念</label>
+                          <select
+                            value={generationRequest.lifePhilosophyAndSpirituality?.legacyConcept || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              lifePhilosophyAndSpirituality: { ...(prev.lifePhilosophyAndSpirituality||{}), legacyConcept: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['物質遺產','精神遺產','無遺產觀','負面遺產'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 行為習慣與個人怪癖 */}
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-semibold text-blue-800 mb-2">行為習慣與個人怪癖</label>
+                  <div className="space-y-4">
+                    {/* 日常儀式 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">日常儀式</div>
+                      <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">晨間例行</label>
+                          <select
+                            value={generationRequest.behaviorHabitsAndQuirks?.morningRoutine || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              behaviorHabitsAndQuirks: { ...(prev.behaviorHabitsAndQuirks||{}), morningRoutine: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['晨間運動','咖啡儀式','新聞閱讀','冥想靜心'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">工作儀式</label>
+                          <select
+                            value={generationRequest.behaviorHabitsAndQuirks?.workRitual || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              behaviorHabitsAndQuirks: { ...(prev.behaviorHabitsAndQuirks||{}), workRitual: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['工作前準備','休息習慣','專注技巧','收尾習慣'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">睡前習慣</label>
+                          <select
+                            value={generationRequest.behaviorHabitsAndQuirks?.bedtimeHabit || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              behaviorHabitsAndQuirks: { ...(prev.behaviorHabitsAndQuirks||{}), bedtimeHabit: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['閱讀入睡','音樂放鬆','護膚保養','祈禱感恩'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">減壓方式</label>
+                          <select
+                            value={generationRequest.behaviorHabitsAndQuirks?.stressRelief || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              behaviorHabitsAndQuirks: { ...(prev.behaviorHabitsAndQuirks||{}), stressRelief: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['散步思考','音樂療癒','運動發洩','創作表達'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 個人怪癖 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">個人怪癖</div>
+                      <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">收集癖好</label>
+                          <select
+                            value={generationRequest.behaviorHabitsAndQuirks?.collectingHobby || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              behaviorHabitsAndQuirks: { ...(prev.behaviorHabitsAndQuirks||{}), collectingHobby: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['書籍收集','音樂收集','文具控','模型愛好'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">強迫行為</label>
+                          <select
+                            value={generationRequest.behaviorHabitsAndQuirks?.compulsiveBehavior || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              behaviorHabitsAndQuirks: { ...(prev.behaviorHabitsAndQuirks||{}), compulsiveBehavior: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['完美主義','重複檢查','對稱強迫','清潔強迫'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">迷信行為</label>
+                          <select
+                            value={generationRequest.behaviorHabitsAndQuirks?.superstitiousBehavior || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              behaviorHabitsAndQuirks: { ...(prev.behaviorHabitsAndQuirks||{}), superstitiousBehavior: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['數字迷信','顏色禁忌','風水信念','占卜依賴'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">特殊嗜好</label>
+                          <select
+                            value={generationRequest.behaviorHabitsAndQuirks?.specialHobby || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              behaviorHabitsAndQuirks: { ...(prev.behaviorHabitsAndQuirks||{}), specialHobby: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['極限運動','古董收藏','手作DIY','遊戲沉迷'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 說話特色 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">說話特色</div>
+                      <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">語言習慣</label>
+                          <select
+                            value={generationRequest.behaviorHabitsAndQuirks?.languageHabit || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              behaviorHabitsAndQuirks: { ...(prev.behaviorHabitsAndQuirks||{}), languageHabit: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['口頭禪','語速特徵','音量控制','語調變化'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">表達風格</label>
+                          <select
+                            value={generationRequest.behaviorHabitsAndQuirks?.expressionStyle || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              behaviorHabitsAndQuirks: { ...(prev.behaviorHabitsAndQuirks||{}), expressionStyle: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['直接坦率','婉轉含蓄','幽默風趣','嚴肅正經'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">方言使用</label>
+                          <select
+                            value={generationRequest.behaviorHabitsAndQuirks?.dialectUsage || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              behaviorHabitsAndQuirks: { ...(prev.behaviorHabitsAndQuirks||{}), dialectUsage: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['國語標準','台語流利','英語穿插','方言混合'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">溝通模式</label>
+                          <select
+                            value={generationRequest.behaviorHabitsAndQuirks?.communicationMode || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              behaviorHabitsAndQuirks: { ...(prev.behaviorHabitsAndQuirks||{}), communicationMode: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['多話健談','沉默寡言','選擇性發言','情緒表達'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 非語言行為 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">非語言行為</div>
+                      <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">眼神特徵</label>
+                          <select
+                            value={generationRequest.behaviorHabitsAndQuirks?.eyeContact || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              behaviorHabitsAndQuirks: { ...(prev.behaviorHabitsAndQuirks||{}), eyeContact: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['直視交流','迴避眼神','銳利眼神','溫柔眼神'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">個人空間</label>
+                          <select
+                            value={generationRequest.behaviorHabitsAndQuirks?.personalSpace || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              behaviorHabitsAndQuirks: { ...(prev.behaviorHabitsAndQuirks||{}), personalSpace: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['親近距離','保持距離','空間敏感','空間侵犯'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">觸碰習慣</label>
+                          <select
+                            value={generationRequest.behaviorHabitsAndQuirks?.touchHabit || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              behaviorHabitsAndQuirks: { ...(prev.behaviorHabitsAndQuirks||{}), touchHabit: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['喜歡擁抱','避免接觸','握手習慣','肢體語言豐富'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">姿態語言</label>
+                          <select
+                            value={generationRequest.behaviorHabitsAndQuirks?.postureLanguage || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              behaviorHabitsAndQuirks: { ...(prev.behaviorHabitsAndQuirks||{}), postureLanguage: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['自信姿態','謙遜姿態','緊張姿態','放鬆姿態'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 文化適應與國際觀 */}
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-semibold text-blue-800 mb-2">文化適應與國際觀</label>
+                  <div className="space-y-4">
+                    {/* 文化開放度 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">文化開放度</div>
+                      <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">多元包容</label>
+                          <select
+                            value={generationRequest.culturalAdaptationAndGlobalView?.diversityInclusion || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              culturalAdaptationAndGlobalView: { ...(prev.culturalAdaptationAndGlobalView||{}), diversityInclusion: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['文化好奇','開放接納','主動學習','尊重差異'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">文化固執</label>
+                          <select
+                            value={generationRequest.culturalAdaptationAndGlobalView?.culturalRigidity || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              culturalAdaptationAndGlobalView: { ...(prev.culturalAdaptationAndGlobalView||{}), culturalRigidity: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['傳統堅持','變化抗拒','本土優先','外來排斥'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">選擇接受</label>
+                          <select
+                            value={generationRequest.culturalAdaptationAndGlobalView?.selectiveAcceptance || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              culturalAdaptationAndGlobalView: { ...(prev.culturalAdaptationAndGlobalView||{}), selectiveAcceptance: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['挑選接納','實用主義','條件開放','部分認同'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">文化衝突</label>
+                          <select
+                            value={generationRequest.culturalAdaptationAndGlobalView?.culturalConflict || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              culturalAdaptationAndGlobalView: { ...(prev.culturalAdaptationAndGlobalView||{}), culturalConflict: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['價值衝突','認同困惑','適應困難','排斥反應'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 國際視野 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">國際視野</div>
+                                             <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">全球思維</label>
+                          <select
+                            value={generationRequest.culturalAdaptationAndGlobalView?.globalThinking || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              culturalAdaptationAndGlobalView: { ...(prev.culturalAdaptationAndGlobalView||{}), globalThinking: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['國際視野','跨文化理解','全球公民意識','普世價值'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">本土主義</label>
+                          <select
+                            value={generationRequest.culturalAdaptationAndGlobalView?.localism || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              culturalAdaptationAndGlobalView: { ...(prev.culturalAdaptationAndGlobalView||{}), localism: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['在地優先','文化保護','傳統維護','本土認同'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">文化相對</label>
+                          <select
+                            value={generationRequest.culturalAdaptationAndGlobalView?.culturalRelativism || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              culturalAdaptationAndGlobalView: { ...(prev.culturalAdaptationAndGlobalView||{}), culturalRelativism: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['尊重差異','情境理解','多元觀點','包容並蓄'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">民族中心</label>
+                          <select
+                            value={generationRequest.culturalAdaptationAndGlobalView?.ethnocentrism || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              culturalAdaptationAndGlobalView: { ...(prev.culturalAdaptationAndGlobalView||{}), ethnocentrism: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['本族優越','文化偏見','刻板印象','排外傾向'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 語言態度 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">語言態度</div>
+                                             <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">語言天賦</label>
+                          <select
+                            value={generationRequest.culturalAdaptationAndGlobalView?.languageTalent || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              culturalAdaptationAndGlobalView: { ...(prev.culturalAdaptationAndGlobalView||{}), languageTalent: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['語言學習快','發音準確','語感敏銳','多語轉換'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">語言障礙</label>
+                          <select
+                            value={generationRequest.culturalAdaptationAndGlobalView?.languageBarrier || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              culturalAdaptationAndGlobalView: { ...(prev.culturalAdaptationAndGlobalView||{}), languageBarrier: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['學習困難','發音問題','表達障礙','理解困難'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">方言偏好</label>
+                          <select
+                            value={generationRequest.culturalAdaptationAndGlobalView?.dialectPreference || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              culturalAdaptationAndGlobalView: { ...(prev.culturalAdaptationAndGlobalView||{}), dialectPreference: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['母語驕傲','方言堅持','標準語偏好','語言純化'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">外語學習</label>
+                          <select
+                            value={generationRequest.culturalAdaptationAndGlobalView?.foreignLanguageLearning || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              culturalAdaptationAndGlobalView: { ...(prev.culturalAdaptationAndGlobalView||{}), foreignLanguageLearning: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['積極學習','被動學習','功利學習','恐懼抗拒'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 旅行偏好 */}
+                    <div>
+                      <div className="text-sm font-medium text-blue-700 mb-2">旅行偏好</div>
+                                             <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">冒險旅行</label>
+                          <select
+                            value={generationRequest.culturalAdaptationAndGlobalView?.adventureTravel || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              culturalAdaptationAndGlobalView: { ...(prev.culturalAdaptationAndGlobalView||{}), adventureTravel: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['探索未知','挑戰極限','深度體驗','文化沉浸'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">舒適旅遊</label>
+                          <select
+                            value={generationRequest.culturalAdaptationAndGlobalView?.comfortTravel || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              culturalAdaptationAndGlobalView: { ...(prev.culturalAdaptationAndGlobalView||{}), comfortTravel: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['奢華享受','輕鬆休閒','服務品質','安全保障'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">文化探索</label>
+                          <select
+                            value={generationRequest.culturalAdaptationAndGlobalView?.culturalExploration || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              culturalAdaptationAndGlobalView: { ...(prev.culturalAdaptationAndGlobalView||{}), culturalExploration: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['歷史古蹟','博物館','當地文化','人文交流'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-blue-600 mb-1">自然親近</label>
+                          <select
+                            value={generationRequest.culturalAdaptationAndGlobalView?.natureProximity || ''}
+                            onChange={(e) => setGenerationRequest(prev => ({
+                              ...prev,
+                              culturalAdaptationAndGlobalView: { ...(prev.culturalAdaptationAndGlobalView||{}), natureProximity: (e.target.value || undefined) as any }
+                            }))}
+                            className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                          >
+                            <option value="">未指定</option>
+                            {['山川美景','生態旅遊','戶外活動','環境保護'].map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                                 </div>
+
+                 {/* 消費心理與物質觀 */}
+                 <div className="md:col-span-2">
+                   <label className="block text-sm font-semibold text-blue-800 mb-2">消費心理與物質觀</label>
+                   <div className="space-y-4">
+                     {/* 購物動機 */}
+                     <div>
+                       <div className="text-sm font-medium text-blue-700 mb-2">購物動機</div>
+                                               <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                          <div>
+                            <label className="block text-xs text-blue-600 mb-1">需求導向</label>
+                           <select
+                             value={generationRequest.consumptionPsychologyAndMaterialView?.shoppingNeeds || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               consumptionPsychologyAndMaterialView: { ...(prev.consumptionPsychologyAndMaterialView||{}), shoppingNeeds: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['實用主義','理性消費','功能優先','必需品購買'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">情緒購物</label>
+                           <select
+                             value={generationRequest.consumptionPsychologyAndMaterialView?.shoppingEmotion || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               consumptionPsychologyAndMaterialView: { ...(prev.consumptionPsychologyAndMaterialView||{}), shoppingEmotion: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['壓力購物','心情購物','衝動消費','情感慰藉'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">社交炫耀</label>
+                           <select
+                             value={generationRequest.consumptionPsychologyAndMaterialView?.shoppingSocial || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               consumptionPsychologyAndMaterialView: { ...(prev.consumptionPsychologyAndMaterialView||{}), shoppingSocial: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['地位象徵','品牌展示','社會認同','身份標識'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">收藏興趣</label>
+                           <select
+                             value={generationRequest.consumptionPsychologyAndMaterialView?.shoppingCollection || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               consumptionPsychologyAndMaterialView: { ...(prev.consumptionPsychologyAndMaterialView||{}), shoppingCollection: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['興趣收集','投資收藏','完整性追求','專業收藏'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                       </div>
+                     </div>
+
+                     {/* 品牌態度 */}
+                     <div>
+                       <div className="text-sm font-medium text-blue-700 mb-2">品牌態度</div>
+                                               <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                          <div>
+                            <label className="block text-xs text-blue-600 mb-1">品牌忠誠</label>
+                           <select
+                             value={generationRequest.consumptionPsychologyAndMaterialView?.brandLoyalty || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               consumptionPsychologyAndMaterialView: { ...(prev.consumptionPsychologyAndMaterialView||{}), brandLoyalty: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['品牌迷戀','忠誠消費','品牌信任','重複購買'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">性價比</label>
+                           <select
+                             value={generationRequest.consumptionPsychologyAndMaterialView?.valueForMoney || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               consumptionPsychologyAndMaterialView: { ...(prev.consumptionPsychologyAndMaterialView||{}), valueForMoney: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['理性比較','價值評估','實用導向','經濟考量'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">本土品牌</label>
+                           <select
+                             value={generationRequest.consumptionPsychologyAndMaterialView?.localBrand || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               consumptionPsychologyAndMaterialView: { ...(prev.consumptionPsychologyAndMaterialView||{}), localBrand: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['本土支持','文化認同','品質信任','情感連結'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">反商業</label>
+                           <select
+                             value={generationRequest.consumptionPsychologyAndMaterialView?.antiCommercial || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               consumptionPsychologyAndMaterialView: { ...(prev.consumptionPsychologyAndMaterialView||{}), antiCommercial: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['反品牌','反消費','簡約生活','非物質主義'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                       </div>
+                     </div>
+
+                     {/* 物質慾望 */}
+                     <div>
+                       <div className="text-sm font-medium text-blue-700 mb-2">物質慾望</div>
+                                               <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                          <div>
+                            <label className="block text-xs text-blue-600 mb-1">極簡主義</label>
+                           <select
+                             value={generationRequest.consumptionPsychologyAndMaterialView?.minimalism || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               consumptionPsychologyAndMaterialView: { ...(prev.consumptionPsychologyAndMaterialView||{}), minimalism: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['斷捨離','必需品','質量重於數量','精神富足'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">物質享受</label>
+                           <select
+                             value={generationRequest.consumptionPsychologyAndMaterialView?.materialEnjoyment || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               consumptionPsychologyAndMaterialView: { ...(prev.consumptionPsychologyAndMaterialView||{}), materialEnjoyment: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['品質生活','奢華品味','生活品質','物質滿足'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">奢侈品愛</label>
+                           <select
+                             value={generationRequest.consumptionPsychologyAndMaterialView?.luxuryLove || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               consumptionPsychologyAndMaterialView: { ...(prev.consumptionPsychologyAndMaterialView||{}), luxuryLove: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['頂級品牌','限量收藏','身份地位','品味象徵'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">環保消費</label>
+                           <select
+                             value={generationRequest.consumptionPsychologyAndMaterialView?.ecoConsumption || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               consumptionPsychologyAndMaterialView: { ...(prev.consumptionPsychologyAndMaterialView||{}), ecoConsumption: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['永續消費','環保意識','二手購買','循環經濟'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                       </div>
+                     </div>
+
+                     {/* 金錢安全感 */}
+                     <div>
+                       <div className="text-sm font-medium text-blue-700 mb-2">金錢安全感</div>
+                                               <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                          <div>
+                            <label className="block text-xs text-blue-600 mb-1">儲蓄傾向</label>
+                           <select
+                             value={generationRequest.consumptionPsychologyAndMaterialView?.savingTendency || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               consumptionPsychologyAndMaterialView: { ...(prev.consumptionPsychologyAndMaterialView||{}), savingTendency: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['未雨綢繆','安全第一','風險規避','長期規劃'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">月光族</label>
+                           <select
+                             value={generationRequest.consumptionPsychologyAndMaterialView?.monthToMonth || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               consumptionPsychologyAndMaterialView: { ...(prev.consumptionPsychologyAndMaterialView||{}), monthToMonth: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['即時享樂','花光薪水','無儲蓄習慣','金錢焦慮'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">投資冒險</label>
+                           <select
+                             value={generationRequest.consumptionPsychologyAndMaterialView?.investmentRisk || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               consumptionPsychologyAndMaterialView: { ...(prev.consumptionPsychologyAndMaterialView||{}), investmentRisk: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['高風險投資','積極理財','財富增值','投機心理'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">金錢恐懼</label>
+                           <select
+                             value={generationRequest.consumptionPsychologyAndMaterialView?.moneyFear || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               consumptionPsychologyAndMaterialView: { ...(prev.consumptionPsychologyAndMaterialView||{}), moneyFear: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['貧窮恐懼','金錢焦慮','過度節儉','安全感不足'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                                  </div>
+
+                 {/* 適應能力與心理彈性 */}
+                 <div className="md:col-span-2">
+                   <label className="block text-sm font-semibold text-blue-800 mb-2">適應能力與心理彈性</label>
+                   <div className="space-y-4">
+                     {/* 變化適應 */}
+                     <div>
+                       <div className="text-sm font-medium text-blue-700 mb-2">變化適應</div>
+                                               <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                          <div>
+                            <label className="block text-xs text-blue-600 mb-1">擁抱變化</label>
+                           <select
+                             value={generationRequest.adaptationAndPsychFlex?.embraceChange || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               adaptationAndPsychFlex: { ...(prev.adaptationAndPsychFlex||{}), embraceChange: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['變化興奮','新鮮感','適應快速','靈活調整'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">抗拒改變</label>
+                           <select
+                             value={generationRequest.adaptationAndPsychFlex?.resistChange || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               adaptationAndPsychFlex: { ...(prev.adaptationAndPsychFlex||{}), resistChange: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['穩定偏好','變化恐懼','習慣依賴','保守堅持'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">適應能力強</label>
+                           <select
+                             value={generationRequest.adaptationAndPsychFlex?.strongAdaptability || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               adaptationAndPsychFlex: { ...(prev.adaptationAndPsychFlex||{}), strongAdaptability: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['環境適應','角色轉換','學習能力','復原力強'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">變化焦慮</label>
+                           <select
+                             value={generationRequest.adaptationAndPsychFlex?.changeAnxiety || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               adaptationAndPsychFlex: { ...(prev.adaptationAndPsychFlex||{}), changeAnxiety: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['不確定恐懼','控制需求','變化壓力','適應困難'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                       </div>
+                     </div>
+
+                     {/* 壓力耐受 */}
+                     <div>
+                       <div className="text-sm font-medium text-blue-700 mb-2">壓力耐受</div>
+                                               <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                          <div>
+                            <label className="block text-xs text-blue-600 mb-1">高壓承受</label>
+                           <select
+                             value={generationRequest.adaptationAndPsychFlex?.highPressureTolerance || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               adaptationAndPsychFlex: { ...(prev.adaptationAndPsychFlex||{}), highPressureTolerance: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['壓力免疫','挑戰接受','冷靜應對','壓力轉化'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">壓力敏感</label>
+                           <select
+                             value={generationRequest.adaptationAndPsychFlex?.stressSensitive || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               adaptationAndPsychFlex: { ...(prev.adaptationAndPsychFlex||{}), stressSensitive: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['壓力易感','焦慮反應','身心症狀','壓力放大'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">壓力轉化</label>
+                           <select
+                             value={generationRequest.adaptationAndPsychFlex?.stressTransformation || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               adaptationAndPsychFlex: { ...(prev.adaptationAndPsychFlex||{}), stressTransformation: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['壓力動力','成長機會','創意催化','能量轉換'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">壓力逃避</label>
+                           <select
+                             value={generationRequest.adaptationAndPsychFlex?.stressAvoidance || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               adaptationAndPsychFlex: { ...(prev.adaptationAndPsychFlex||{}), stressAvoidance: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['逃避面對','否認壓力','轉移注意','消極應對'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                       </div>
+                     </div>
+
+                     {/* 創新程度 */}
+                     <div>
+                       <div className="text-sm font-medium text-blue-700 mb-2">創新程度</div>
+                                               <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                          <div>
+                            <label className="block text-xs text-blue-600 mb-1">創新先驅</label>
+                           <select
+                             value={generationRequest.adaptationAndPsychFlex?.innovationPioneer || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               adaptationAndPsychFlex: { ...(prev.adaptationAndPsychFlex||{}), innovationPioneer: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['創新領導','早期採用','突破傳統','變革推動'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">穩健跟隨</label>
+                           <select
+                             value={generationRequest.adaptationAndPsychFlex?.steadyFollower || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               adaptationAndPsychFlex: { ...(prev.adaptationAndPsychFlex||{}), steadyFollower: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['觀察學習','穩定跟進','風險評估','謹慎創新'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">保守傳統</label>
+                           <select
+                             value={generationRequest.adaptationAndPsychFlex?.conservativeTraditional || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               adaptationAndPsychFlex: { ...(prev.adaptationAndPsychFlex||{}), conservativeTraditional: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['傳統堅持','變化抗拒','經驗依賴','穩定優先'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">創新恐懼</label>
+                           <select
+                             value={generationRequest.adaptationAndPsychFlex?.innovationFear || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               adaptationAndPsychFlex: { ...(prev.adaptationAndPsychFlex||{}), innovationFear: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['新事物恐懼','失敗恐懼','安全依賴','變化排斥'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                       </div>
+                     </div>
+
+                     {/* 學習彈性 */}
+                     <div>
+                       <div className="text-sm font-medium text-blue-700 mb-2">學習彈性</div>
+                                               <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                          <div>
+                            <label className="block text-xs text-blue-600 mb-1">終身學習</label>
+                           <select
+                             value={generationRequest.adaptationAndPsychFlex?.lifelongLearning || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               adaptationAndPsychFlex: { ...(prev.adaptationAndPsychFlex||{}), lifelongLearning: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['持續成長','知識渴望','自我更新','適應變化'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">固化思維</label>
+                           <select
+                             value={generationRequest.adaptationAndPsychFlex?.fixedMindset || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               adaptationAndPsychFlex: { ...(prev.adaptationAndPsychFlex||{}), fixedMindset: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['思維僵化','學習抗拒','經驗固著','改變困難'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">選擇學習</label>
+                           <select
+                             value={generationRequest.adaptationAndPsychFlex?.selectiveLearning || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               adaptationAndPsychFlex: { ...(prev.adaptationAndPsychFlex||{}), selectiveLearning: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['興趣導向','實用學習','選擇性接受','目標明確'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">學習抗拒</label>
+                           <select
+                             value={generationRequest.adaptationAndPsychFlex?.learningResistance || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               adaptationAndPsychFlex: { ...(prev.adaptationAndPsychFlex||{}), learningResistance: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['學習恐懼','能力懷疑','舒適圈依賴','挑戰逃避'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                                  </div>
+
+                 {/* 特殊經歷與成就 */}
+                 <div className="md:col-span-2">
+                   <label className="block text-sm font-semibold text-blue-800 mb-2">特殊經歷與成就</label>
+                   <div className="space-y-4">
+                     {/* 人生成就 */}
+                     <div>
+                       <div className="text-sm font-medium text-blue-700 mb-2">人生成就</div>
+                       <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">學業成就</label>
+                           <select
+                             value={generationRequest.specialExperienceAndAchievements?.academicAchievement || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               specialExperienceAndAchievements: { ...(prev.specialExperienceAndAchievements||{}), academicAchievement: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['學術獎項','研究發表','升學成功'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">職業成就</label>
+                           <select
+                             value={generationRequest.specialExperienceAndAchievements?.careerAchievement || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               specialExperienceAndAchievements: { ...(prev.specialExperienceAndAchievements||{}), careerAchievement: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['升職加薪','創業成功','專業認證'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">服務成就</label>
+                           <select
+                             value={generationRequest.specialExperienceAndAchievements?.serviceAchievement || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               specialExperienceAndAchievements: { ...(prev.specialExperienceAndAchievements||{}), serviceAchievement: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['志工經歷','社會貢獻','慈善活動'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">個人成就</label>
+                           <select
+                             value={generationRequest.specialExperienceAndAchievements?.personalAchievement || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               specialExperienceAndAchievements: { ...(prev.specialExperienceAndAchievements||{}), personalAchievement: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['技能習得','興趣專精','個人突破'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                       </div>
+                     </div>
+
+                     {/* 特殊經歷 */}
+                     <div>
+                       <div className="text-sm font-medium text-blue-700 mb-2">特殊經歷</div>
+                       <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">旅行經歷</label>
+                           <select
+                             value={generationRequest.specialExperienceAndAchievements?.travelExperience || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               specialExperienceAndAchievements: { ...(prev.specialExperienceAndAchievements||{}), travelExperience: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['國際志工','背包旅行','文化交流'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">挑戰經歷</label>
+                           <select
+                             value={generationRequest.specialExperienceAndAchievements?.challengeExperience || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               specialExperienceAndAchievements: { ...(prev.specialExperienceAndAchievements||{}), challengeExperience: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['馬拉松比賽','登山探險','極限運動'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">服務經歷</label>
+                           <select
+                             value={generationRequest.specialExperienceAndAchievements?.serviceExperience || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               specialExperienceAndAchievements: { ...(prev.specialExperienceAndAchievements||{}), serviceExperience: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['偏鄉教學','災難救助','環保活動'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">創意經歷</label>
+                           <select
+                             value={generationRequest.specialExperienceAndAchievements?.creativeExperience || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               specialExperienceAndAchievements: { ...(prev.specialExperienceAndAchievements||{}), creativeExperience: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['街頭表演','藝術創作','媒體參與'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                       </div>
+                     </div>
+
+                     {/* 背景故事 */}
+                     <div>
+                       <div className="text-sm font-medium text-blue-700 mb-2">背景故事</div>
+                       <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">夢想故事</label>
+                           <select
+                             value={generationRequest.specialExperienceAndAchievements?.dreamStory || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               specialExperienceAndAchievements: { ...(prev.specialExperienceAndAchievements||{}), dreamStory: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['開咖啡廳','環遊世界','學習樂器'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">興趣故事</label>
+                           <select
+                             value={generationRequest.specialExperienceAndAchievements?.interestStory || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               specialExperienceAndAchievements: { ...(prev.specialExperienceAndAchievements||{}), interestStory: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['搖滾樂迷','天文愛好','桌遊收藏'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">學習故事</label>
+                           <select
+                             value={generationRequest.specialExperienceAndAchievements?.learningStory || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               specialExperienceAndAchievements: { ...(prev.specialExperienceAndAchievements||{}), learningStory: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['多語能力','釀酒技術','古董修復'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                         <div>
+                           <label className="block text-xs text-blue-600 mb-1">收藏故事</label>
+                           <select
+                             value={generationRequest.specialExperienceAndAchievements?.collectionStory || ''}
+                             onChange={(e) => setGenerationRequest(prev => ({
+                               ...prev,
+                               specialExperienceAndAchievements: { ...(prev.specialExperienceAndAchievements||{}), collectionStory: (e.target.value || undefined) as any }
+                             }))}
+                             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white"
+                           >
+                             <option value="">未指定</option>
+                             {['攝影作品','動漫文化','登山裝備'].map(o => <option key={o} value={o}>{o}</option>)}
+                           </select>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+                 
+                 <div>
+                   <label className="block text-sm font-semibold text-blue-800 mb-2">工作</label>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-blue-700 mb-2">產業</label>
