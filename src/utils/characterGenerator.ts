@@ -366,6 +366,19 @@ export function generateCharacterProfile(request: CharacterGenerationRequest): E
     (request.selectedOptions?.digital?.devices?.length ? request.selectedOptions?.digital?.devices : GENERATION_FACTORS.digitalProfile.devices) as string[],
     rng
   );
+  const digitalLiteracyLevel = sampleFromArray(
+    (request.selectedOptions?.digital?.digitalLiteracy?.length ? request.selectedOptions?.digital?.digitalLiteracy : GENERATION_FACTORS.digitalProfile.digitalLiteracy) as string[],
+    rng
+  );
+  // 生活語言偏好
+  const commLang: { topic: string; level: string } = sampleFromArray(
+    (GENERATION_FACTORS.lifestyleInterests.languages.communication as any) as Array<{ topic: string; level: string }>,
+    rng
+  ) as any;
+  const culturalPref = sampleFromArray(
+    (GENERATION_FACTORS.lifestyleInterests.languages.cultural as string[]),
+    rng
+  );
   
   // 生成能量曲線
   const energyCurveBase = GENERATION_FACTORS.factors.energyCurve.byIndustry[industryObj.name] || 
@@ -393,8 +406,298 @@ export function generateCharacterProfile(request: CharacterGenerationRequest): E
   
   // 信仰實踐程度：已移除
   
-  // 構建角色描述
-  const description = `${age}歲的${gender}，${education}，${maritalStatus}。在${industryObj.name}擔任${role}。個性${personality.join('、')}，興趣包括${hobbies.join('、')}。數位科技${techAdoption}，隱私${privacySettings}。`;
+  // 構建角色描述（含體型特徵摘要）
+  const pa = (request as any).physicalAppearance as any;
+  const first = (v?: string[]) => (Array.isArray(v) && v.length ? v[0] : undefined);
+  const physicalParts: string[] = [];
+  if (first(pa?.heightWeight)) physicalParts.push(`身材${first(pa?.heightWeight)}`);
+  if (first(pa?.bodyType)) physicalParts.push(`體型${first(pa?.bodyType)}`);
+  if (first(pa?.bodyContour)) physicalParts.push(`輪廓${first(pa?.bodyContour)}`);
+  if (first(pa?.alignmentIssues)) physicalParts.push(`姿勢${first(pa?.alignmentIssues)}`);
+  if (first(pa?.limbProportion)) physicalParts.push(`四肢比例${first(pa?.limbProportion)}`);
+  if (first(pa?.shoulderHipRatio)) physicalParts.push(`肩臀比例${first(pa?.shoulderHipRatio)}`);
+  if (first(pa?.composition)) physicalParts.push(`組成${first(pa?.composition)}`);
+  if (first(pa?.bmiBand)) physicalParts.push(`BMI${first(pa?.bmiBand)}`);
+  if (first(pa?.bodyFatBand)) physicalParts.push(`體脂${first(pa?.bodyFatBand)}`);
+  if (first(pa?.gait)) physicalParts.push(`步態${first(pa?.gait)}`);
+  if (first(pa?.flexibility)) physicalParts.push(`柔軟度${first(pa?.flexibility)}`);
+  if (first(pa?.athleticTendency)) physicalParts.push(`運動傾向${first(pa?.athleticTendency)}`);
+  if (first(pa?.metabolismType)) physicalParts.push(`代謝${first(pa?.metabolismType)}`);
+  if (first(pa?.dominantMuscleGroup)) physicalParts.push(`肌群${first(pa?.dominantMuscleGroup)}`);
+  // 外貌特色補充
+  if (first(pa?.hairStyleColor)) physicalParts.push(`髮型${first(pa?.hairStyleColor)}`);
+  if (first(pa?.eyeFeatures)) physicalParts.push(`眼眸${first(pa?.eyeFeatures)}`);
+  if (first(pa?.skinTexture)) physicalParts.push(`膚質${first(pa?.skinTexture)}`);
+  if (first(pa?.faceShape)) physicalParts.push(`臉型${first(pa?.faceShape)}`);
+  if (first(pa?.eyebrowStyle)) physicalParts.push(`眉型${first(pa?.eyebrowStyle)}`);
+  if (first(pa?.eyeShape)) physicalParts.push(`眼型${first(pa?.eyeShape)}`);
+  if (first(pa?.eyelash)) physicalParts.push(`睫毛${first(pa?.eyelash)}`);
+  if (first(pa?.eyewear)) physicalParts.push(`眼鏡/隱眼${first(pa?.eyewear)}`);
+  if (first(pa?.noseType)) physicalParts.push(`鼻型${first(pa?.noseType)}`);
+  if (first(pa?.lipShape)) physicalParts.push(`唇形${first(pa?.lipShape)}`);
+  if (first(pa?.beardStyle)) physicalParts.push(`鬍型${first(pa?.beardStyle)}`);
+  if (first(pa?.hairVolume)) physicalParts.push(`髮量/髮際線${first(pa?.hairVolume)}`);
+  if (first(pa?.hairTexture)) physicalParts.push(`髮質${first(pa?.hairTexture)}`);
+  if (first(pa?.skinUndertone)) physicalParts.push(`膚色底調${first(pa?.skinUndertone)}`);
+  if (first(pa?.skinFeatures)) physicalParts.push(`皮膚特徵${first(pa?.skinFeatures)}`);
+  if (first(pa?.facialFeatures)) physicalParts.push(`臉部特徵${first(pa?.facialFeatures)}`);
+  if (first(pa?.earAccessories)) physicalParts.push(`耳部配飾${first(pa?.earAccessories)}`);
+  if (first(pa?.teethFeature)) physicalParts.push(`牙齒${first(pa?.teethFeature)}`);
+  if (first(pa?.fragrance)) physicalParts.push(`香氛${first(pa?.fragrance)}`);
+  if (first(pa?.tattooStyle)) physicalParts.push(`紋身${first(pa?.tattooStyle)}`);
+  if (first(pa?.tattooPlacement)) physicalParts.push(`紋身部位${first(pa?.tattooPlacement)}`);
+  if (first(pa?.scarBirthmarkPlacement)) physicalParts.push(`疤痕/胎記${first(pa?.scarBirthmarkPlacement)}`);
+  if (first(pa?.nailStyle)) physicalParts.push(`指甲${first(pa?.nailStyle)}`);
+  if (first(pa?.makeupStyle)) physicalParts.push(`妝感${first(pa?.makeupStyle)}`);
+    const physicalSummary = physicalParts.length ? ` 體型與外貌：${physicalParts.slice(0, 8).join('、')}。` : '';
+ 
+   // 穿衣風格摘要
+   const ap = pa as any;
+   const styleParts: string[] = [];
+   const pushFirst = (label: string, v?: string[]) => { const x = first(v); if (x) styleParts.push(`${label}${x}`); };
+   pushFirst('服裝', ap?.clothingType);
+   pushFirst('風格', ap?.stylePreference);
+   pushFirst('色彩', ap?.colorTone);
+   pushFirst('圖樣', ap?.patternPreference);
+   pushFirst('剪裁', ap?.fitCut);
+   pushFirst('層次', ap?.layering);
+   pushFirst('材質', ap?.material);
+   pushFirst('季節', ap?.seasonStyle);
+   pushFirst('正式度', ap?.formality);
+   pushFirst('鞋履', ap?.shoeStyle);
+   pushFirst('帽款', ap?.hatStyle);
+   pushFirst('包款', ap?.bagPreference);
+   pushFirst('飾品', ap?.accessoryStyle);
+   pushFirst('永續', ap?.sustainability);
+   pushFirst('品牌', ap?.brandOrientation);
+   pushFirst('預算', ap?.budgetLevel);
+   pushFirst('標誌單品', ap?.signatureItem);
+   pushFirst('定位', ap?.styleIdentity);
+   pushFirst('搭配', ap?.matchingHabit);
+   pushFirst('配件取向', ap?.accessoryApproach);
+   const clothesSummary = styleParts.length ? ` 穿衣風格：${styleParts.slice(0, 6).join('、')}。` : '';
+ 
+  // 身體習慣摘要（共用 pushFirst）
+  const bh = (request as any).physicalAppearance as any;
+  const habitParts: string[] = [];
+  pushFirst('睡眠', bh?.sleepPattern);
+  pushFirst('睡姿', bh?.sleepPosition);
+  pushFirst('起床', bh?.wakeHabit);
+  pushFirst('飲水', bh?.hydrationLevel);
+  pushFirst('咖啡因', bh?.caffeineIntake);
+  pushFirst('飲酒', bh?.alcoholUse);
+  pushFirst('抽菸', bh?.smokingHabit);
+  pushFirst('飲食', bh?.eatingRhythm);
+  pushFirst('忌口', bh?.foodRestrictions);
+  pushFirst('螢幕', bh?.screenHabit);
+  pushFirst('握姿', bh?.devicePosture);
+  pushFirst('坐/站', bh?.sittingStandingHabit);
+  pushFirst('通勤', bh?.commuteMode);
+  pushFirst('步頻', bh?.walkingPace);
+  pushFirst('放鬆', bh?.relaxationHabit);
+  pushFirst('保健', bh?.supplements);
+  pushFirst('保養', bh?.skincareSun);
+  pushFirst('呼吸', bh?.breathingHabit);
+  pushFirst('輔具', bh?.postureAids);
+  pushFirst('穿戴', bh?.wearableDevices);
+  pushFirst('水分節律', bh?.waterBalance);
+  pushFirst('口頭禪', bh?.speechHabit);
+    const habitSummary = habitParts.length ? ` 生活習慣：${habitParts.slice(0, 6).join('、')}。` : '';
+ 
+  // 戀愛模式摘要
+  const lr = (request as any).loveAndRomance as any;
+  const loveParts: string[] = [];
+  const pushVal = (label: string, v?: string) => { if (v) loveParts.push(`${label}${v}`); };
+  pushVal('類型', lr?.loveType);
+  pushVal('風格', lr?.loveStyle);
+  pushVal('表達', lr?.expression);
+  pushVal('經歷', lr?.experience);
+  pushVal('相處', lr?.relationshipMode);
+  pushVal('衝突', lr?.conflictStyle);
+  pushVal('未來', lr?.futurePlan);
+  pushVal('依附', lr?.attachmentStyle);
+  pushVal('節奏', lr?.relationshipPace);
+  pushVal('排他', lr?.commitmentExclusivity);
+  pushVal('定義', lr?.relationshipDefinition);
+  pushVal('頻率', lr?.communicationFrequency);
+  pushVal('偏好', lr?.communicationPreference);
+  pushVal('修復', lr?.conflictRepairTiming);
+  pushVal('道歉', lr?.apologyStyle);
+  pushVal('嫉妒', lr?.jealousySensitivity);
+  pushVal('信任', lr?.trustBuilding);
+  pushVal('隱私', lr?.privacyBoundary);
+  pushVal('公開', lr?.socialPublicity);
+  pushVal('約會', lr?.dateStyle);
+  pushVal('頻率', lr?.dateFrequency);
+  pushVal('共處', lr?.togetherTimeRatio);
+  pushVal('公開親密', lr?.publicIntimacy);
+  pushVal('週末', lr?.weekendPreference);
+  pushVal('同居', lr?.cohabitationView);
+  pushVal('家務', lr?.houseworkDivision);
+  pushVal('金錢', lr?.moneyArrangement);
+  pushVal('送禮', lr?.giftBudget);
+  pushVal('原生界線', lr?.familyBoundaryWithOrigin);
+  pushVal('見家人', lr?.meetParentsAttitude);
+  pushVal('前任界線', lr?.exBoundary);
+  pushVal('異地', lr?.longDistanceTolerance);
+  pushVal('見面週期', lr?.longDistanceMeetCycle);
+  pushVal('婚姻觀', lr?.marriageView);
+  pushVal('生育觀', lr?.fertilityView);
+  pushVal('育兒分工', lr?.parentingDivisionView);
+  pushVal('親密界線', lr?.intimacyBoundary);
+  pushVal('性開放', lr?.sexualOpenness);
+  pushVal('性頻率', lr?.sexualFrequencyExpectation);
+  pushVal('安全感', lr?.securityTriggers);
+  pushVal('儀式感', lr?.ritualImportance);
+  pushVal('生活儀式', lr?.sharedRituals);
+  pushVal('寵物觀', lr?.petViewRelationship);
+  pushVal('時間期待', lr?.timeExpectation);
+  const loveSummary = loveParts.length ? ` 戀愛：${loveParts.slice(0, 6).join('、')}。` : '';
+ 
+  const digitalSummary = `數位科技${techAdoption}，隱私${privacySettings}，常用裝置${device}，數位素養${digitalLiteracyLevel}`;
+  const socialSummary = `溝通風格${communicationStyle}，參與模式${participationMode}，能量高峰於${energyPattern}`;
+  const languageSummary = `語言：${commLang.topic}${commLang.level ? '（'+commLang.level+'）' : ''}，文化喜好${culturalPref}`;
+  // 家庭關係摘要（置於最前）
+  const fr = (request as any).familyRelations as any;
+  const familyParts: string[] = [];
+  if (fr?.spouseDetails) {
+    const sd = fr.spouseDetails;
+    const spouseSegs: string[] = [];
+    if (sd.name) spouseSegs.push(`${sd.name}`);
+    if (typeof sd.age === 'number') spouseSegs.push(`${sd.age}歲`);
+    if (sd.occupationBackground) spouseSegs.push(`${sd.occupationBackground}`);
+    if (sd.personalityTrait) spouseSegs.push(`性格${sd.personalityTrait}`);
+    if (sd.interests) spouseSegs.push(`興趣${sd.interests}`);
+    if (sd.familyBackground) spouseSegs.push(`家庭背景${sd.familyBackground}`);
+    if (spouseSegs.length) familyParts.push(`配偶：${spouseSegs.join('，')}`);
+  }
+  if (fr?.familyBackground) familyParts.push(`家庭背景：${fr.familyBackground}`);
+  if (fr?.marriageStage) familyParts.push(`婚姻階段：${fr.marriageStage}`);
+  if (fr?.meetingMethod) familyParts.push(`相識方式：${fr.meetingMethod}`);
+  if (fr?.childrenCount) familyParts.push(`子女數：${fr.childrenCount}`);
+  if (Array.isArray(fr?.childrenAgeDistribution) && fr.childrenAgeDistribution.length) familyParts.push(`子女年齡：${fr.childrenAgeDistribution.join('、')}`);
+  if (fr?.parentingStyle) familyParts.push(`教養風格：${fr.parentingStyle}`);
+  if (fr?.parentsStatus) familyParts.push(`父母狀態：${fr.parentsStatus}`);
+  if (fr?.siblingsRank) familyParts.push(`兄弟姊妹排行：${fr.siblingsRank}`);
+  if (fr?.siblingsCloseness) familyParts.push(`親密度：${fr.siblingsCloseness}`);
+  const familySummary = familyParts.length ? `家庭：${familyParts.join('；')}。` : '';
+
+  // 日常生活摘要
+  const li = (request as any).lifestyleAndInterests as any;
+  const dailyParts: string[] = [];
+  const add = (label: string, v?: string) => { if (v) dailyParts.push(`${label}${v}`); };
+  add('作息', li?.dailyRhythm);
+  add('飲食', li?.eatingHabit);
+  add('運動', li?.exerciseHabit);
+  add('居住', li?.livingEnvironment);
+  add('起床', li?.wakeUpRoutine);
+  add('就寢', li?.nightRoutine);
+  add('用餐', li?.mealPattern);
+  add('開伙', li?.cookingFrequency);
+  add('零食', li?.snackHabit);
+  add('甜度', li?.sugarIntake);
+  add('補水', li?.hydrationHabit);
+  add('整潔', li?.homeTidiness);
+  add('家務', li?.cleaningSchedule);
+  add('洗衣', li?.laundryRoutine);
+  add('採買', li?.groceryStyle);
+  add('工作', li?.workMode);
+  add('時間', li?.timeManagement);
+  add('記帳', li?.budgetingRoutine);
+  add('環保', li?.ecoHabit);
+  add('社交', li?.socialRhythm);
+  add('媒體', li?.mediaConsumption);
+  add('興趣時段', li?.hobbySlot);
+  add('寵物', li?.petCareRoutine);
+  add('植物', li?.plantCareRoutine);
+  add('穿搭', li?.wardrobePrep);
+  add('旅行', li?.travelPrepStyle);
+  const dailySummary = dailyParts.length ? ` 日常：${dailyParts.slice(0, 6).join('、')}。` : '';
+
+  // 興趣技能摘要
+  const li2 = li as any;
+  const interestParts: string[] = [];
+  const addI = (label: string, v?: string) => { if (v) interestParts.push(`${label}${v}`); };
+  addI('藝術', li2?.artInterest);
+  addI('運動', li2?.sportsInterest);
+  addI('學習', li2?.learningInterest);
+  addI('社交', li2?.socialInterest);
+  addI('樂器', li2?.musicInstrument);
+  addI('烹飪', li2?.culinarySkill);
+  addI('工藝', li2?.craftSkill);
+  addI('攝影', li2?.photographyStyle);
+  addI('閱讀', li2?.readingGenre);
+  addI('寫作', li2?.writingStyle);
+  addI('表演', li2?.performingArts);
+  addI('設計軟體', li2?.creativeSoftware);
+  addI('開發', li2?.codingStack);
+  addI('桌遊', li2?.boardgamePreference);
+  addI('電玩', li2?.gamingGenre);
+  addI('運動細分', li2?.sportsDiscipline);
+  addI('戶外', li2?.outdoorHobby);
+  addI('旅行', li2?.travelStyle);
+  addI('園藝', li2?.gardeningStyle);
+  addI('寵物訓練', li2?.petTraining);
+  addI('志工', li2?.volunteeringFocus);
+  addI('投資', li2?.investingStyle);
+  addI('表達', li2?.publicSpeaking);
+  addI('領導', li2?.leadershipRole);
+  addI('自造', li2?.diyMaker);
+  addI('收藏', li2?.collectingHobby);
+  addI('學習模式', li2?.learningMode);
+  addI('頻率', li2?.engagementFrequency);
+  addI('熟練度', li2?.proficiencyLevel);
+    const interestSummary = interestParts.length ? ` 興趣技能：${interestParts.slice(0, 6).join('、')}。` : '';
+
+  // 交通摘要
+  const tp = li as any;
+  const transportParts: string[] = [];
+  const addT = (label: string, v?: string) => { if (v) transportParts.push(`${label}${v}`); };
+  addT('主要通勤', tp?.commutePrimaryMode);
+  addT('轉乘', tp?.multiModalHabit);
+  addT('距離', tp?.commuteDistance);
+  addT('時段', tp?.commuteTimeBand);
+  addT('微移動', tp?.microMobility);
+  addT('軌道', tp?.railPreference);
+  addT('票卡', tp?.publicPass);
+  addT('導航', tp?.navigationApp);
+  addT('停車', tp?.parkingPreference);
+  addT('安全', tp?.safetyPriority);
+  addT('共乘', tp?.carpoolHabit);
+  // 汽機車摘要（只取一兩項代表）
+  addT('車型', tp?.carSegment);
+  addT('動力', tp?.carPowertrain);
+  addT('用車', tp?.carUseScenario);
+  addT('機車', tp?.motorcycleType);
+  const transportSummary = transportParts.length ? ` 交通：${transportParts.slice(0, 6).join('、')}。` : '';
+
+  // 情緒摘要
+  const pe = (request as any).psychologyAndEmotion as any;
+  const emotionParts: string[] = [];
+  const addE = (label: string, v?: string) => { if (v) emotionParts.push(`${label}${v}`); };
+  addE('正向', pe?.positiveEmotion);
+  addE('負向', pe?.negativeEmotion);
+  addE('特質', pe?.emotionTrait);
+  addE('能量', pe?.emotionEnergy);
+  addE('穩定', pe?.emotionStability);
+  addE('壓力', pe?.stressTolerance);
+  addE('覺察', pe?.emotionAwareness);
+  addE('表達', pe?.expressionIntensity);
+  addE('管道', pe?.expressionChannel);
+  addE('復原', pe?.resilienceRecovery);
+  addE('節律', pe?.diurnalMoodPattern);
+  addE('社交', pe?.socialAffect);
+  addE('觸發', pe?.emotionTriggers);
+  addE('預警', pe?.warningSigns);
+  addE('敏感', pe?.sensitiveTopics);
+  addE('安全感', pe?.safetyAnchors);
+  addE('需求', pe?.affectionNeed);
+  addE('偏誤', pe?.affectiveBias);
+  addE('心流', pe?.flowProneness);
+  const emotionSummary = emotionParts.length ? ` 情緒：${emotionParts.slice(0, 6).join('、')}。` : '';
+ 
+  const description = `${familySummary}${age}歲的${gender}，${education}，${maritalStatus}。在${industryObj.name}擔任${role}。個性${personality.join('、')}，興趣包括${hobbies.join('、')}。${digitalSummary}。${languageSummary}。${socialSummary}。${loveSummary}${dailySummary}${interestSummary}${transportSummary}${emotionSummary}${physicalSummary}${clothesSummary}${habitSummary}`;
+
   
   // 構建背景故事
   const background = `出生於${new Date().getFullYear() - age}年，${education}後進入${industryObj.name}工作。作為${role}，需要具備${GENERATION_FACTORS.occupationEconomy.skillsMap.technical.slice(0, 2).join('、')}等技能，以及${GENERATION_FACTORS.occupationEconomy.skillsMap.soft.slice(0, 2).join('、')}等軟實力。`;

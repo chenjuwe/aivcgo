@@ -354,25 +354,104 @@ export interface CharacterGenerationRequest {
   };
 
   // 生理特徵與外貌（可選）
-  physicalAppearance?: {
-    // 體型特徵
-    heightWeight?: string[]; // 身高體重
-    bodyType?: string[];     // 體型分類
-    bodyProportion?: string[]; // 身體比例
-    // 外貌特色
-    hairStyleColor?: string[];
-    eyeFeatures?: string[];
-    skinTexture?: string[];
-    specialMarks?: string[];
-    // 穿衣風格
-    clothingType?: string[];
-    stylePreference?: string[];
-    accessoriesHabits?: string[];
-    // 身體習慣
-    handedness?: string[];
-    posture?: string[];
-    gestures?: string[];
-  };
+    physicalAppearance?: {
+     // 體型特徵
+     heightWeight?: string[]; // 身高體重
+     bodyType?: string[];     // 體型分類
+     bodyProportion?: string[]; // 身體比例
+     // 擴充體型子項
+     composition?: string[]; // 體脂/肌肉比例
+     frameSize?: string[]; // 骨架大小
+     bodyContour?: string[]; // 體型輪廓
+     alignmentIssues?: string[]; // 姿勢/對齊（圓肩、頸前傾等）
+     flexibility?: string[]; // 柔軟度
+     athleticTendency?: string[]; // 運動能力傾向
+     metabolismType?: string[]; // 代謝傾向
+     dominantMuscleGroup?: string[]; // 肌群發達部位
+     limbProportion?: string[]; // 四肢比例
+     shoulderHipRatio?: string[]; // 肩臀比例
+     gait?: string[]; // 步態
+     gripStrength?: string[]; // 握力/力量等級
+     breathingPattern?: string[]; // 呼吸型態
+     thermoregulation?: string[]; // 體溫/流汗傾向
+     weightTrend?: string[]; // 體重趨勢（半年）
+     bmiBand?: string[]; // BMI 區間
+     bodyFatBand?: string[]; // 體脂率區間
+     // 外貌特色
+     hairStyleColor?: string[];
+     eyeFeatures?: string[];
+     skinTexture?: string[];
+     specialMarks?: string[];
+     faceShape?: string[];
+     eyebrowStyle?: string[];
+     eyeShape?: string[];
+     eyelash?: string[];
+     eyewear?: string[];
+     noseType?: string[];
+     lipShape?: string[];
+     beardStyle?: string[];
+     hairVolume?: string[];
+     hairTexture?: string[];
+     skinUndertone?: string[];
+     skinFeatures?: string[];
+     facialFeatures?: string[];
+     earAccessories?: string[];
+     teethFeature?: string[];
+     fragrance?: string[];
+     tattooStyle?: string[];
+     tattooPlacement?: string[];
+     scarBirthmarkPlacement?: string[];
+     nailStyle?: string[];
+     makeupStyle?: string[];
+     // 穿衣風格
+     clothingType?: string[];
+     stylePreference?: string[];
+     accessoriesHabits?: string[];
+     colorTone?: string[];
+     patternPreference?: string[];
+     fitCut?: string[];
+     layering?: string[];
+     material?: string[];
+     seasonStyle?: string[];
+     formality?: string[];
+     shoeStyle?: string[];
+     hatStyle?: string[];
+     bagPreference?: string[];
+     accessoryStyle?: string[];
+     sustainability?: string[];
+     brandOrientation?: string[];
+     budgetLevel?: string[];
+     signatureItem?: string[];
+     styleIdentity?: string[];
+     matchingHabit?: string[];
+     accessoryApproach?: string[];
+     // 身體習慣
+     handedness?: string[];
+     posture?: string[];
+     gestures?: string[];
+     sleepPattern?: string[];
+     sleepPosition?: string[];
+     wakeHabit?: string[];
+     hydrationLevel?: string[];
+     caffeineIntake?: string[];
+     alcoholUse?: string[];
+     smokingHabit?: string[];
+     eatingRhythm?: string[];
+     foodRestrictions?: string[];
+     screenHabit?: string[];
+     devicePosture?: string[];
+     sittingStandingHabit?: string[];
+     commuteMode?: string[];
+     walkingPace?: string[];
+     relaxationHabit?: string[];
+     supplements?: string[];
+     skincareSun?: string[];
+     breathingHabit?: string[];
+     postureAids?: string[];
+     wearableDevices?: string[];
+     waterBalance?: string[];
+     speechHabit?: string[];
+   };
   
   // 情感與愛情觀（可選）
   loveAndRomance?: {
@@ -395,6 +474,54 @@ export interface CharacterGenerationRequest {
     relationshipMode?: '黏膩依賴型' | '獨立自主型' | '相互補型' | '良性競爭型' | '平等合作型' | '主導控制型' | '被動配合型' | '朋友戀人型' | '激情浪漫型' | '平淡溫馨型' | '衝突不斷型' | '和諧穩定型' | '刺激冒險型' | '安全舒適型' | '成長促進型';
     conflictStyle?: '直接溝通型' | '冷戰處理型' | '尋求仲裁型' | '逃避問題型' | '情緒爆發型' | '理性討論型' | '妥協讓步型' | '堅持己見型' | '尋求共識型' | '暫時分離型' | '第三方調解型' | '寫信溝通型' | '時間淡化型' | '道歉和解型' | '分手威脅型';
     futurePlan?: '婚姻導向型' | '享受過程型' | '恐婚傾向型' | '開放關係型' | '試婚同居型' | '遠距維持型' | '事業優先型' | '家庭第一型' | '子女計畫型' | '環遊世界型' | '創業合夥型' | '學習成長型' | '退休規劃型' | '財務規劃型' | '健康養生型';
+
+    // 進階新增子項
+    attachmentStyle?: '安全型' | '焦慮型' | '逃避型' | '矛盾混亂型';
+    relationshipPace?: '快速確認' | '穩健推進' | '慢熱觀望' | '保持曖昧';
+    commitmentExclusivity?: '早期排他' | '確認後排他' | '開放式關係' | '尚未設定';
+    relationshipDefinition?: '自然默契' | '正式告白' | '共同討論' | '儀式化約定';
+
+    communicationFrequency?: '高頻即時' | '每日聯繫' | '週幾次' | '需要空間';
+    communicationPreference?: '文字訊息' | '語音通話' | '視訊' | '面對面';
+    conflictRepairTiming?: '立即處理' | '冷靜後再談' | '第三方協助' | '書面整理';
+    apologyStyle?: '承擔責任' | '彌補行動' | '情感共鳴' | '承諾改變' | '論理澄清';
+    jealousySensitivity?: '低' | '中' | '高' | '條件式';
+    trustBuilding?: '預設信任' | '驗證後信任' | '積分累積' | '情境信任';
+
+    privacyBoundary?: '手機全開放' | '局部分享' | '私領域保留' | '嚴格保護';
+    socialPublicity?: '高調放閃' | '適度分享' | '低調' | '不公開';
+
+    dateStyle?: '儀式感' | '生活系' | '探索冒險' | '文藝靜態' | '運動戶外';
+    dateFrequency?: '每天' | '每週多次' | '每週一次' | '雙週一次' | '視情況';
+    togetherTimeRatio?: '高度共處' | '平衡共處與獨處' | '高度獨處需求';
+    publicIntimacy?: '高' | '中' | '低' | '視場合';
+    weekendPreference?: '宅家共處' | '戶外出遊' | '社交聚會' | '分頭安排';
+
+    cohabitationView?: '傾向同居' | '觀察後同居' | '婚後同居' | '不同居';
+    houseworkDivision?: '明確分工' | '擅長者負責' | '平均輪替' | '外包';
+    moneyArrangement?: 'AA' | '比例分擔' | '一人負擔' | '共同基金';
+    giftBudget?: '小而精' | '儀式感為主' | '實用至上' | '高價紀念';
+
+    familyBoundaryWithOrigin?: '密切融合' | '適度往來' | '清晰邊界' | '低頻互動';
+    meetParentsAttitude?: '盡早' | '穩定後' | '結婚前' | '視情況';
+    exBoundary?: '斷聯' | '基本禮貌' | '保持朋友' | '仍有互動';
+
+    longDistanceTolerance?: '低' | '中' | '高';
+    longDistanceMeetCycle?: '每週' | '每月' | '雙月' | '季度';
+
+    marriageView?: '必經之路' | '視緣分' | '可有可無' | '不婚主義';
+    fertilityView?: '想要' | '視情況' | '保持開放' | '不要';
+    parentingDivisionView?: '平等共擔' | '傾向一方主負' | '家庭支援導向' | '外包導向';
+
+    intimacyBoundary?: '明確界線' | '彈性調整' | '需事先討論' | '視情況';
+    sexualOpenness?: '保守' | '適中' | '開放';
+    sexualFrequencyExpectation?: '低' | '中' | '高';
+
+    securityTriggers?: '失聯' | '訊息冷淡' | '隱瞞' | '批評' | '與異性互動';
+    ritualImportance?: '高' | '中' | '低';
+    sharedRituals?: '例行約會日' | '旅行儀式' | '紀念日策劃' | '家庭聚餐';
+    petViewRelationship?: '同養意願高' | '視時機' | '僅個人飼養' | '不考慮';
+    timeExpectation?: '高共處' | '平衡' | '高自由度';
   };
 
   // 生活方式與興趣（可選）
@@ -405,11 +532,61 @@ export interface CharacterGenerationRequest {
     exerciseHabit?: '每日散步' | '跑步健身' | '游泳運動' | '瑜伽練習' | '重量訓練' | '不愛運動';
     livingEnvironment?: '市中心公寓' | '郊區透天' | '租屋族' | '與家人同住' | '獨居生活' | '極簡風格';
 
+    wakeUpRoutine?: '早起拉伸' | '冥想' | '閱讀' | '手沖咖啡' | '晨跑' | '靜默時光';
+    nightRoutine?: '熱水澡' | '輕閱讀' | '手帳/反思' | '藍光阻隔' | '冥想' | '音樂助眠';
+    mealPattern?: '三餐固定' | '兩餐制' | '少量多餐' | '宵夜習慣';
+    cookingFrequency?: '每日開伙' | '偶爾開伙' | '週末開伙' | '多半外食';
+    snackHabit?: '幾乎不吃' | '下午茶固定' | '晚間小點' | '隨手零食';
+    sugarIntake?: '無糖' | '低糖' | '中等' | '偏高';
+    hydrationHabit?: '水壺隨身' | '定時提醒' | '渴了才喝' | '常忘記';
+    homeTidiness?: '極簡整潔' | '規律整理' | '物品偏多' | '隨性雜亂';
+    cleaningSchedule?: '每日打掃' | '每週整理' | '隔週整理' | '視需要';
+    laundryRoutine?: '每日小洗' | '每週集中' | '外送洗衣' | '與室友分工';
+    groceryStyle?: '每日採買' | '每週採買' | '線上下單' | '大賣場補貨';
+    workMode?: '在辦公室' | '混合' | '完全遠端' | '彈性工時';
+    timeManagement?: '行事曆控' | '待辦清單控' | '番茄鐘' | '當日隨心';
+    budgetingRoutine?: '每日記帳' | '每週記帳' | '不記帳' | '自動分帳';
+    ecoHabit?: '自備餐具杯' | '隨手關燈節電' | '節水' | '垃圾分類嚴格';
+    socialRhythm?: '每日小聚' | '每週聚會' | '獨處為主' | '家庭時光';
+    mediaConsumption?: '每日閱讀' | '每日播客' | '每日影集' | '週末追劇';
+    hobbySlot?: '早晨練習' | '午休時段' | '下班後' | '週末固定';
+    petCareRoutine?: '早晚散步' | '定時餵食' | '定期梳毛' | '無';
+    plantCareRoutine?: '每日澆水' | '週期澆水' | '噴霧保養' | '低維護';
+    wardrobePrep?: '前晚備衣' | '早晨即興' | '膠囊衣櫥' | '依行程調整';
+    travelPrepStyle?: '極簡打包' | '清單規劃' | '臨時打包' | '模組化收納';
+
     // 興趣愛好與技能
     artInterest?: '古典音樂' | '流行音樂' | '繪畫藝術' | '攝影技術' | '書法' | '手工藝' | '數位藝術';
     sportsInterest?: '游泳' | '慢跑' | '登山健行' | '球類運動' | '瑜伽' | '騎腳踏車' | '跳舞' | '武術';
     learningInterest?: '程式設計' | '數據分析' | '語言學習' | '投資理財' | '心理學' | '歷史研究';
     socialInterest?: '聚餐' | '旅遊' | '志工服務' | '社團活動' | '讀書會' | '才藝班';
+
+    // 興趣技能擴充
+    musicInstrument?: '吉他' | '鋼琴' | '小提琴' | '鼓組' | '薩克斯風' | '唱歌/合唱';
+    culinarySkill?: '家常菜' | '異國料理' | '甜點烘焙' | '咖啡手沖' | '調酒';
+    craftSkill?: '編織' | '木工' | '金工' | '陶藝' | '皮革' | '手作香氛';
+    photographyStyle?: '人像' | '風景' | '街拍' | '旅拍' | '微距' | '影像後製';
+    readingGenre?: '文學' | '推理' | '商管' | '心理' | '科幻' | '歷史' | '漫畫/輕小說';
+    writingStyle?: '散文' | '小說' | '詩歌' | '影評' | '影像腳本' | '文案';
+    performingArts?: '戲劇' | '舞蹈' | '即興' | '魔術' | '相聲/單口喜劇';
+    creativeSoftware?: 'PS' | 'AI' | 'Figma' | 'Blender' | 'After Effects';
+    codingStack?: '前端' | '後端' | '資料分析' | '手機開發' | '遊戲開發' | 'AI/ML';
+    boardgamePreference?: '德式策略' | '派對' | '合作類' | '卡牌對戰' | '團隊推理';
+    gamingGenre?: 'RPG' | 'FPS' | 'MOBA' | '模擬經營' | '音樂節奏' | '獨立遊戲';
+    sportsDiscipline?: '重訓' | 'HIIT' | '皮拉提斯' | '攀岩' | '跑步' | '自行車' | '球類專項';
+    outdoorHobby?: '露營' | '登山' | '溯溪' | '潛水' | '攝鳥' | '攝星';
+    travelStyle?: '背包客' | '美食旅遊' | '文化深度' | '奢華度假' | '自駕' | '攝影行程';
+    gardeningStyle?: '多肉' | '香草' | '花卉' | '蔬果' | '水培' | '造景';
+    petTraining?: '服從訓練' | '敏捷訓練' | '社會化' | '護理保養';
+    volunteeringFocus?: '教育' | '環保' | '動保' | '長者' | '兒少' | '社區';
+    investingStyle?: '指數被動' | '價值投資' | '成長動能' | '固收' | '加密資產';
+    publicSpeaking?: '演講' | '主持' | '朗讀' | '辯論' | '直播/Podcast';
+    leadershipRole?: '社團幹部' | '專案統籌' | '跨域協作' | '指導/Mentor';
+    diyMaker?: '3D列印' | 'Arduino/Raspberry Pi' | '居家修繕' | '車輛改裝';
+    collectingHobby?: '公仔模型' | '球鞋' | '黑膠/CD' | '書籍' | '香水' | '咖啡器具';
+    learningMode?: '線上課程' | '實體工作坊' | '自學計畫' | '社群共學';
+    engagementFrequency?: '每日' | '每週' | '每月' | '季節性';
+    proficiencyLevel?: '入門' | '進階' | '熟練' | '專精';
 
     // 語言能力
     nativeLanguage?: '中文母語' | '台語流利' | '客家話母語' | '原住民語學習中';
@@ -439,6 +616,31 @@ export interface CharacterGenerationRequest {
     publicTransport?: '捷運' | '公車' | '自行車' | '步行';
     scooterType?: 'Gogoro' | '光陽GP125';
     carType?: 'Toyota Altis' | 'Honda CR-V' | 'Mercedes-Benz' | 'BMW' | 'Porsche' | 'Tesla';
+
+    commutePrimaryMode?: '捷運' | '公車' | '火車/高鐵' | '自行車' | '機車' | '汽車自駕' | '步行' | '共乘/計程車' | '公司接駁';
+    multiModalHabit?: '只單一' | '雙模轉乘' | '三模以上' | '視情況';
+    commuteDistance?: '<5km' | '5-15km' | '15-40km' | '>40km';
+    commuteTimeBand?: '早高峰' | '晚高峰' | '離峰' | '彈性';
+    drivingStyle?: '穩健' | '節能' | '靈活積極' | '謹慎保守';
+    carSegment?: 'Hatchback' | 'Sedan' | 'SUV' | 'MPV/7人座' | 'Wagon' | 'Coupe/敞篷' | 'Pickup';
+    carPowertrain?: '汽油' | '柴油' | '油電HEV' | '插電PHEV' | '純電BEV';
+    carTransmission?: '自排' | '手排' | '手自排';
+    carUseScenario?: '都市代步' | '跨縣市通勤' | '露營長途' | '商務應酬' | '家庭接送';
+    evChargingHabit?: '家用慢充' | '公司/社區充電' | '超充為主' | '公共慢充' | '不適用';
+    carBrandOrientation?: '日系' | '德系' | '美系' | '韓系' | '中國/新創' | '無特定';
+    motorcycleType?: '速克達125/150' | '大羊' | '檔車' | '都會輕檔' | '電動機車';
+    microMobility?: '電輔自行車' | '共享單車' | '電動滑板車' | '直排輪/滑板';
+    taxiRideshare?: '多使用' | '偶爾' | '幾乎不用' | 'Uber' | '計程車';
+    railPreference?: '高鐵常用' | '台鐵常用' | '城際巴士常用' | '視行程';
+    publicPass?: '定期票' | '季票' | '學生票' | '商務票' | '無';
+    navigationApp?: 'Google Maps' | 'Apple Maps' | 'Waze' | '車機原生';
+    parkingPreference?: '路邊' | '立體停車場' | '月租車位' | '共用車位';
+    safetyPriority?: '高' | '中' | '低';
+    maintenanceHabit?: '原廠定保' | '技師保養' | '自行保養' | '隨用隨修';
+    insuranceCoverage?: '強制+第三責任' | '乙式' | '甲式全險' | '依需求';
+    carpoolHabit?: '常共乘' | '偶爾共乘' | '不共乘';
+    ecoTransportCommitment?: '優先公共運輸' | '每月無車日' | '減碳里程目標' | '無特別';
+    airTravelFrequency?: '每月' | '每季' | '每年' | '罕見';
   };
 
   // 心理與情感（可選）
@@ -447,6 +649,27 @@ export interface CharacterGenerationRequest {
     positiveEmotion?: '樂觀開朗' | '穩定平和' | '熱情洋溢' | '充滿希望' | '積極正向' | '溫和親切' | '活潑開朗' | '沉著冷靜' | '溫暖體貼' | '自信從容' | '幽默風趣' | '純真善良' | '堅韌不拔' | '富有同情心' | '充滿活力';
     negativeEmotion?: '容易焦慮' | '情緒起伏大' | '憂鬱傾向' | '容易沮喪' | '多愁善感' | '急躁易怒' | '悲觀消極' | '情緒化' | '易受挫折' | '內心脆弱' | '情緒壓抑' | '過度敏感' | '情緒不穩' | '容易絕望' | '心情陰鬱';
     emotionTrait?: '敏感細膩' | '冷靜理性' | '內心堅強' | '情緒穩定' | '內向安靜' | '外向健談' | '情感豐富' | '理智務實' | '感性浪漫' | '情緒複雜' | '直覺敏銳' | '邏輯清晰' | '富有想像力' | '現實主義' | '理想主義';
+
+    // 情緒補充與量表
+    emotionEnergy?: '低' | '中' | '高' | '起伏不定';
+    emotionStability?: '穩定' | '中等' | '易波動';
+    stressTolerance?: '低' | '中' | '高';
+    emotionAwareness?: '低' | '中' | '高' | '元認知強';
+    expressionIntensity?: '內斂' | '適中' | '強烈';
+    expressionChannel?: '言語' | '肢體' | '創作' | '行動' | '沉默';
+    resilienceRecovery?: '快速' | '中等' | '較慢';
+    diurnalMoodPattern?: '晨間佳' | '夜間佳' | '午後低潮' | '無明顯';
+    socialAffect?: '社交亢奮' | '社交耗竭' | '視場合' | '穩定';
+    emotionTriggers?: '批評' | '時間壓力' | '噪音' | '混亂' | '衝突' | '社交';
+    warningSigns?: '心跳加速' | '肩頸緊繃' | '胃部不適' | '手心出汗' | '呼吸急促';
+    sensitiveTopics?: '家庭' | '工作' | '金錢' | '關係' | '評價' | '自我價值';
+    safetyAnchors?: '規律' | '關係支持' | '掌控感' | '價值/信念' | '穩定環境';
+    affectionNeed?: '低' | '中' | '高';
+    affectiveBias?: '災難化' | '過度概化' | '讀心' | '貼標籤' | '非黑即白';
+    flowProneness?: '容易進入' | '偶爾' | '少見';
+
+    positiveEmotionPlus?: '滿足' | '平靜' | '感恩' | '敬畏' | '投入' | '安適' | '踏實' | '專注' | '輕鬆' | '自在';
+    negativeEmotionPlus?: '羞愧' | '罪惡感' | '緊繃' | '擔憂' | '恐懼' | '孤獨' | '無力' | '倦怠' | '厭世';
 
     // 情緒管理方式
     regulationBodyMind?: '深呼吸冥想' | '運動發洩' | '音樂療癒' | '獨處思考' | '專業諮商';
