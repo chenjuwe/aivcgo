@@ -46,7 +46,7 @@ export function CommunityPrayers() {
 
   if (!user) {
     return (
-      <div className="max-w-4xl mx-auto p-6">
+      <div className="container mx-auto p-6 max-w-7xl md:max-w-9xl 3xl:max-w-10xl 4xl:max-w-11xl 5xl:max-w-12xl">
         <div className="text-center py-12">
           <Users className="mx-auto h-16 w-16 text-gray-400 mb-4" />
           <h2 className="text-2xl font-bold text-gray-800 mb-2">社群禱告</h2>
@@ -58,7 +58,7 @@ export function CommunityPrayers() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
+    <div className="container mx-auto p-6 max-w-11xl 4xl:max-w-12xl">
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-gray-800 mb-2">
           <Users className="inline mr-2 text-purple-500" />

@@ -38,7 +38,7 @@ function App() {
       
       case 'favorites':
         return (
-          <div className="max-w-6xl mx-auto p-6">
+          <div className="container mx-auto p-6 max-w-11xl 4xl:max-w-12xl">
             <div className="text-center mb-8">
               <h1 className="text-3xl font-bold text-gray-800 mb-2">我的收藏</h1>
               <p className="text-gray-600">您收藏的珍貴禱告內容</p>
@@ -97,7 +97,7 @@ function App() {
 
       {/* 頁腳 */}
       <footer className="bg-gray-800 text-white py-8 mt-16">
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="container mx-auto px-6 max-w-11xl 4xl:max-w-12xl">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
               <h3 className="text-lg font-semibold mb-4">關於虛擬人物生成器</h3>

@@ -74,10 +74,10 @@ function simGiven(a: string, b: string): number {
   return Math.min(1, s);
 }
 
-function mmrRerankBatch(items: Array<{ name: string; meta?: any }>, lambda = 0.8): Array<{ name: string; meta?: any }> {
+function mmrRerankBatch<T extends { name: string; meta?: any }>(items: T[], lambda = 0.8): T[] {
   if (items.length <= 2) return items;
-  const remain = [...items];
-  const picked: typeof items = [];
+  const remain: T[] = [...items];
+  const picked: T[] = [];
   // 以 meta.score 排序初選
   remain.sort((a, b) => ((b.meta?.score ?? 0) - (a.meta?.score ?? 0)));
   picked.push(remain.shift()!);
@@ -95,7 +95,7 @@ function mmrRerankBatch(items: Array<{ name: string; meta?: any }>, lambda = 0.8
   }
   // 去重同一個 given
   const seen = new Set<string>();
-  const uniq: typeof items = [];
+  const uniq: T[] = [];
   for (const it of picked) {
     const g = getGiven(it.name);
     if (seen.has(g)) continue;
@@ -162,7 +162,7 @@ ctx.onmessage = async (e: MessageEvent<InMsg>) => {
         blockedNames: payload.blockedNames,
         weights: payload.weights,
       });
-      results.push({ name: n.fullName, reasons: (n.meta?.reasons as string[] | undefined)?.join('、') || '', roman: (n.meta as any)?.romanization, meta: n.meta });
+      results.push({ name: n.fullName, reasons: Array.isArray(n.meta?.reasons) ? (n.meta?.reasons as string[]).join('、') : (n.meta?.reasons || ''), roman: (n.meta as any)?.romanization, meta: n.meta });
     }
     // 跨批次 MMR + 去重同名
     results = mmrRerankBatch(results).slice(0, batch);

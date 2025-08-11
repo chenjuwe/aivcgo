@@ -22,7 +22,7 @@ export function CharacterGallery({ onCharacterSelect }: CharacterGalleryProps) {
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
+    <div className="container mx-auto p-6 max-w-11xl 4xl:max-w-12xl">
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-gray-800 mb-2">
           <Users className="inline mr-2 text-purple-500" />

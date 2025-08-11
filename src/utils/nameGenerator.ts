@@ -1127,7 +1127,7 @@ export function generateChineseName(req: NameRequest = {}): GeneratedName {
       pickedSurname, pools, gender, region, theme, beamSize, w, pen, diversityPenalty, allowSingleGiven, era, style,
       surnameTonePenaltyWeight, homophonePolicy, fiveElementPreference, crossRegionMix, chineseZodiac, westernZodiac, birthTime,
       familyGenerationChar, familyGenerationPosition,
-      enablePhonologyAesthetics, structureDiversityWeight, literaryPreference, familyGenerationChar, siblingNames, enableThreeFiveGrids, uniquenessPreference, additionalBlacklist,
+      enablePhonologyAesthetics, structureDiversityWeight, literaryPreference, siblingNames, enableThreeFiveGrids, uniquenessPreference, additionalBlacklist,
       likedChars, likedBigrams, blockedChars, blockedBigrams, blockedNames
     ).map(c => buildCandidate(
       pickedSurname, c.given, c.strokes, gender, region, theme, w, pen, pools, era, style, surnameTonePenaltyWeight,
@@ -1141,7 +1141,7 @@ export function generateChineseName(req: NameRequest = {}): GeneratedName {
       pickedSurname, pools, filterOpts, trials, rnd, gender, region, theme, w, pen, allowSingleGiven, era, style,
       surnameTonePenaltyWeight, homophonePolicy, fiveElementPreference, crossRegionMix, chineseZodiac, westernZodiac, birthTime,
       familyGenerationChar, familyGenerationPosition,
-      enablePhonologyAesthetics, structureDiversityWeight, literaryPreference, familyGenerationChar, siblingNames, enableThreeFiveGrids, uniquenessPreference, additionalBlacklist,
+      enablePhonologyAesthetics, structureDiversityWeight, literaryPreference, siblingNames, enableThreeFiveGrids, uniquenessPreference, additionalBlacklist,
       likedChars, likedBigrams, blockedChars, blockedBigrams, blockedNames
     ).map(c => buildCandidate(
       pickedSurname, c.given, c.strokes, gender, region, theme, w, pen, pools, era, style, surnameTonePenaltyWeight,

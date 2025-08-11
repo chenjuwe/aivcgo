@@ -185,7 +185,7 @@ export function useCustomCharacters() {
   // 按分類篩選角色
   const filterByCategory = useCallback((category: PrayerCategory) => {
     return characters.filter(character => 
-      character.preferredCategories.includes(category)
+      (character.preferredCategories || []).includes(category)
     );
   }, [characters]);
 

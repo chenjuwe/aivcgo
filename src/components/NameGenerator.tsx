@@ -90,7 +90,7 @@ export function NameGenerator() {
   useEffect(() => { warmup('TW'); }, []);
   useEffect(() => { warmup(region); }, [region]);
 
-  const applyPreset = (p: 'tw_classic'|'hk_modern'|'cn_era90s'|'bazi_focus') => {
+  const applyPreset = (p: 'tw_classic'|'hk_modern'|'cn_era90s'|'bazi_focus'|'tw_literary'|'hk_traditional'|'cn_modern'|'tw_business'|'hk_creative'|'cn_traditional'|'tw_family'|'hk_education'|'cn_artistic'|'tw_health'|'hk_social'|'cn_wisdom'|'tw_adventure'|'cn_community') => {
     if (p === 'tw_classic') {
       setRegion('TW'); setStyle('classic'); setSelectionMode('max'); setBeamSize(5); setTemperature(0.6); setTopK(40); setTopP(0.85); setDiversityPenalty(0.05); setEra('');
       setCustomWeights(undefined);
@@ -108,6 +108,48 @@ export function NameGenerator() {
       setTopK(50);
       setTopP(0.9);
       setCustomWeights({ alpha: 0.35, beta: 0.2, gamma: 0.15, delta: 0.25, epsilon: 0.05 });
+    } else if (p === 'tw_literary') {
+      setRegion('TW'); setStyle('literary'); setSelectionMode('sample'); setBeamSize(6); setTemperature(0.85); setTopK(70); setTopP(0.92); setDiversityPenalty(0.08); setEra('2000s');
+      setCustomWeights(undefined);
+    } else if (p === 'hk_traditional') {
+      setRegion('HK'); setStyle('classic'); setSelectionMode('max'); setBeamSize(5); setTemperature(0.6); setTopK(40); setTopP(0.85); setDiversityPenalty(0.05); setEra('1990s');
+      setCustomWeights(undefined);
+    } else if (p === 'cn_modern') {
+      setRegion('CN'); setStyle('modern'); setSelectionMode('sample'); setBeamSize(6); setTemperature(0.8); setTopK(60); setTopP(0.9); setDiversityPenalty(0.08); setEra('2000s');
+      setCustomWeights(undefined);
+    } else if (p === 'tw_business') {
+      setRegion('TW'); setStyle('neutral'); setSelectionMode('max'); setBeamSize(5); setTemperature(0.5); setTopK(30); setTopP(0.8); setDiversityPenalty(0.03); setEra('2010s');
+      setCustomWeights(undefined);
+    } else if (p === 'hk_creative') {
+      setRegion('HK'); setStyle('modern'); setSelectionMode('sample'); setBeamSize(7); setTemperature(0.9); setTopK(80); setTopP(0.95); setDiversityPenalty(0.1); setEra('2010s');
+      setCustomWeights(undefined);
+    } else if (p === 'cn_traditional') {
+      setRegion('CN'); setStyle('classic'); setSelectionMode('max'); setBeamSize(4); setTemperature(0.5); setTopK(35); setTopP(0.8); setDiversityPenalty(0.04); setEra('1980s');
+      setCustomWeights(undefined);
+    } else if (p === 'tw_family') {
+      setRegion('TW'); setStyle('neutral'); setSelectionMode('max'); setBeamSize(5); setTemperature(0.6); setTopK(45); setTopP(0.85); setDiversityPenalty(0.05); setEra('');
+      setCustomWeights({ alpha: 0.3, beta: 0.25, gamma: 0.2, delta: 0.2, epsilon: 0.05 });
+    } else if (p === 'hk_education') {
+      setRegion('HK'); setStyle('modern'); setSelectionMode('sample'); setBeamSize(6); setTemperature(0.7); setTopK(55); setTopP(0.88); setDiversityPenalty(0.06); setEra('2010s');
+      setCustomWeights(undefined);
+    } else if (p === 'cn_artistic') {
+      setRegion('CN'); setStyle('modern'); setSelectionMode('sample'); setBeamSize(6); setTemperature(0.85); setTopK(70); setTopP(0.92); setDiversityPenalty(0.09); setEra('2000s');
+      setCustomWeights(undefined);
+    } else if (p === 'tw_health') {
+      setRegion('TW'); setStyle('neutral'); setSelectionMode('max'); setBeamSize(5); setTemperature(0.6); setTopK(45); setTopP(0.85); setDiversityPenalty(0.05); setEra('');
+      setCustomWeights({ alpha: 0.25, beta: 0.2, gamma: 0.25, delta: 0.25, epsilon: 0.05 });
+    } else if (p === 'hk_social') {
+      setRegion('HK'); setStyle('modern'); setSelectionMode('sample'); setBeamSize(6); setTemperature(0.8); setTopK(60); setTopP(0.9); setDiversityPenalty(0.08); setEra('2010s');
+      setCustomWeights(undefined);
+    } else if (p === 'cn_wisdom') {
+      setRegion('CN'); setStyle('classic'); setSelectionMode('max'); setBeamSize(5); setTemperature(0.6); setTopK(40); setTopP(0.85); setDiversityPenalty(0.05); setEra('1990s');
+      setCustomWeights(undefined);
+    } else if (p === 'tw_adventure') {
+      setRegion('TW'); setStyle('modern'); setSelectionMode('sample'); setBeamSize(6); setTemperature(0.8); setTopK(60); setTopP(0.9); setDiversityPenalty(0.08); setEra('2010s');
+      setCustomWeights(undefined);
+    } else if (p === 'cn_community') {
+      setRegion('CN'); setStyle('neutral'); setSelectionMode('max'); setBeamSize(5); setTemperature(0.6); setTopK(45); setTopP(0.85); setDiversityPenalty(0.05); setEra('2000s');
+      setCustomWeights(undefined);
     }
   };
 
@@ -213,7 +255,7 @@ export function NameGenerator() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-6">
+    <div className="container mx-auto p-6 space-y-6 max-w-7xl md:max-w-9xl 3xl:max-w-10xl 4xl:max-w-11xl 5xl:max-w-12xl">
       <div className="text-center mb-6">
         <h1 className="text-4xl font-bold text-gray-800 mb-2">
           <Sparkles className="inline mr-2 text-purple-600" />
@@ -540,10 +582,21 @@ export function NameGenerator() {
             <button onClick={() => applyPreset('tw_classic')} className="px-3 py-2 text-sm border rounded hover:bg-gray-50">TW・古典穩健</button>
             <button onClick={() => applyPreset('hk_modern')} className="px-3 py-2 text-sm border rounded hover:bg-gray-50">HK・現代順口</button>
             <button onClick={() => applyPreset('cn_era90s')} className="px-3 py-2 text-sm border rounded hover:bg-gray-50">CN・90年代</button>
-            <button onClick={() => { setRegion('TW'); setStyle('literary'); setSelectionMode('sample'); setBeamSize(6); setTemperature(0.85); setTopK(70); setTopP(0.92); setDiversityPenalty(0.08); setEra('2000s'); }} className="px-3 py-2 text-sm border rounded hover:bg-gray-50">TW・文青</button>
-            <button onClick={() => { setRegion('HK'); setStyle('classic'); setSelectionMode('max'); setBeamSize(5); setTemperature(0.6); setTopK(40); setTopP(0.85); setDiversityPenalty(0.05); setEra('1990s'); }} className="px-3 py-2 text-sm border rounded hover:bg-gray-50">HK・傳統</button>
-            <button onClick={() => { setRegion('CN'); setStyle('modern'); setSelectionMode('sample'); setBeamSize(6); setTemperature(0.8); setTopK(60); setTopP(0.9); setDiversityPenalty(0.08); setEra('2000s'); }} className="px-3 py-2 text-sm border rounded hover:bg-gray-50">CN・00後</button>
+            <button onClick={() => applyPreset('tw_literary')} className="px-3 py-2 text-sm border rounded hover:bg-gray-50">TW・文青</button>
+            <button onClick={() => applyPreset('hk_traditional')} className="px-3 py-2 text-sm border rounded hover:bg-gray-50">HK・傳統</button>
+            <button onClick={() => applyPreset('cn_modern')} className="px-3 py-2 text-sm border rounded hover:bg-gray-50">CN・00後</button>
             <button onClick={() => applyPreset('bazi_focus')} className="px-3 py-2 text-sm border rounded hover:bg-gray-50">生辰加權</button>
+            <button onClick={() => applyPreset('tw_business')} className="px-3 py-2 text-sm border rounded hover:bg-gray-50">TW・商業</button>
+            <button onClick={() => applyPreset('hk_creative')} className="px-3 py-2 text-sm border rounded hover:bg-gray-50">HK・創意</button>
+            <button onClick={() => applyPreset('cn_traditional')} className="px-3 py-2 text-sm border rounded hover:bg-gray-50">CN・傳統</button>
+            <button onClick={() => applyPreset('tw_family')} className="px-3 py-2 text-sm border rounded hover:bg-gray-50">TW・家庭</button>
+            <button onClick={() => applyPreset('hk_education')} className="px-3 py-2 text-sm border rounded hover:bg-gray-50">HK・教育</button>
+            <button onClick={() => applyPreset('cn_artistic')} className="px-3 py-2 text-sm border rounded hover:bg-gray-50">CN・藝術</button>
+            <button onClick={() => applyPreset('tw_health')} className="px-3 py-2 text-sm border rounded hover:bg-gray-50">TW・健康</button>
+            <button onClick={() => applyPreset('hk_social')} className="px-3 py-2 text-sm border rounded hover:bg-gray-50">HK・社交</button>
+            <button onClick={() => applyPreset('cn_wisdom')} className="px-3 py-2 text-sm border rounded hover:bg-gray-50">CN・智慧</button>
+            <button onClick={() => applyPreset('tw_adventure')} className="px-3 py-2 text-sm border rounded hover:bg-gray-50">TW・冒險</button>
+            <button onClick={() => applyPreset('cn_community')} className="px-3 py-2 text-sm border rounded hover:bg-gray-50">CN・社群</button>
           </div>
         </div>
       </div>

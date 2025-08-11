@@ -73,6 +73,9 @@ export default {
       maxWidth: {
         '8xl': '88rem',
         '9xl': '96rem',
+        '10xl': '120rem', // 1920px
+        '11xl': '160rem', // 2560px
+        '12xl': '240rem', // 3840px
       },
       backdropBlur: {
         xs: '2px',
@@ -83,6 +86,30 @@ export default {
       },
       screens: {
         'xs': '475px',
+        '3xl': '1920px',
+        '4xl': '2560px',
+        '5xl': '3840px',
+      },
+    },
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: '1rem',
+        sm: '1.25rem',
+        md: '1.5rem',
+        lg: '2rem',
+        xl: '2rem',
+        '2xl': '2rem',
+      },
+      screens: {
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+        '2xl': '1536px',
+        '3xl': '1920px',
+        '4xl': '2560px',
+        '5xl': '3840px',
       },
     },
   },

@@ -49,7 +49,7 @@ export function CustomCharacterManager() {
 
     // 分類篩選
     if (filterCategory !== 'all') {
-      filtered = filtered.filter(c => c.preferredCategories.includes(filterCategory));
+      filtered = filtered.filter(c => (c.preferredCategories || []).includes(filterCategory));
     }
 
     // 公開狀態篩選
@@ -101,7 +101,7 @@ export function CustomCharacterManager() {
   const filteredCharacters = getFilteredCharacters();
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
+    <div className="container mx-auto p-6 max-w-11xl 4xl:max-w-12xl">
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-gray-800 mb-2">
           <Users className="inline mr-2 text-purple-500" />
@@ -133,7 +133,7 @@ export function CustomCharacterManager() {
               />
             </div>
 
-            {/* 分類篩選 */}
+            {/* 分類篩選（保留但允許空）*/}
             <select
               value={filterCategory}
               onChange={(e) => setFilterCategory(e.target.value as PrayerCategory | 'all')}
@@ -317,11 +317,11 @@ export function CustomCharacterManager() {
                     </div>
                   </div>
 
-                  {/* 偏好禱告類型 */}
+                  {/* 偏好主題（可為空） */}
                   <div className="mb-4">
                     <h4 className="text-sm font-medium text-gray-700 mb-2">偏好主題（附加）</h4>
                     <div className="flex flex-wrap gap-2">
-                      {character.preferredCategories.map((category) => (
+                      {(character.preferredCategories || []).map((category) => (
                         <span
                           key={category}
                           className="px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded-full"
@@ -392,12 +392,7 @@ export function CustomCharacterManager() {
                       )}
                     </div>
                     
-                    <div className="flex items-center space-x-2">
-                      <span>禱告風格（附加）：
-                        {character.prayerStyle === 'formal' ? '正式' :
-                         character.prayerStyle === 'casual' ? '親切' : '傳統'}
-                      </span>
-                    </div>
+                    {/* 禱告風格顯示已移除 */}
                   </div>
                 </div>
               </div>
