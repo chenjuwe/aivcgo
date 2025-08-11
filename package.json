@@ -1,6 +1,6 @@
 {
   "name": "prayer-generator-app",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "智能禱告生成器應用程式 - 支援雲端同步",
   "main": "index.js",
   "scripts": {
